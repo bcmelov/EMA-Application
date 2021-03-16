@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    //Titles in user profile (Skills, Home works)
+    //Titles in user profile (Skills, Homework)
     <style name="title">
         <item name="android:textColor">@color/grey</item>
         <item name="android:textSize">18sp</item>
