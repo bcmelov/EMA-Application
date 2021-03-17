@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,22 +12,19 @@
         android:paddingHorizontal="50dp">
 
         <!--temporary switch for night/day mode-->
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/night_mode"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="@string/night_mode" />
 
         <!--layout for user icon, user name and platform specification-->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <!--user icon (temporary icon for now)-->
-
             <ImageView
                 android:id="@+id/user_icon"
                 android:layout_width="100dp"
@@ -38,60 +34,57 @@
                 android:src="@drawable/ic_emoji" />
 
             <!--username-->
-
             <TextView
-                android:layout_below="@+id/user_icon"
                 android:id="@+id/user_name"
-                style="@style/username"
+                style="@style/Username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/user_icon"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:text="@string/user_name" />
 
             <!--platform name-->
-
             <TextView
                 android:id="@+id/platform_name"
-                android:layout_below="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/user_name"
                 android:layout_centerInParent="true"
                 android:text="@string/platform_android" />
 
             <!--layout for horizontal icons: Slack, Email, LinkedIn-->
-
             <RelativeLayout
                 android:id="@+id/contact_icons_layout"
-                android:layout_below="@+id/platform_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/platform_name"
                 android:layout_centerInParent="true"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="@dimen/spacing_small">
 
                 <ImageButton
                     android:id="@+id/slack_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20sp"
+                    android:layout_marginEnd="@dimen/spacing_medium"
                     android:background="@drawable/ic_slack"
                     android:backgroundTint="?attr/colorControlNormal"
                     android:contentDescription="@string/slack" />
 
                 <ImageButton
                     android:id="@+id/email_icon"
-                    android:layout_toEndOf="@+id/slack_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20sp"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:layout_toEndOf="@+id/slack_icon"
                     android:background="@drawable/ic_email2"
                     android:backgroundTint="?attr/colorControlNormal"
                     android:contentDescription="@string/email" />
 
                 <ImageButton
-                    android:layout_toEndOf="@+id/email_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/email_icon"
                     android:background="@drawable/ic_linkedin"
                     android:backgroundTint="?attr/colorControlNormal"
                     android:contentDescription="@string/linked_in" />
@@ -99,16 +92,16 @@
 
             <!--break line-->
             <View
-                android:layout_below="@+id/contact_icons_layout"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
+                android:layout_below="@+id/contact_icons_layout"
+                android:layout_marginVertical="@dimen/spacing_Xsmall"
                 android:background="@android:color/darker_gray" />
         </RelativeLayout>
 
         <!--Skills Headline-->
         <TextView
-            style="@style/title"
+            style="@style/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/skills_headline" />
@@ -117,19 +110,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relativeLayout7"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
 
             <!--Progress in Android-->
-
             <ImageView
                 android:id="@+id/android_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="21dp"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 android:contentDescription="@string/android"
                 android:src="@drawable/ic_android"
-                app:layout_constraintBottom_toTopOf="@+id/progressBar10"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:tint="?attr/colorControlNormal" />
@@ -139,11 +131,12 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
                 app:layout_constraintEnd_toStartOf="@+id/progress_android"
                 app:layout_constraintStart_toEndOf="@+id/android_icon"
-                app:layout_constraintTop_toTopOf="@+id/android_icon" />
+                app:layout_constraintTop_toTopOf="@+id/android_icon"/>
 
             <TextView
                 android:id="@+id/progress_android"
@@ -151,19 +144,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="134dp"
                 android:text="@string/zero"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBar9" />
 
-
             <!--Progress in Kotlin-->
-
             <ImageView
                 android:id="@+id/kotlin_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/kotlin"
                 android:src="@drawable/ic_kotlin"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar10"
@@ -176,7 +166,8 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="10"
                 app:layout_constraintEnd_toStartOf="@+id/progress_kotlin"
                 app:layout_constraintStart_toEndOf="@+id/kotlin_icon"
@@ -186,7 +177,7 @@
                 android:id="@+id/progress_kotlin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_large"
                 android:text="@string/one"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBar10"
@@ -194,14 +185,11 @@
 
 
             <!--Progress in iOS-->
-
-
             <ImageView
                 android:id="@+id/apple_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/ios"
                 android:src="@drawable/ic_apple"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar11"
@@ -214,35 +202,32 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="47dp"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/progress_apple"
-                app:layout_constraintStart_toEndOf="@+id/apple_icon" />
+                app:layout_constraintStart_toEndOf="@+id/apple_icon"
+                app:layout_constraintTop_toTopOf="@+id/progress_apple" />
 
             <TextView
                 android:id="@+id/progress_apple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="48dp"
+                android:layout_marginTop="@dimen/spacing_large"
                 android:text="@string/zero"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBar11" />
-
+                app:layout_constraintStart_toEndOf="@+id/progressBar11"
+                app:layout_constraintTop_toBottomOf="@+id/progress_kotlin" />
 
             <!--Progress in Swift-->
-
-
             <ImageView
                 android:id="@+id/swift_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/swift"
                 android:src="@drawable/ic_swift"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/apple_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar12"
                 app:layout_constraintStart_toStartOf="parent"
                 app:tint="?attr/colorControlNormal" />
@@ -252,10 +237,10 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/progress_swift"
                 app:layout_constraintEnd_toStartOf="@+id/progress_swift"
                 app:layout_constraintStart_toEndOf="@+id/swift_icon" />
 
@@ -263,578 +248,326 @@
                 android:id="@+id/progress_swift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
+                android:layout_marginTop="@dimen/spacing_large"
                 android:text="@string/zero"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_apple"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBar12" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--Homework title-->
-
         <TextView
-            style="@style/title"
+            style="@style/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_works" />
 
         <!--homework scroll view-->
-
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="180dp">
+                android:layout_height="wrap_content">
 
                 <!--homework1-->
-
                 <RelativeLayout
                     android:id="@+id/layout_homework1"
-                    android:layout_width="180dp"
+                    android:layout_width="@dimen/xl_square_icon"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="@dimen/spacing_Xmedium"
                     android:background="@drawable/border_homeworks"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="@dimen/spacing_small">
 
 
                     <ImageView
                         android:id="@+id/homework_number_1"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/medium_square_icon"
+                        android:layout_height="@dimen/medium_square_icon"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_one" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/title_push_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/homework_number_1"
-                        android:id="@+id/line_push1"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/push"
+                        app:drawableEndCompat="@drawable/ic_done" />
+
+                    <TextView
+                        android:id="@+id/title_review_1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_push_1"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/review"
+                        app:drawableEndCompat="@drawable/ic_done" />
 
-                        <TextView
-                            android:id="@+id/title_push_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/push" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_push_1"
-                            android:layout_alignParentEnd="true"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_done" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_push1"
-                        android:id="@+id/line_review1"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_acceptance_1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_review_1"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/acceptance"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_review_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/review" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_review_1"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_review_1"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_done" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_review1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_acceptance_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acceptance" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_acceptance_1"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_acceptance_1"
-                            android:contentDescription="@string/clock"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
                 </RelativeLayout>
 
                 <!--homework2-->
-
                 <RelativeLayout
                     android:id="@+id/layout_homework2"
-                    android:layout_toEndOf="@+id/layout_homework1"
-                    android:layout_width="180dp"
+                    android:layout_width="@dimen/xl_square_icon"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="@dimen/spacing_Xmedium"
+                    android:layout_toEndOf="@+id/layout_homework1"
                     android:background="@drawable/border_homeworks"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="@dimen/spacing_small">
 
 
                     <ImageView
                         android:id="@+id/homework_number_2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/medium_square_icon"
+                        android:layout_height="@dimen/medium_square_icon"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_two" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/title_push_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/homework_number_2"
-                        android:id="@+id/line_push2"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/push"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
+
+                    <TextView
+                        android:id="@+id/title_review_2"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_push_2"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/review"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_push_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/push" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_push_2"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_push_2"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_push2"
-                        android:id="@+id/line_review2"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_acceptance_2"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_review_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/review" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_review_2"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_review_2"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_review2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_acceptance_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acceptance" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_acceptance_2"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_acceptance_2"
-                            android:contentDescription="@string/clock"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
+                        android:layout_below="@+id/title_review_2"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/acceptance"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
 
                 <!--homework3-->
-
                 <RelativeLayout
                     android:id="@+id/layout_homework3"
-                    android:layout_toEndOf="@+id/layout_homework2"
-                    android:layout_width="180dp"
+                    android:layout_width="@dimen/xl_square_icon"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="@dimen/spacing_Xmedium"
+                    android:layout_toEndOf="@+id/layout_homework2"
                     android:background="@drawable/border_homeworks"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="@dimen/spacing_small">
 
 
                     <ImageView
                         android:id="@+id/homework_number_3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/medium_square_icon"
+                        android:layout_height="@dimen/medium_square_icon"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_three" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/title_push_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/homework_number_3"
-                        android:id="@+id/line_push3"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/push"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
+
+                    <TextView
+                        android:id="@+id/title_review_3"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_push_3"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/review"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_push_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/push" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_push_3"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_push_3"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_push3"
-                        android:id="@+id/line_review3"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_acceptance_3"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_review_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/review" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_review_3"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_review_3"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_review3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_acceptance_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acceptance" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_acceptance_3"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_acceptance_3"
-                            android:contentDescription="@string/clock"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
+                        android:layout_below="@+id/title_review_3"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/acceptance"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
 
-                <!--homework4-->
-
+                <!--homework 4 -->
                 <RelativeLayout
                     android:id="@+id/layout_homework4"
-                    android:layout_toEndOf="@+id/layout_homework3"
-                    android:layout_width="180dp"
+                    android:layout_width="@dimen/xl_square_icon"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="@dimen/spacing_Xmedium"
+                    android:layout_toEndOf="@+id/layout_homework3"
                     android:background="@drawable/border_homeworks"
                     android:orientation="vertical"
-                    android:padding="10dp">
-
+                    android:padding="@dimen/spacing_small">
 
                     <ImageView
                         android:id="@+id/homework_number_4"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/medium_square_icon"
+                        android:layout_height="@dimen/medium_square_icon"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_four" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/title_push_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/homework_number_4"
-                        android:id="@+id/line_push4"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/push"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
+
+                    <TextView
+                        android:id="@+id/title_review_4"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_push_4"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/review"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_push_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/push" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_push_4"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_push_4"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_push4"
-                        android:id="@+id/line_review4"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_acceptance_4"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_review_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/review" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_review_4"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_review_4"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_review4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_acceptance_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acceptance" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_acceptance_4"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_acceptance_4"
-                            android:contentDescription="@string/clock"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
+                        android:layout_below="@+id/title_review_4"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/acceptance"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
 
                 <!--homework5-->
-
                 <RelativeLayout
                     android:id="@+id/layout_homework5"
-                    android:layout_toEndOf="@+id/layout_homework4"
-                    android:layout_width="180dp"
+                    android:layout_width="@dimen/xl_square_icon"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="@dimen/spacing_Xmedium"
+                    android:layout_toEndOf="@+id/layout_homework4"
                     android:background="@drawable/border_homeworks"
                     android:orientation="vertical"
-                    android:padding="10dp">
-
+                    android:padding="@dimen/spacing_small">
 
                     <ImageView
                         android:id="@+id/homework_number_5"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/medium_square_icon"
+                        android:layout_height="@dimen/medium_square_icon"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_five" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/title_push_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/homework_number_5"
-                        android:id="@+id/line_push5"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/push"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
+
+                    <TextView
+                        android:id="@+id/title_review_5"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_push_5"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/review"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_push_5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/push" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_push_5"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_push_5"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_push5"
-                        android:id="@+id/line_review5"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_acceptance_5"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_review_5"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/acceptance"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_review_5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/review" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_review_5"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_review_5"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_review5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_acceptance_5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acceptance" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_acceptance_5"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_acceptance_5"
-                            android:contentDescription="@string/clock"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
                 </RelativeLayout>
 
                 <!--homework6-->
                 <RelativeLayout
                     android:id="@+id/layout_homework6"
-                    android:layout_toEndOf="@+id/layout_homework5"
-                    android:layout_width="180dp"
+                    android:layout_width="@dimen/xl_square_icon"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="@dimen/spacing_Xmedium"
+                    android:layout_toEndOf="@+id/layout_homework5"
                     android:background="@drawable/border_homeworks"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="@dimen/spacing_small">
 
                     <ImageView
                         android:id="@+id/homework_number_6"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/medium_square_icon"
+                        android:layout_height="@dimen/medium_square_icon"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_six" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/title_push_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/homework_number_6"
-                        android:id="@+id/line_push6"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/push"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
+
+                    <TextView
+                        android:id="@+id/title_review_6"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@+id/title_push_6"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/review"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
 
-                        <TextView
-                            android:id="@+id/title_push_6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/push" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_push_6"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_push_6"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_push6"
-                        android:id="@+id/line_review6"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_acceptance_6"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_review_6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/review" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_review_6"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_review_6"
-                            android:contentDescription="@string/check_mark"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_below="@+id/line_review6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/title_acceptance_6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acceptance" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/title_acceptance_6"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="@+id/title_acceptance_6"
-                            android:contentDescription="@string/clock"
-                            android:src="@drawable/ic_waiting" />
-                    </RelativeLayout>
+                        android:layout_below="@+id/title_review_6"
+                        android:layout_marginStart="@dimen/spacing_Xsmall"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/acceptance"
+                        app:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
             </RelativeLayout>
         </HorizontalScrollView>
