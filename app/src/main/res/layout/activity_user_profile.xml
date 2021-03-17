@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="50dp">
+        android:paddingHorizontal="@dimen/spacing_Xlarge">
 
         <!--temporary switch for night/day mode-->
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -27,8 +27,8 @@
             <!--user icon (temporary icon for now)-->
             <ImageView
                 android:id="@+id/user_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/xl_circle_icon"
+                android:layout_height="@dimen/xl_circle_icon"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_icon"
                 android:src="@drawable/ic_emoji" />
@@ -142,7 +142,6 @@
                 android:id="@+id/progress_android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="134dp"
                 android:text="@string/zero"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
