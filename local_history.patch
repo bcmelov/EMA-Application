@@ -1,0 +1,25 @@
+Index: app/src/main/res/layout/activity_user_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_user_profile.xml	(date 1615836267250)
++++ app/src/main/res/layout/activity_user_profile.xml	(date 1615836267250)
+@@ -192,7 +192,7 @@
+                 android:layout_alignParentStart="true"
+                 android:layout_centerVertical="true"
+                 android:layout_marginEnd="20dp"
+-                android:contentDescription="@string/kotlin"
++                android:contentDescription="@string/ios"
+                 android:src="@drawable/ic_apple"
+                 app:tint="?attr/colorControlNormal"/>
+ 
+@@ -230,7 +230,7 @@
+                 android:layout_alignParentStart="true"
+                 android:layout_centerVertical="true"
+                 android:layout_marginEnd="20dp"
+-                android:contentDescription="@string/kotlin"
++                android:contentDescription="@string/swift"
+                 android:src="@drawable/ic_swift"
+                 app:tint="?attr/colorControlNormal"/>
+ 

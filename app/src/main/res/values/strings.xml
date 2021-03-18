@@ -1,0 +1,43 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--titles-->
+    <string name="app_name">EMA App</string>
+    <string name="user_name">Bára Čmelová</string>
+    <string name="platform_android">Android</string>
+    <string name="skills_headline">Skills</string>
+    <string name="home_works">Homework</string>
+    <string name="push">push</string>
+    <string name="review">review</string>
+    <string name="acceptance">acceptance</string>
+
+    <!--switch to night/day mode-->
+    <string name="night_mode">Night mode</string>
+
+
+    <!--image descriptions-->
+    <string name="hw_number">Home work number</string>
+    <string name="email">Email</string>
+    <string name="slack">Slack</string>
+    <string name="linked_in">LinkedIn</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="swift">Swift</string>
+    <string name="user_icon">User icon</string>
+    <string name="check_mark">Check_mark</string>
+    <string name="clock">Clock</string>
+
+    <!--progress titles-->
+    <string name="zero">0/10</string>
+    <string name="one">1/10</string>
+    <string name="two">2/10</string>
+    <string name="three">3/10</string>
+    <string name="four">4/10</string>
+    <string name="five">5/10</string>
+    <string name="six">6/10</string>
+    <string name="seven">7/10</string>
+    <string name="eight">8/10</string>
+    <string name="nine">9/10</string>
+    <string name="ten">10/10</string>
+
+</resources>
