@@ -20,5 +20,10 @@
         <item name="android:textColor">@color/user_name</item>
     </style>
 
+    <!-- Circle image view -->
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>
