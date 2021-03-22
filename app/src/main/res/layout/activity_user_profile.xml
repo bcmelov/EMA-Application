@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <!--main layout for vertical ScrollView-->
     <LinearLayout
@@ -29,13 +30,12 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/user_icon"
-                app:shapeAppearanceOverlay="@style/circleImageView"
-                app:srcCompat="@drawable/me"
-                android:layout_height="@dimen/xl_square_icon"
                 android:layout_width="@dimen/xl_square_icon"
+                android:layout_height="@dimen/xl_square_icon"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_icon"
-                />
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:srcCompat="@drawable/me" />
 
             <!--username-->
             <TextView
@@ -124,10 +124,10 @@
                 android:layout_height="@dimen/square_icon_Xsmall"
                 android:contentDescription="@string/android"
                 android:src="@drawable/ic_android"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/progressBarAndroid"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="?attr/colorControlNormal"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorControlNormal" />
 
             <ProgressBar
                 android:id="@+id/progressBarAndroid"
@@ -137,19 +137,19 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
+                app:layout_constraintBottom_toBottomOf="@id/android_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_android"
                 app:layout_constraintStart_toEndOf="@+id/android_icon"
-                app:layout_constraintTop_toTopOf="@+id/android_icon"
-                app:layout_constraintBottom_toBottomOf="@id/android_icon"/>
+                app:layout_constraintTop_toTopOf="@+id/android_icon" />
 
             <TextView
                 android:id="@+id/progress_android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zero"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarAndroid" />
+                app:layout_constraintStart_toEndOf="@+id/progressBarAndroid"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!--Progress in Kotlin-->
             <ImageView
@@ -172,10 +172,10 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="10"
+                app:layout_constraintBottom_toBottomOf="@id/kotlin_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_kotlin"
                 app:layout_constraintStart_toEndOf="@+id/kotlin_icon"
-                app:layout_constraintTop_toTopOf="@+id/kotlin_icon"
-                app:layout_constraintBottom_toBottomOf="@id/kotlin_icon"/>
+                app:layout_constraintTop_toTopOf="@+id/kotlin_icon" />
 
             <TextView
                 android:id="@+id/progress_kotlin"
@@ -209,10 +209,10 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
+                app:layout_constraintBottom_toBottomOf="@id/apple_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_apple"
                 app:layout_constraintStart_toEndOf="@+id/apple_icon"
-                app:layout_constraintTop_toTopOf="@+id/apple_icon"
-                app:layout_constraintBottom_toBottomOf="@id/apple_icon"/>
+                app:layout_constraintTop_toTopOf="@+id/apple_icon" />
 
             <TextView
                 android:id="@+id/progress_apple"
@@ -232,9 +232,9 @@
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/swift"
                 android:src="@drawable/ic_swift"
-                app:layout_constraintTop_toBottomOf="@id/apple_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progressBarSwift"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/apple_icon"
                 app:tint="?attr/colorControlNormal" />
 
             <ProgressBar
@@ -245,10 +245,10 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
+                app:layout_constraintBottom_toBottomOf="@id/swift_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_swift"
                 app:layout_constraintStart_toEndOf="@+id/swift_icon"
-                app:layout_constraintTop_toTopOf="@+id/progress_swift"
-                app:layout_constraintBottom_toBottomOf="@id/swift_icon"/>
+                app:layout_constraintTop_toTopOf="@+id/progress_swift" />
 
             <TextView
                 android:id="@+id/progress_swift"
@@ -256,9 +256,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/zero"
-                app:layout_constraintTop_toBottomOf="@id/progress_apple"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarSwift" />
+                app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
+                app:layout_constraintTop_toBottomOf="@id/progress_apple" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

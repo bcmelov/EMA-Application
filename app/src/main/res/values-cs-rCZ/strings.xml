@@ -39,4 +39,7 @@
     <string name="nine">9/10</string>
     <string name="ten">10/10</string>
 
+    <!-- toolbar titles -->
+    <string name="item_all">Vše</string>
+
 </resources>
