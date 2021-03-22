@@ -40,6 +40,6 @@
     <string name="ten">10/10</string>
 
     <!-- toolbar titles -->
-    <string name="item_all">Vše</string>
+    <string name="user_filter_all">Vše</string>
 
 </resources>

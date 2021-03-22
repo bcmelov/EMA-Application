@@ -41,9 +41,9 @@
     <string name="ten">10/10</string>
 
     <!-- toolbar titles -->
-    <string name="item_all">All</string>
-    <string name="item_android" translatable="false">Android</string>
-    <string name="item_iOS" translatable="false">iOS</string>
+    <string name="user_filter_all">All</string>
+    <string name="user_filter_android" translatable="false">Android</string>
+    <string name="user_filter_iOS" translatable="false">iOS</string>
 
 
     <!-- ucastnici akademie - mock jmena -->
