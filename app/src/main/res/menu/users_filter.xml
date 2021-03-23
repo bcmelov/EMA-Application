@@ -4,13 +4,13 @@
     <item
         android:id="@+id/item_all"
         android:title="@string/user_filter_all"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/item_android"
         android:title="@string/user_filter_android"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/item_iOS"
         android:title="@string/user_filter_iOS"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

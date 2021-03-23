@@ -29,9 +29,9 @@
             app:strokeColor="@color/white"
             app:strokeWidth="1dp"
             android:layout_toEndOf="@id/list_user_icon"
-            android:background="@color/white"
             android:contentDescription="@string/platform_android"
             android:tint="@color/teal_700"
+            android:background="@color/white"
             app:shapeAppearanceOverlay="@style/circleImageView"
             app:srcCompat="@drawable/ic_android" />
 
@@ -52,7 +52,8 @@
             android:layout_below="@+id/list_user_name"
             android:layout_alignStart="@+id/list_user_name"
             android:src="@drawable/ic_one"
-            android:layout_marginTop="@dimen/spacing_Xsmall"/>
+            android:layout_marginTop="@dimen/spacing_Xsmall"
+            android:contentDescription="@string/home_works" />
 
         <!-- homework 2 -->
         <ImageView
@@ -60,8 +61,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/list_hw1"
-            android:layout_toRightOf="@id/list_hw1"
-            android:src="@drawable/ic_two" />
+            android:layout_toEndOf="@id/list_hw1"
+            android:src="@drawable/ic_two"
+            android:contentDescription="@string/home_works"/>
 
         <!-- homework 3 -->
         <ImageView
@@ -69,8 +71,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/list_hw2"
-            android:layout_toRightOf="@id/list_hw2"
-            android:src="@drawable/ic_three" />
+            android:layout_toEndOf="@id/list_hw2"
+            android:src="@drawable/ic_three"
+            android:contentDescription="@string/home_works"/>
 
         <!-- homework 4 -->
         <ImageView
@@ -78,8 +81,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/list_hw3"
-            android:layout_toRightOf="@id/list_hw3"
-            android:src="@drawable/ic_four" />
+            android:layout_toEndOf="@id/list_hw3"
+            android:src="@drawable/ic_four"
+            android:contentDescription="@string/home_works"/>
 
         <!-- homework 5 -->
         <ImageView
@@ -87,8 +91,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/list_hw4"
-            android:layout_toRightOf="@id/list_hw4"
-            android:src="@drawable/ic_five" />
+            android:layout_toEndOf="@id/list_hw4"
+            android:src="@drawable/ic_five"
+            android:contentDescription="@string/home_works"/>
 
         <!-- homework 6 -->
         <ImageView
@@ -96,8 +101,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/list_hw5"
-            android:layout_toRightOf="@id/list_hw5"
-            android:src="@drawable/ic_five" />
+            android:layout_toEndOf="@id/list_hw5"
+            android:src="@drawable/ic_five"
+            android:contentDescription="@string/home_works"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

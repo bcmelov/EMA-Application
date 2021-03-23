@@ -7,15 +7,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.emaapp.R
+import com.example.emaapp.data.User
 
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
-//    object onClickListener : View.OnClickListener {
-//        override fun onClick(v: View?) {
-//            TODO("Not yet implemented")
-//        }
-//
-//    }
+class MainActivity : AppCompatActivity(R.layout.activity_main){
 
     private lateinit var toolbar: Toolbar
 

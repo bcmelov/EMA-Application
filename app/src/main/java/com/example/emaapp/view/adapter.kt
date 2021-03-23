@@ -5,37 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.User
 
-//OLD VERSION - CAN BE DELETED LATER ON
-//class ViewHolder(val row: TextView) : RecyclerView.ViewHolder(row) {
-//}
-//
-//class Adapter(var users: List<User>) : RecyclerView.Adapter<ViewHolder>() {
-//    override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): ViewHolder {
-//        val view = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.layout_row, parent, false) as TextView
-//        return ViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.row.setText(users[position].displayName)
-//        holder.row.setCompoundDrawablesRelativeWithIntrinsicBounds(
-//            users[position].icon,
-//            0,
-//            0,
-//            0
-//        )
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return users.size
-//    }
-//}
+class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-class Adapter(var users: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+    var users: List<User> = row
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_row, parent, false)
         return ViewHolder(view)

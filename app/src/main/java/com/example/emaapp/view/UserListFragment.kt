@@ -11,6 +11,7 @@ import com.example.emaapp.R
 import com.example.emaapp.data.DataSource
 import java.lang.IllegalStateException
 
+//fragment with display of list of the attendees as RecyclerViewer
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     lateinit var adapter: Adapter
@@ -25,7 +26,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         adapter = Adapter(DataSource.users)
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
