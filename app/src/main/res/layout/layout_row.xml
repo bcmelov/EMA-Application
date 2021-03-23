@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/list_user_icon"
+            android:layout_width="@dimen/square_icon_medium"
+            android:layout_height="@dimen/square_icon_medium"
+            android:contentDescription="@string/user_icon"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/me" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/list_platform_id"
+            android:layout_width="@dimen/square_icon_Xsmall"
+            android:layout_height="@dimen/square_icon_Xsmall"
+            android:layout_below="@+id/list_user_icon"
+            android:layout_marginStart="-15dp"
+            android:layout_marginTop="-15dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            android:layout_toEndOf="@id/list_user_icon"
+            android:background="@color/white"
+            android:contentDescription="@string/platform_android"
+            android:tint="@color/teal_700"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/ic_android" />
+
+        <TextView
+            android:id="@+id/list_user_name"
+            style="@style/User_list_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_toEndOf="@id/list_platform_id"
+            android:text="@string/user_name" />
+
+        <!-- homework 1 -->
+        <ImageView
+            android:id="@+id/list_hw1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_user_name"
+            android:layout_alignStart="@+id/list_user_name"
+            android:src="@drawable/ic_one"
+            android:layout_marginTop="@dimen/spacing_Xsmall"/>
+
+        <!-- homework 2 -->
+        <ImageView
+            android:id="@+id/list_hw2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/list_hw1"
+            android:layout_toRightOf="@id/list_hw1"
+            android:src="@drawable/ic_two" />
+
+        <!-- homework 3 -->
+        <ImageView
+            android:id="@+id/list_hw3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/list_hw2"
+            android:layout_toRightOf="@id/list_hw2"
+            android:src="@drawable/ic_three" />
+
+        <!-- homework 4 -->
+        <ImageView
+            android:id="@+id/list_hw4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/list_hw3"
+            android:layout_toRightOf="@id/list_hw3"
+            android:src="@drawable/ic_four" />
+
+        <!-- homework 5 -->
+        <ImageView
+            android:id="@+id/list_hw5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/list_hw4"
+            android:layout_toRightOf="@id/list_hw4"
+            android:src="@drawable/ic_five" />
+
+        <!-- homework 6 -->
+        <ImageView
+            android:id="@+id/list_hw6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/list_hw5"
+            android:layout_toRightOf="@id/list_hw5"
+            android:src="@drawable/ic_five" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+
