@@ -1,11 +1,16 @@
 package com.example.emaapp.view
 
+import android.content.ContentValues.TAG
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.User
@@ -37,7 +42,13 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
         val name = itemView.findViewById<TextView>(R.id.list_user_name)!!
         val userIcon = itemView.findViewById<ImageView>(R.id.list_user_icon)!!
         val platformIcon = itemView.findViewById<ImageView>(R.id.list_platform_id)!!
-
+        init {
+            row.setOnClickListener {
+                println("TEST")
+                val intent = Intent(row.context, UserProfileActivity :: class.java)
+                row.context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

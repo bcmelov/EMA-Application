@@ -13,18 +13,19 @@
         android:paddingHorizontal="@dimen/spacing_Xlarge"
         android:paddingBottom="@dimen/spacing_large">
 
-        <!--temporary switch for night/day mode-->
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/night_mode" />
+<!--        &lt;!&ndash;temporary switch for night/day mode&ndash;&gt;-->
+<!--        <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--            android:id="@+id/switch1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/spacing_small"-->
+<!--            android:text="@string/night_mode" />-->
 
         <!--layout for user icon, user name and platform specification-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_medium">
 
             <!--user icon (temporary icon for now)-->
 

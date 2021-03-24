@@ -44,7 +44,8 @@
     <string name="user_filter_all">All</string>
     <string name="user_filter_android" translatable="false">Android</string>
     <string name="user_filter_iOS" translatable="false">iOS</string>
-
+    <string name="user_list_title">List of students</string>
+    <string name="user_profile_title">User profile</string>
 
     <!-- ucastnici akademie - mock jmena -->
     <string name="bara_cmelova" translatable="false">Bára Čmelová</string>
@@ -53,5 +54,14 @@
     <string name="patrik_mokry" translatable="false">Patrik Mokrý</string>
     <string name="pavel_stanek" translatable="false">Pavel Staněk</string>
     <string name="lenka_veselá" translatable="false">Lenka Veselá</string>
+    <string name="title_activity_user_profile" translatable="false">UserProfileActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
 
 </resources>
