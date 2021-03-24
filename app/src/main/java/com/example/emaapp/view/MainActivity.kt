@@ -7,10 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.emaapp.R
-import com.example.emaapp.data.User
 
 
-class MainActivity : AppCompatActivity(R.layout.activity_main){
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var toolbar: Toolbar
 
@@ -18,7 +17,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main){
         super.onCreate(savedInstanceState)
 
         // access to navController that is a part of NavHostFragment
-        val navController = (supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment).navController
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment).navController
 
         // setup toolbar with nav controller
         toolbar = findViewById(R.id.toolbar)
@@ -28,18 +28,5 @@ class MainActivity : AppCompatActivity(R.layout.activity_main){
             AppBarConfiguration(navController.graph)
         )
 
-
-//        //BUTTON FOR NIGHT/DAY MODE
-//        /* declare the switch from the layout file */
-//        val btn = findViewById<SwitchMaterial>(R.id.switch1)
-//
-//        /* set the switch to listen on checked change */
-//        btn.setOnCheckedChangeListener { _, isChecked ->
-//
-//            /*if the button is checked, enable dark mode, else keep day mode*/
-//            if (isChecked) {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//            } else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        }
     }
 }

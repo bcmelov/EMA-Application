@@ -1,22 +1,19 @@
 package com.example.emaapp.view
 
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.User
+import kotlinx.coroutines.flow.callbackFlow
+
 
 class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
-
     var users: List<User> = row
     set(value) {
         field = value
@@ -44,8 +41,7 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
         val platformIcon = itemView.findViewById<ImageView>(R.id.list_platform_id)!!
         init {
             row.setOnClickListener {
-                println("TEST")
-                val intent = Intent(row.context, UserProfileActivity :: class.java)
+                val intent = Intent(row.context, UserProfileActivity::class.java)
                 row.context.startActivity(intent)
             }
         }
@@ -54,4 +50,6 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
     override fun getItemCount(): Int {
         return this.users.size
     }
+
+
 }

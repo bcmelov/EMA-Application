@@ -14,6 +14,7 @@ import java.lang.IllegalStateException
 //fragment with display of list of the attendees as RecyclerViewer
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
+
     lateinit var adapter: Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_scroll_view"
     >
 
     <!--main layout for vertical ScrollView-->
@@ -12,14 +14,6 @@
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/spacing_Xlarge"
         android:paddingBottom="@dimen/spacing_large">
-
-<!--        &lt;!&ndash;temporary switch for night/day mode&ndash;&gt;-->
-<!--        <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--            android:id="@+id/switch1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/spacing_small"-->
-<!--            android:text="@string/night_mode" />-->
 
         <!--layout for user icon, user name and platform specification-->
         <RelativeLayout
@@ -87,6 +81,7 @@
                     android:contentDescription="@string/email" />
 
                 <ImageButton
+                    android:id="@+id/linkedin_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/email_icon"
@@ -211,12 +206,12 @@
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
                 app:layout_constraintBottom_toBottomOf="@id/apple_icon"
-                app:layout_constraintEnd_toStartOf="@+id/progress_apple"
+                app:layout_constraintEnd_toStartOf="@+id/progress_iOS"
                 app:layout_constraintStart_toEndOf="@+id/apple_icon"
                 app:layout_constraintTop_toTopOf="@+id/apple_icon" />
 
             <TextView
-                android:id="@+id/progress_apple"
+                android:id="@+id/progress_iOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
@@ -259,7 +254,7 @@
                 android:text="@string/zero"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
-                app:layout_constraintTop_toBottomOf="@id/progress_apple" />
+                app:layout_constraintTop_toBottomOf="@id/progress_iOS" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
