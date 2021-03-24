@@ -4,11 +4,11 @@
     <!--Titles in user profile (Skills, Homework)-->
     <style name="Title">
         <item name="android:textColor">@color/grey</item>
-        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:textSize">@dimen/medium_text</item>
         <item name="android:textStyle">normal</item>
         <item name="textAllCaps">true</item>
-        <item name="android:layout_marginTop">15dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">@dimen/spacing_small</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_small</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
     </style>
 

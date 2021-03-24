@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/spacing_Xlarge"
+        android:paddingHorizontal="@dimen/spacing_large"
         android:paddingBottom="@dimen/spacing_large">
 
         <!--layout for user icon, user name and platform specification-->
@@ -25,12 +25,12 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/user_icon"
-                android:layout_width="@dimen/xl_square_icon"
-                android:layout_height="@dimen/xl_square_icon"
+                android:layout_width="@dimen/large_square_icon"
+                android:layout_height="@dimen/large_square_icon"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_icon"
                 app:shapeAppearanceOverlay="@style/circleImageView"
-                app:srcCompat="@drawable/me" />
+                app:srcCompat="@drawable/girl4" />
 
             <!--username-->
             <TextView

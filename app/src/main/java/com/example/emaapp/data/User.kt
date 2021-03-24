@@ -25,7 +25,7 @@ enum class User(
 ) {
     //list of users (test one, the final one has to be completed!
     BaraCmelova(
-        R.drawable.me,
+        R.drawable.girl4,
         R.drawable.ic_android,
         R.string.bara_cmelova,
         PlatformType.Android,

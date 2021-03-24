@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.callbackFlow
 
 class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
     var users: List<User> = row
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_row, parent, false)
@@ -39,6 +39,8 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
         val name = itemView.findViewById<TextView>(R.id.list_user_name)!!
         val userIcon = itemView.findViewById<ImageView>(R.id.list_user_icon)!!
         val platformIcon = itemView.findViewById<ImageView>(R.id.list_platform_id)!!
+
+
         init {
             row.setOnClickListener {
                 val intent = Intent(row.context, UserProfileActivity::class.java)
@@ -50,6 +52,4 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
     override fun getItemCount(): Int {
         return this.users.size
     }
-
-
 }
