@@ -36,7 +36,13 @@ enum class User(
     val android_skills: Int,
     val kotlin_skills: Int,
     val iOs_skills: Int,
-    val swift_skills: Int
+    val swift_skills: Int,
+    @DrawableRes val hw1_started: Int,
+    @DrawableRes val hw2_started: Int,
+    @DrawableRes val hw3_started: Int,
+    @DrawableRes val hw4_started: Int,
+    @DrawableRes val hw5_started: Int,
+    @DrawableRes val hw6_started: Int
 ) {
     //list of users (test one, the final one has to be completed!
     BaraCmelova(
@@ -68,7 +74,13 @@ enum class User(
         2,
         1,
         0,
-        0
+        0,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     KevinVojco(
         R.drawable.man10,
@@ -99,7 +111,13 @@ enum class User(
         2,
         4,
         3,
-        6
+        6,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     LucieZvorilova(
         R.drawable.girl1,
@@ -130,7 +148,13 @@ enum class User(
         5,
         1,
         1,
-        2
+        2,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three_done,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     PatrikMokry(
         R.drawable.man11,
@@ -161,7 +185,13 @@ enum class User(
         1,
         1,
         0,
-        0
+        0,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three_done,
+        R.drawable.ic_four_done,
+        R.drawable.ic_five_done,
+        R.drawable.ic_six
     ),
     PavelStanek(
         R.drawable.man12,
@@ -192,7 +222,13 @@ enum class User(
         5,
         1,
         1,
-        2
+        2,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two,
+        R.drawable.ic_three,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     LenkaVesela(
         R.drawable.girl2,
@@ -223,7 +259,13 @@ enum class User(
         0,
         0,
         0,
-        0
+        0,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     PavlaVelka(
         R.drawable.girl3,
@@ -254,7 +296,13 @@ enum class User(
         2,
         4,
         3,
-        6
+        6,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     RomanMaly(
         R.drawable.man8,
@@ -285,10 +333,16 @@ enum class User(
         5,
         1,
         1,
-        2
+        2,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two,
+        R.drawable.ic_three,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     IgorStredni(
-        R.drawable.girl3,
+        R.drawable.man5,
         R.drawable.ic_android,
         R.string.igor_stredni,
         PlatformType.Android,
@@ -316,7 +370,13 @@ enum class User(
         1,
         1,
         0,
-        0
+        0,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three_done,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     PetraNovakova(
         R.drawable.girl4,
@@ -347,7 +407,13 @@ enum class User(
         2,
         4,
         3,
-        6
+        6,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three_done,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
     RomanTrudic(
         R.drawable.man1,
@@ -378,7 +444,13 @@ enum class User(
         4,
         8,
         3,
-        2
+        2,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three_done,
+        R.drawable.ic_four_done,
+        R.drawable.ic_five_done,
+        R.drawable.ic_six
     ),
     KarelVlasak(
         R.drawable.man2,
@@ -409,6 +481,12 @@ enum class User(
         5,
         1,
         1,
-        2
+        2,
+        R.drawable.ic_one_done,
+        R.drawable.ic_two_done,
+        R.drawable.ic_three_done,
+        R.drawable.ic_four,
+        R.drawable.ic_five,
+        R.drawable.ic_six
     ),
 }

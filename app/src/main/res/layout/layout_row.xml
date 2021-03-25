@@ -44,14 +44,63 @@
             android:layout_toEndOf="@id/list_platform_id"
             android:text="@string/user_name" />
 
-        <include layout="@layout/homework_num_status"
+        <LinearLayout
             android:layout_below="@id/list_user_name"
             android:layout_toEndOf="@id/list_user_icon"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_Xsmall"/>
+            android:layout_marginTop="@dimen/spacing_Xsmall">
 
+         <!-- homework 1 -->
+    <ImageView
+        android:id="@+id/list_hw1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_one"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 2 -->
+    <ImageView
+        android:id="@+id/list_hw2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_two"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 3 -->
+    <ImageView
+        android:id="@+id/list_hw3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_three"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 4 -->
+    <ImageView
+        android:id="@+id/list_hw4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_four"
+        android:contentDescription="@string/home_works"/>
+
+    <!-- homework 5 -->
+    <ImageView
+        android:id="@+id/list_hw5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_five"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 6 -->
+    <ImageView
+        android:id="@+id/list_hw6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_six"
+        android:contentDescription="@string/home_works" />
+
+        </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 

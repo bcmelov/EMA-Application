@@ -33,13 +33,36 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
         holder.platformIcon.setImageResource(
             users[position].displayPlatform
         )
+        holder.hw1.setImageResource(
+            users[position].hw1_started
+        )
+        holder.hw2.setImageResource(
+            users[position].hw2_started
+        )
+        holder.hw3.setImageResource(
+            users[position].hw3_started
+        )
+        holder.hw4.setImageResource(
+            users[position].hw4_started
+        )
+        holder.hw5.setImageResource(
+            users[position].hw5_started
+        )
+        holder.hw6.setImageResource(
+            users[position].hw6_started
+        )
     }
 
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
-        val name = itemView.findViewById<TextView>(R.id.list_user_name)!!
-        val userIcon = itemView.findViewById<ImageView>(R.id.list_user_icon)!!
-        val platformIcon = itemView.findViewById<ImageView>(R.id.list_platform_id)!!
-
+        val name = itemView.findViewById<TextView>(R.id.list_user_name)
+        val userIcon = itemView.findViewById<ImageView>(R.id.list_user_icon)
+        val platformIcon = itemView.findViewById<ImageView>(R.id.list_platform_id)
+        val hw1 = itemView.findViewById<ImageView>(R.id.list_hw1)
+        val hw2 = itemView.findViewById<ImageView>(R.id.list_hw2)
+        val hw3 = itemView.findViewById<ImageView>(R.id.list_hw3)
+        val hw4 = itemView.findViewById<ImageView>(R.id.list_hw4)
+        val hw5 = itemView.findViewById<ImageView>(R.id.list_hw5)
+        val hw6 = itemView.findViewById<ImageView>(R.id.list_hw6)
 
         init {
             row.setOnClickListener {
@@ -53,3 +76,4 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
         return this.users.size
     }
 }
+
