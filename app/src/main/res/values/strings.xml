@@ -54,7 +54,14 @@
     <string name="patrik_mokry" translatable="false">Patrik Mokrý</string>
     <string name="pavel_stanek" translatable="false">Pavel Staněk</string>
     <string name="lenka_veselá" translatable="false">Lenka Veselá</string>
+    <string name="roman_trudic" translatable="false">Roman Trudič</string>
+    <string name="petra_novakova" translatable="false">Petra Nováková</string>
+    <string name="igor_stredni" translatable="false">Igor Střední</string>
+    <string name="roman_maly" translatable="false">Roman Malý</string>
+    <string name="pavla_velka" translatable="false">Pavla Velká</string>
+    <string name="karel_vlasak" translatable="false">Karel Vlasák</string>
     <string name="title_activity_user_profile" translatable="false">UserProfileActivity</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
