@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/userListFragment">
 
-    //start fragment
+    <!--start fragment-->
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.example.emaapp.view.UserListFragment"
@@ -15,11 +14,11 @@
             app:destination="@id/userProfileFragment" />
     </fragment>
 
-    //end fragment
+   <!-- end fragment-->
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.emaapp.view.UserProfileFragment"
-        android:label="UserProfileFragment" >
+        android:label="User Profile">
         <argument
             android:name="name"
             app:argType="string" />

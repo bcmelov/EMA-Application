@@ -10,7 +10,7 @@ import com.example.emaapp.data.DataSource
 //fragment with display of list of the attendees as RecyclerViewer
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
-    lateinit var adapter: Adapter
+    private lateinit var adapter: Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

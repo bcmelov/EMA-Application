@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/item_all"
+        android:actionLayout="@layout/user_filter"
         android:title="@string/user_filter_all"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/item_android"
+        android:actionLayout="@layout/user_filter"
         android:title="@string/user_filter_android"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/item_iOS"
+        android:actionLayout="@layout/user_filter"
         android:title="@string/user_filter_iOS"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"/>
 </menu>
