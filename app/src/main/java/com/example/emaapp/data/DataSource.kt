@@ -6,5 +6,5 @@ object DataSource {
     //list of Android students
     val android_users: List<User> = users.filter {it.type == PlatformType.Android}
     //list of iOS students
-    val iOS_users: List<User> = users.filter {it.type == PlatformType.iOS}
+    val iOS_users: List<User> = users.filter {it.type == PlatformType.IOS}
 }

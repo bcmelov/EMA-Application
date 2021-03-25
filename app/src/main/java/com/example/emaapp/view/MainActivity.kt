@@ -1,12 +1,15 @@
 package com.example.emaapp.view
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
+import javax.sql.DataSource
 
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -27,6 +30,5 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             navController,
             AppBarConfiguration(navController.graph)
         )
-
     }
 }

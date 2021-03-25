@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/userListScreen">
+    app:startDestination="@id/userListFragment">
 
     //start fragment
     <fragment
-        android:id="@+id/userListScreen"
+        android:id="@+id/userListFragment"
         android:name="com.example.emaapp.view.UserListFragment"
-        android:label="@string/user_list_title">
+        android:label="Students List">
         <action
-            android:id="@+id/action_userListScreen_to_userProfileFragment"
+            android:id="@+id/action_userListFragment_to_userProfileFragment4"
             app:destination="@id/userProfileFragment" />
     </fragment>
 
@@ -19,6 +19,10 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.emaapp.view.UserProfileFragment"
-        android:label="UserProfileFragment" />
+        android:label="UserProfileFragment" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

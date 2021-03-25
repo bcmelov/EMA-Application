@@ -1,5 +1,6 @@
 package com.example.emaapp.view
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.User
 
+class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
+    val name: TextView = itemView.findViewById(R.id.list_user_name)
+    val userIcon: ImageView = itemView.findViewById(R.id.list_user_icon)
+    val platformIcon: ImageView = itemView.findViewById(R.id.list_platform_id)
+    val hw1: ImageView = itemView.findViewById(R.id.list_hw1)
+    val hw2: ImageView = itemView.findViewById(R.id.list_hw2)
+    val hw3: ImageView = itemView.findViewById(R.id.list_hw3)
+    val hw4: ImageView = itemView.findViewById(R.id.list_hw4)
+    val hw5: ImageView = itemView.findViewById(R.id.list_hw5)
+    val hw6: ImageView = itemView.findViewById(R.id.list_hw6)
+}
 
-class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(row: List<User>) : RecyclerView.Adapter<ViewHolder>() {
     var users: List<User> = row
         set(value) {
             field = value
@@ -49,26 +61,15 @@ class Adapter(var row: List<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() 
         holder.hw6.setImageResource(
             users[position].hw6_started
         )
-    }
 
-    class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
-        val name: TextView = itemView.findViewById<TextView>(R.id.list_user_name)
-        val userIcon: ImageView = itemView.findViewById<ImageView>(R.id.list_user_icon)
-        val platformIcon: ImageView = itemView.findViewById<ImageView>(R.id.list_platform_id)
-        val hw1: ImageView = itemView.findViewById<ImageView>(R.id.list_hw1)
-        val hw2: ImageView = itemView.findViewById<ImageView>(R.id.list_hw2)
-        val hw3: ImageView = itemView.findViewById<ImageView>(R.id.list_hw3)
-        val hw4: ImageView = itemView.findViewById<ImageView>(R.id.list_hw4)
-        val hw5: ImageView = itemView.findViewById<ImageView>(R.id.list_hw5)
-        val hw6: ImageView = itemView.findViewById<ImageView>(R.id.list_hw6)
-
-        init {
-            //redirect to UserProfileFragment when clicked on a row
-            row.setOnClickListener {
-                Navigation.findNavController(row).navigate(R.id.action_userListScreen_to_userProfileFragment)
-            }
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("name", holder.itemView.context.getString(users[position].displayName)
+            )
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_userListFragment_to_userProfileFragment4,bundle)
         }
     }
+
 
     override fun getItemCount(): Int {
         return this.users.size
