@@ -13,14 +13,6 @@ import com.example.emaapp.data.User
 
 //fragment with display of list of the attendees as RecyclerViewer
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
-    companion object {
-        private const val KEY_USERNAME = "KEY_USERNAME"
-        fun newInstance(username: String): UserListFragment = UserListFragment().apply {
-            arguments = bundleOf(
-                KEY_USERNAME to username
-            )
-        }
-    }
 
     lateinit var adapter: Adapter
 
