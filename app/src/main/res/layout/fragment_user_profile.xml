@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/large_square_icon"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_icon"
-                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:shapeAppearanceOverlay="@style/CircleImageView"
                 app:srcCompat="@drawable/girl4" />
 
             <!--username-->

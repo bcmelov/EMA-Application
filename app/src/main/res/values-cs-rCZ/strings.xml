@@ -46,8 +46,8 @@
     <string name="user_profile_title">Profil účastníka</string>
 
     <!-- navigation between fragments-->
-    <string name="first_fragment_label">První Fragment</string>
-    <string name="second_fragment_label">Druhý Fragment</string>
+    <string name="first_fragment_label">Seznam studentů</string>
+    <string name="second_fragment_label">Profil studenta</string>
     <string name="next">Další</string>
     <string name="previous">Zpět</string>
 

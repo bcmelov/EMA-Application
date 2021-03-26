@@ -29,19 +29,18 @@
     </style>
 
     <!-- Circle image view -->
-    <style name="circleImageView" parent="">
+    <style name="CircleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
     <!--toggle button styles-->
-    <style name="ToggleButtonWithIconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="ToggleButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:paddingLeft">@dimen/spacing_small</item>
         <item name="android:paddingRight">@dimen/spacing_small</item>
-        <item name="android:height">@dimen/square_icon_small</item>
-        <item name="backgroundColor">@color/purple_500</item>
-        <item name="android:onClick">@color/purple_700</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:height">@dimen/square_icon_Xsmall</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/purple_500</item>
     </style>
 
 </resources>

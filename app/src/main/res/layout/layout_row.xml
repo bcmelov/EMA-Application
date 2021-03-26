@@ -16,7 +16,7 @@
             android:layout_width="@dimen/square_icon_medium"
             android:layout_height="@dimen/square_icon_medium"
             android:contentDescription="@string/user_icon"
-            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
             app:srcCompat="@drawable/girl4" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -32,7 +32,7 @@
             android:contentDescription="@string/platform_android"
             android:tint="@color/teal_700"
             android:background="@color/white"
-            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
             app:srcCompat="@drawable/ic_android" />
 
         <TextView

@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
-import com.example.emaapp.data.DataSource
 import com.example.emaapp.data.User
 
 class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
@@ -75,28 +74,6 @@ class Adapter(row: List<User>) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int {
         return this.users.size
-    }
-
-
-    fun showListByCategory(category: String) {
-        // Filter the list by its category and set to recyclerView
-        when (category) {
-            "Android" -> {
-                this.users = DataSource.android_users
-            }
-
-            "IOS" -> {
-                this.users = DataSource.iOS_users
-            }
-
-            "All" -> {
-                this.users = DataSource.users
-            }
-
-            else -> {
-                this.users = DataSource.users
-            }
-        }
     }
 }
 
