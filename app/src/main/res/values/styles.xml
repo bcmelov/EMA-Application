@@ -12,7 +12,7 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
     </style>
 
-    <style name="User_list_name">
+    <style name="UserListName">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/medium_text</item>
         <item name="android:textStyle">bold</item>

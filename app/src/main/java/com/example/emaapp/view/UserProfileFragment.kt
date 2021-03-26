@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -29,8 +28,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         bundle = arguments ?: throw IllegalStateException("View is null.")
         name = bundle.getString("name")
         student = students.find {getString(it.displayName) == name} ?: throw java.lang.IllegalStateException("Student is null.")
-        //pomocny log do konzole = bundle funguje
-        Log.d("TAG", student.toString())
     }
 
 
@@ -45,7 +42,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private fun fillHeader() {
         student.let { view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(it.displayIcon) }
         student.let { view?.findViewById<TextView>(R.id.user_name)?.setText(it.displayName) }
-        setText()
+        student.let { view?.findViewById<TextView>(R.id.platform_name)?.setText(it.type.toString()) }
         view?.findViewById<ImageButton>(R.id.slack_icon)?.setOnClickListener {
             val url = Uri.parse(student.slack)
             val intent = Intent(Intent.ACTION_VIEW, url)
@@ -53,9 +50,9 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
 
         view?.findViewById<ImageButton>(R.id.email_icon)?.setOnClickListener {
-            val mailTo = Uri.parse(student.email)
-            val intent = Intent(Intent.ACTION_SEND, mailTo)
-            startActivity(Intent.createChooser(intent, "Choose email client to use:"))
+            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(student.email))
+            startActivity(Intent.createChooser(intent, "@string/email_client"))
         }
         view?.findViewById<ImageButton>(R.id.linkedin_icon)?.setOnClickListener {
             val url = Uri.parse(student.linkedIn)
@@ -111,9 +108,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         student.let { view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(it.accepted6) }
 
     }
-}
-
-private fun setText() {
 }
 
 private fun TextView.setState(done: Boolean) {

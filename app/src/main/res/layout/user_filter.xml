@@ -1,43 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_user_filter"
+<com.google.android.material.button.MaterialButtonToggleGroup xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toggleButtonGroup"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:singleSelection="true">
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButtonGroup"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button_all"
+        style="@style/ToggleButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:singleSelection="true">
+        android:layout_weight="3"
+        android:text="@string/user_filter_all" />
 
-        <Button
-            android:id="@+id/button_all"
-            style="@style/ToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="@string/user_filter_all"/>
+    <Button
+        android:id="@+id/button_android"
+        style="@style/ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/user_filter_android" />
 
-        <Button
-            android:id="@+id/button_android"
-            style="@style/ToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="@string/user_filter_android" />
+    <Button
+        android:id="@+id/button_iOs"
+        style="@style/ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/user_filter_iOS" />
 
-        <Button
-            android:id="@+id/button_iOs"
-            style="@style/ToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="@string/user_filter_iOS" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.button.MaterialButtonToggleGroup>

@@ -51,4 +51,7 @@
     <string name="next">Další</string>
     <string name="previous">Zpět</string>
 
+    <!-- Other -->
+    <string name="email_client">"Zvolte prohlížeč:"</string>
+
 </resources>

@@ -67,4 +67,7 @@
     <string name="second_fragment_label">User Profile</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
+    <!-- Other -->
+    <string name="email_client">"Choose email client:"</string>
 </resources>

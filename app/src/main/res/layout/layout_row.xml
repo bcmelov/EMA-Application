@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/spacing_Xsmall">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="@dimen/spacing_Xsmall">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/list_user_icon"
@@ -17,7 +18,7 @@
             android:layout_height="@dimen/square_icon_medium"
             android:contentDescription="@string/user_icon"
             app:shapeAppearanceOverlay="@style/CircleImageView"
-            app:srcCompat="@drawable/girl4" />
+            tools:srcCompat="@drawable/girl4" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/list_platform_id"
@@ -33,11 +34,11 @@
             android:tint="@color/teal_700"
             android:background="@color/white"
             app:shapeAppearanceOverlay="@style/CircleImageView"
-            app:srcCompat="@drawable/ic_android" />
+            tools:srcCompat="@drawable/ic_android" />
 
         <TextView
             android:id="@+id/list_user_name"
-            style="@style/User_list_name"
+            style="@style/UserListName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
@@ -57,7 +58,7 @@
         android:id="@+id/list_hw1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_one"
+        tools:src="@drawable/ic_one"
         android:contentDescription="@string/home_works" />
 
     <!-- homework 2 -->
@@ -65,7 +66,7 @@
         android:id="@+id/list_hw2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_two"
+        tools:src="@drawable/ic_two"
         android:contentDescription="@string/home_works" />
 
     <!-- homework 3 -->
@@ -73,7 +74,7 @@
         android:id="@+id/list_hw3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_three"
+        tools:src="@drawable/ic_three"
         android:contentDescription="@string/home_works" />
 
     <!-- homework 4 -->
@@ -81,7 +82,7 @@
         android:id="@+id/list_hw4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_four"
+        tools:src="@drawable/ic_four"
         android:contentDescription="@string/home_works"/>
 
     <!-- homework 5 -->
@@ -89,7 +90,7 @@
         android:id="@+id/list_hw5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_five"
+        tools:src="@drawable/ic_five"
         android:contentDescription="@string/home_works" />
 
     <!-- homework 6 -->
@@ -97,7 +98,7 @@
         android:id="@+id/list_hw6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_six"
+        tools:src="@drawable/ic_six"
         android:contentDescription="@string/home_works" />
 
         </LinearLayout>
