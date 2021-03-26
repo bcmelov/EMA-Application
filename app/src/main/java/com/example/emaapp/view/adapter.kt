@@ -1,12 +1,10 @@
 package com.example.emaapp.view
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.User
@@ -23,7 +21,11 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
     val hw6: ImageView = itemView.findViewById(R.id.list_hw6)
 }
 
-class Adapter(row: List<User>) : RecyclerView.Adapter<ViewHolder>() {
+interface UserClickListener {
+    fun onUserClick(user : User)
+}
+
+class UserAdapter(row: List<User>, private val listener: UserClickListener) : RecyclerView.Adapter<ViewHolder>() {
     var users: List<User> = row
         set(value) {
             field = value
@@ -32,6 +34,10 @@ class Adapter(row: List<User>) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_row, parent, false)
+        val viewHolder = ViewHolder(view)
+        viewHolder.itemView.setOnClickListener {
+            listener.onUserClick(users[viewHolder.adapterPosition])
+        }
         return ViewHolder(view)
     }
 
@@ -61,14 +67,15 @@ class Adapter(row: List<User>) : RecyclerView.Adapter<ViewHolder>() {
         holder.hw6.setImageResource(
             users[position].hw6_started
         )
+//        holder.itemView.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putString("name", holder.itemView.context.getString(users[position].displayName)
+//            )
+//            Navigation.findNavController(holder.itemView)
+//                .navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
+//        }
 
-        holder.itemView.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("name", holder.itemView.context.getString(users[position].displayName)
-            )
-            Navigation.findNavController(holder.itemView)
-                .navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
-        }
+        listener.onUserClick(users[holder.adapterPosition])
     }
 
 
