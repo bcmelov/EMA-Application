@@ -3,7 +3,7 @@ package com.example.emaapp.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.DataSource
@@ -38,9 +38,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), UserClickListene
         val bundle = Bundle()
         bundle.putString("name", getString(user.displayName)
         )
-        view?.let {
-            Navigation.findNavController(it)
-                .navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
-        }
+        findNavController().navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
     }
 }

@@ -38,7 +38,7 @@ class UserAdapter(row: List<User>, private val listener: UserClickListener) : Re
         viewHolder.itemView.setOnClickListener {
             listener.onUserClick(users[viewHolder.adapterPosition])
         }
-        return ViewHolder(view)
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -67,17 +67,7 @@ class UserAdapter(row: List<User>, private val listener: UserClickListener) : Re
         holder.hw6.setImageResource(
             users[position].hw6_started
         )
-//        holder.itemView.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString("name", holder.itemView.context.getString(users[position].displayName)
-//            )
-//            Navigation.findNavController(holder.itemView)
-//                .navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
-//        }
-
-        listener.onUserClick(users[holder.adapterPosition])
     }
-
 
     override fun getItemCount(): Int {
         return this.users.size

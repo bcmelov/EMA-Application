@@ -52,7 +52,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         view?.findViewById<ImageButton>(R.id.email_icon)?.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
             intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(student.email))
-            startActivity(Intent.createChooser(intent, "@string/email_client"))
+            startActivity(Intent.createChooser(intent, getString(R.string.email_client)))
         }
         view?.findViewById<ImageButton>(R.id.linkedin_icon)?.setOnClickListener {
             val url = Uri.parse(student.linkedIn)
