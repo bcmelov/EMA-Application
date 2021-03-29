@@ -47,7 +47,7 @@
     <string name="user_list_title">List of students</string>
     <string name="user_profile_title">User profile</string>
 
-    <!-- ucastnici akademie - mock jmena -->
+    <!-- academy students - mock names -->
     <string name="bara_cmelova" translatable="false">Bára Čmelová</string>
     <string name="kevin_vojco" translatable="false">Kevin Vojco</string>
     <string name="lucie_zvorilova" translatable="false">Lucie Zvořilová</string>

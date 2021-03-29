@@ -198,7 +198,7 @@ enum class User(
         PlatformType.Android,
         "pavel.stanek@gmail.com",
         "https://miro.medium.com/max/1250/1*TzFF6NMADHPbCQBxmHv3lQ.png",
-        "https://drive.google.com/file/d/1vn3QG6rJTUNIxcDFWoW4uU_qN0-yVlQw/view",
+        "https://s.keepmeme.com/files/en_posts/20200910/cute-cat-with-question-marks-meme-a86f321eb420826d46594635641c2c0e.jpg",
         true,
         true,
         true,

@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.data.DataSource
 import com.example.emaapp.data.User
@@ -23,13 +22,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     //receiving data from the bundle
     private val student: User by lazy {
-        val name = arguments?.getString("name") ?: throw IllegalStateException("No name in args")
+        val name = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No name in args")
         DataSource.users.find { getString(it.displayName) == name} ?: throw IllegalStateException("Student is null.")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<RecyclerView>(R.id.recyclerView)
         fillHeader()
         fillSkills()
         fillHomework()

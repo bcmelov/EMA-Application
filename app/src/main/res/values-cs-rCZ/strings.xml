@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--titles-->
+    <!--user profile titles-->
     <string name="app_name">EMA App</string>
     <string name="user_name">Bára Čmelová</string>
     <string name="platform_android">Android</string>
@@ -51,7 +51,7 @@
     <string name="next">Další</string>
     <string name="previous">Zpět</string>
 
-    <!-- Other -->
+    <!-- other -->
     <string name="email_client">"Zvolte prohlížeč:"</string>
 
 </resources>
