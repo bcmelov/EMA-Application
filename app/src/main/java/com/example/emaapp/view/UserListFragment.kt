@@ -10,10 +10,9 @@ import com.example.emaapp.data.DataSource
 import com.example.emaapp.data.User
 import com.google.android.material.button.MaterialButtonToggleGroup
 
-
 //fragment with display of list of the attendees as RecyclerViewer
 class UserListFragment : Fragment(R.layout.fragment_user_list), UserClickListener {
-    lateinit var adapter: UserAdapter
+    private lateinit var adapter: UserAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,7 +20,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), UserClickListene
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
 
-        val toggleButton = view.findViewById(R.id.toggleButtonGroup) as MaterialButtonToggleGroup
+        val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 adapter.users = when (checkedId) {
@@ -36,7 +35,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), UserClickListene
 
     override fun onUserClick(user: User) {
         val bundle = Bundle()
-        bundle.putString("name", getString(user.displayName)
+        bundle.putString(UserProfileFragment.KEY_NAME, getString(user.displayName)
         )
         findNavController().navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
     }

@@ -50,22 +50,22 @@ class UserAdapter(row: List<User>, private val listener: UserClickListener) : Re
             users[position].displayPlatform
         )
         holder.hw1.setImageResource(
-            users[position].hw1_started
+            users[position].hw1Started
         )
         holder.hw2.setImageResource(
-            users[position].hw2_started
+            users[position].hw2Started
         )
         holder.hw3.setImageResource(
-            users[position].hw3_started
+            users[position].hw3Started
         )
         holder.hw4.setImageResource(
-            users[position].hw4_started
+            users[position].hw4Started
         )
         holder.hw5.setImageResource(
-            users[position].hw5_started
+            users[position].hw5Started
         )
         holder.hw6.setImageResource(
-            users[position].hw6_started
+            users[position].hw6Started
         )
     }
 

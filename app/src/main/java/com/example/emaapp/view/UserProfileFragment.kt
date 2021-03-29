@@ -17,19 +17,15 @@ import com.example.emaapp.data.User
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
-    //receiving data from the bundle
-    private lateinit var bundle : Bundle
-    private var name : String? = null
-    private val students : List<User> = DataSource.users
-    private lateinit var student: User
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bundle = arguments ?: throw IllegalStateException("View is null.")
-        name = bundle.getString("name")
-        student = students.find {getString(it.displayName) == name} ?: throw java.lang.IllegalStateException("Student is null.")
+    companion object {
+        const val KEY_NAME = "name"
     }
 
+    //receiving data from the bundle
+    private val student: User by lazy {
+        val name = arguments?.getString("name") ?: throw IllegalStateException("No name in args")
+        DataSource.users.find { getString(it.displayName) == name} ?: throw IllegalStateException("Student is null.")
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,9 +36,9 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun fillHeader() {
-        student.let { view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(it.displayIcon) }
-        student.let { view?.findViewById<TextView>(R.id.user_name)?.setText(it.displayName) }
-        student.let { view?.findViewById<TextView>(R.id.platform_name)?.setText(it.type.toString()) }
+        view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(student.displayIcon)
+        view?.findViewById<TextView>(R.id.user_name)?.setText(student.displayName)
+        view?.findViewById<TextView>(R.id.platform_name)?.text = student.type.toString()
         view?.findViewById<ImageButton>(R.id.slack_icon)?.setOnClickListener {
             val url = Uri.parse(student.slack)
             val intent = Intent(Intent.ACTION_VIEW, url)
@@ -64,49 +60,47 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     @SuppressLint("SetTextI18n")
     private fun fillSkills() {
 
-        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = student.android_skills * 10
-        view?.findViewById<TextView>(R.id.progress_android)?.text = "${student.android_skills}/10"
-        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress =
-            student.kotlin_skills * 10
-        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${student.kotlin_skills}/10"
-        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = student.iOs_skills * 10
-        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${student.iOs_skills}/10"
-        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = student.swift_skills * 10
-        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${student.swift_skills}/10"
+        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = student.androidSkills * 10
+        view?.findViewById<TextView>(R.id.progress_android)?.text = "${student.androidSkills}/10"
+        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = student.kotlinSkills * 10
+        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${student.kotlinSkills}/10"
+        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = student.iOsSkills * 10
+        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${student.iOsSkills}/10"
+        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = student.swiftSkills * 10
+        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${student.swiftSkills}/10"
     }
 
     private fun fillHomework() {
 
         //1. homework
-        student.let { view?.findViewById<TextView>(R.id.title_push_1)?.setState(it.push1) }
-        student.let { view?.findViewById<TextView>(R.id.title_review_1)?.setState(it.review1) }
-        student.let { view?.findViewById<TextView>(R.id.title_acceptance_1)?.setState(it.accepted1) }
+        view?.findViewById<TextView>(R.id.title_push_1)?.setState(student.push1)
+        view?.findViewById<TextView>(R.id.title_review_1)?.setState(student.review1)
+        view?.findViewById<TextView>(R.id.title_acceptance_1)?.setState(student.accepted1)
 
         //2. homework
-        student.let { view?.findViewById<TextView>(R.id.title_push_2)?.setState(it.push2) }
-        student.let { view?.findViewById<TextView>(R.id.title_review_2)?.setState(it.review2) }
-        student.let { view?.findViewById<TextView>(R.id.title_acceptance_2)?.setState(it.accepted2) }
+        view?.findViewById<TextView>(R.id.title_push_2)?.setState(student.push2)
+        view?.findViewById<TextView>(R.id.title_review_2)?.setState(student.review2)
+        view?.findViewById<TextView>(R.id.title_acceptance_2)?.setState(student.accepted2)
 
         //3. homework
-        student.let { view?.findViewById<TextView>(R.id.title_push_3)?.setState(it.push3) }
-        student.let { view?.findViewById<TextView>(R.id.title_review_3)?.setState(it.review3) }
-        student.let { view?.findViewById<TextView>(R.id.title_acceptance_3)?.setState(it.accepted3) }
+        view?.findViewById<TextView>(R.id.title_push_3)?.setState(student.push3)
+        view?.findViewById<TextView>(R.id.title_review_3)?.setState(student.review3)
+        view?.findViewById<TextView>(R.id.title_acceptance_3)?.setState(student.accepted3)
 
         //4. homework
-        student.let { view?.findViewById<TextView>(R.id.title_push_4)?.setState(it.push4) }
-        student.let { view?.findViewById<TextView>(R.id.title_review_4)?.setState(it.review4) }
-        student.let { view?.findViewById<TextView>(R.id.title_acceptance_4)?.setState(it.accepted4) }
+        view?.findViewById<TextView>(R.id.title_push_4)?.setState(student.push4)
+        view?.findViewById<TextView>(R.id.title_review_4)?.setState(student.review4)
+        view?.findViewById<TextView>(R.id.title_acceptance_4)?.setState(student.accepted4)
 
         //5. homework
-        student.let { view?.findViewById<TextView>(R.id.title_push_5)?.setState(it.push5) }
-        student.let { view?.findViewById<TextView>(R.id.title_review_5)?.setState(it.review5) }
-        student.let { view?.findViewById<TextView>(R.id.title_acceptance_5)?.setState(it.accepted5) }
+        view?.findViewById<TextView>(R.id.title_push_5)?.setState(student.push5)
+        view?.findViewById<TextView>(R.id.title_review_5)?.setState(student.review5)
+        view?.findViewById<TextView>(R.id.title_acceptance_5)?.setState(student.accepted5)
 
         //6. homework
-        student.let { view?.findViewById<TextView>(R.id.title_push_6)?.setState(it.push6) }
-        student.let { view?.findViewById<TextView>(R.id.title_review_6)?.setState(it.review6) }
-        student.let { view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(it.accepted6) }
-
+        view?.findViewById<TextView>(R.id.title_push_6)?.setState(student.push6)
+        view?.findViewById<TextView>(R.id.title_review_6)?.setState(student.review6)
+        view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(student.accepted6)
     }
 }
 

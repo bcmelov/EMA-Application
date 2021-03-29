@@ -11,17 +11,15 @@ import com.example.emaapp.R
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var toolbar: Toolbar
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-                // access to navController that is a part of NavHostFragment
+        // access to navController that is a part of NavHostFragment
         val navController =
             (supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment).navController
 
         // setup toolbar with nav controller
-        toolbar = findViewById(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.setupWithNavController(
             navController,

@@ -5,9 +5,7 @@ import androidx.annotation.StringRes
 import com.example.emaapp.R
 
 //Users with mapping [icon] and [name]
-
 enum class User(
-    //zavinace = anotace --> informuji kompilator, ze ocekavana hodnota je urcity resource
     @DrawableRes val displayIcon: Int,
     @DrawableRes val displayPlatform: Int,
     @StringRes val displayName: Int,
@@ -33,18 +31,18 @@ enum class User(
     val push6: Boolean,
     val review6: Boolean,
     val accepted6: Boolean,
-    val android_skills: Int,
-    val kotlin_skills: Int,
-    val iOs_skills: Int,
-    val swift_skills: Int,
-    @DrawableRes val hw1_started: Int,
-    @DrawableRes val hw2_started: Int,
-    @DrawableRes val hw3_started: Int,
-    @DrawableRes val hw4_started: Int,
-    @DrawableRes val hw5_started: Int,
-    @DrawableRes val hw6_started: Int
+    val androidSkills: Int,
+    val kotlinSkills: Int,
+    val iOsSkills: Int,
+    val swiftSkills: Int,
+    @DrawableRes val hw1Started: Int,
+    @DrawableRes val hw2Started: Int,
+    @DrawableRes val hw3Started: Int,
+    @DrawableRes val hw4Started: Int,
+    @DrawableRes val hw5Started: Int,
+    @DrawableRes val hw6Started: Int
 ) {
-    //list of users (test one, the final one has to be completed!
+    //list of users
     BaraCmelova(
         R.drawable.girl4,
         R.drawable.ic_android,

@@ -34,7 +34,7 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <!--toggle button styles-->
+    <!--Toggle button styles-->
     <style name="ToggleButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:paddingLeft">@dimen/spacing_small</item>
         <item name="android:paddingRight">@dimen/spacing_small</item>
