@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_scroll_view"
+    >
 
     <!--main layout for vertical ScrollView-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/spacing_Xlarge">
-
-        <!--temporary switch for night/day mode-->
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/night_mode" />
+        android:paddingHorizontal="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_large">
 
         <!--layout for user icon, user name and platform specification-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_medium">
 
             <!--user icon (temporary icon for now)-->
-            <ImageView
+
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/user_icon"
-                android:layout_width="@dimen/xl_circle_icon"
-                android:layout_height="@dimen/xl_circle_icon"
+                android:layout_width="@dimen/large_square_icon"
+                android:layout_height="@dimen/large_square_icon"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_icon"
-                android:src="@drawable/ic_emoji" />
+                app:shapeAppearanceOverlay="@style/CircleImageView"
+                app:srcCompat="@drawable/girl4" />
 
             <!--username-->
             <TextView
@@ -82,6 +81,7 @@
                     android:contentDescription="@string/email" />
 
                 <ImageButton
+                    android:id="@+id/linkedin_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/email_icon"
@@ -116,41 +116,42 @@
             <!--Progress in Android-->
             <ImageView
                 android:id="@+id/android_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/square_icon_Xsmall"
+                android:layout_height="@dimen/square_icon_Xsmall"
                 android:contentDescription="@string/android"
                 android:src="@drawable/ic_android"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/progressBarAndroid"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="?attr/colorControlNormal" />
 
             <ProgressBar
                 android:id="@+id/progressBarAndroid"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
+                app:layout_constraintBottom_toBottomOf="@id/android_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_android"
                 app:layout_constraintStart_toEndOf="@+id/android_icon"
-                app:layout_constraintTop_toTopOf="@+id/android_icon"/>
+                app:layout_constraintTop_toTopOf="@+id/android_icon" />
 
             <TextView
                 android:id="@+id/progress_android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zero"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarAndroid" />
+                app:layout_constraintStart_toEndOf="@+id/progressBarAndroid"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!--Progress in Kotlin-->
             <ImageView
                 android:id="@+id/kotlin_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/square_icon_Xsmall"
+                android:layout_height="@dimen/square_icon_Xsmall"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/kotlin"
                 android:src="@drawable/ic_kotlin"
@@ -163,19 +164,20 @@
                 android:id="@+id/progressBarKotlin"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="10"
+                app:layout_constraintBottom_toBottomOf="@id/kotlin_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_kotlin"
                 app:layout_constraintStart_toEndOf="@+id/kotlin_icon"
-                app:layout_constraintTop_toTopOf="@+id/progress_kotlin" />
+                app:layout_constraintTop_toTopOf="@+id/kotlin_icon" />
 
             <TextView
                 android:id="@+id/progress_kotlin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/one"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBarKotlin"
@@ -185,8 +187,8 @@
             <!--Progress in iOS-->
             <ImageView
                 android:id="@+id/apple_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/square_icon_Xsmall"
+                android:layout_height="@dimen/square_icon_Xsmall"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/ios"
                 android:src="@drawable/ic_apple"
@@ -199,19 +201,20 @@
                 android:id="@+id/progressBariOS"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
-                app:layout_constraintEnd_toStartOf="@+id/progress_apple"
+                app:layout_constraintBottom_toBottomOf="@id/apple_icon"
+                app:layout_constraintEnd_toStartOf="@+id/progress_iOS"
                 app:layout_constraintStart_toEndOf="@+id/apple_icon"
-                app:layout_constraintTop_toTopOf="@+id/progress_apple" />
+                app:layout_constraintTop_toTopOf="@+id/apple_icon" />
 
             <TextView
-                android:id="@+id/progress_apple"
+                android:id="@+id/progress_iOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/zero"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBariOS"
@@ -220,37 +223,38 @@
             <!--Progress in Swift-->
             <ImageView
                 android:id="@+id/swift_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/square_icon_Xsmall"
+                android:layout_height="@dimen/square_icon_Xsmall"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:contentDescription="@string/swift"
                 android:src="@drawable/ic_swift"
-                app:layout_constraintTop_toBottomOf="@id/apple_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progressBarSwift"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/apple_icon"
                 app:tint="?attr/colorControlNormal" />
 
             <ProgressBar
                 android:id="@+id/progressBarSwift"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:progress="0"
-                app:layout_constraintTop_toTopOf="@+id/progress_swift"
+                app:layout_constraintBottom_toBottomOf="@id/swift_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_swift"
-                app:layout_constraintStart_toEndOf="@+id/swift_icon" />
+                app:layout_constraintStart_toEndOf="@+id/swift_icon"
+                app:layout_constraintTop_toTopOf="@+id/progress_swift" />
 
             <TextView
                 android:id="@+id/progress_swift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/zero"
-                app:layout_constraintTop_toBottomOf="@id/progress_apple"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarSwift" />
+                app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
+                app:layout_constraintTop_toBottomOf="@id/progress_iOS" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -283,8 +287,8 @@
 
                     <ImageView
                         android:id="@+id/homework_number_1"
-                        android:layout_width="@dimen/medium_square_icon"
-                        android:layout_height="@dimen/medium_square_icon"
+                        android:layout_width="@dimen/square_icon_small"
+                        android:layout_height="@dimen/square_icon_small"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_one" />
 
@@ -334,8 +338,8 @@
 
                     <ImageView
                         android:id="@+id/homework_number_2"
-                        android:layout_width="@dimen/medium_square_icon"
-                        android:layout_height="@dimen/medium_square_icon"
+                        android:layout_width="@dimen/square_icon_small"
+                        android:layout_height="@dimen/square_icon_small"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_two" />
 
@@ -384,8 +388,8 @@
 
                     <ImageView
                         android:id="@+id/homework_number_3"
-                        android:layout_width="@dimen/medium_square_icon"
-                        android:layout_height="@dimen/medium_square_icon"
+                        android:layout_width="@dimen/square_icon_small"
+                        android:layout_height="@dimen/square_icon_small"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_three" />
 
@@ -433,8 +437,8 @@
 
                     <ImageView
                         android:id="@+id/homework_number_4"
-                        android:layout_width="@dimen/medium_square_icon"
-                        android:layout_height="@dimen/medium_square_icon"
+                        android:layout_width="@dimen/square_icon_small"
+                        android:layout_height="@dimen/square_icon_small"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_four" />
 
@@ -482,8 +486,8 @@
 
                     <ImageView
                         android:id="@+id/homework_number_5"
-                        android:layout_width="@dimen/medium_square_icon"
-                        android:layout_height="@dimen/medium_square_icon"
+                        android:layout_width="@dimen/square_icon_small"
+                        android:layout_height="@dimen/square_icon_small"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_five" />
 
@@ -532,8 +536,8 @@
 
                     <ImageView
                         android:id="@+id/homework_number_6"
-                        android:layout_width="@dimen/medium_square_icon"
-                        android:layout_height="@dimen/medium_square_icon"
+                        android:layout_width="@dimen/square_icon_small"
+                        android:layout_height="@dimen/square_icon_small"
                         android:contentDescription="@string/hw_number"
                         android:src="@drawable/ic_six" />
 

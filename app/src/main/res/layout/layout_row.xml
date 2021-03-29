@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/spacing_Xsmall">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing_Xsmall">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/list_user_icon"
+            android:layout_width="@dimen/square_icon_medium"
+            android:layout_height="@dimen/square_icon_medium"
+            android:contentDescription="@string/user_icon"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            tools:srcCompat="@drawable/girl4" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/list_platform_id"
+            android:layout_width="@dimen/square_icon_Xsmall"
+            android:layout_height="@dimen/square_icon_Xsmall"
+            android:layout_below="@+id/list_user_icon"
+            android:layout_marginStart="-15dp"
+            android:layout_marginTop="-15dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            android:layout_toEndOf="@id/list_user_icon"
+            android:contentDescription="@string/platform_android"
+            android:tint="@color/teal_700"
+            android:background="@color/white"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            tools:srcCompat="@drawable/ic_android" />
+
+        <TextView
+            android:id="@+id/list_user_name"
+            style="@style/UserListName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_toEndOf="@id/list_platform_id"
+            android:text="@string/user_name" />
+
+        <LinearLayout
+            android:layout_below="@id/list_user_name"
+            android:layout_toEndOf="@id/list_user_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_Xsmall">
+
+         <!-- homework 1 -->
+    <ImageView
+        android:id="@+id/list_hw1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_one"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 2 -->
+    <ImageView
+        android:id="@+id/list_hw2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_two"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 3 -->
+    <ImageView
+        android:id="@+id/list_hw3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_three"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 4 -->
+    <ImageView
+        android:id="@+id/list_hw4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_four"
+        android:contentDescription="@string/home_works"/>
+
+    <!-- homework 5 -->
+    <ImageView
+        android:id="@+id/list_hw5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_five"
+        android:contentDescription="@string/home_works" />
+
+    <!-- homework 6 -->
+    <ImageView
+        android:id="@+id/list_hw6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_six"
+        android:contentDescription="@string/home_works" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+

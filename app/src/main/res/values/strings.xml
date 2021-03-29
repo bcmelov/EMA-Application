@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
     <!--titles-->
     <string name="app_name">EMA App</string>
@@ -40,4 +40,34 @@
     <string name="nine">9/10</string>
     <string name="ten">10/10</string>
 
+    <!-- toolbar titles -->
+    <string name="user_filter_all">All</string>
+    <string name="user_filter_android" translatable="false">Android</string>
+    <string name="user_filter_iOS" translatable="false">iOS</string>
+    <string name="user_list_title">List of students</string>
+    <string name="user_profile_title">User profile</string>
+
+    <!-- academy students - mock names -->
+    <string name="bara_cmelova" translatable="false">Bára Čmelová</string>
+    <string name="kevin_vojco" translatable="false">Kevin Vojco</string>
+    <string name="lucie_zvorilova" translatable="false">Lucie Zvořilová</string>
+    <string name="patrik_mokry" translatable="false">Patrik Mokrý</string>
+    <string name="pavel_stanek" translatable="false">Pavel Staněk</string>
+    <string name="lenka_veselá" translatable="false">Lenka Veselá</string>
+    <string name="roman_trudic" translatable="false">Roman Trudič</string>
+    <string name="petra_novakova" translatable="false">Petra Nováková</string>
+    <string name="igor_stredni" translatable="false">Igor Střední</string>
+    <string name="roman_maly" translatable="false">Roman Malý</string>
+    <string name="pavla_velka" translatable="false">Pavla Velká</string>
+    <string name="karel_vlasak" translatable="false">Karel Vlasák</string>
+    <string name="title_activity_user_profile" translatable="false">UserProfileActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Students List</string>
+    <string name="second_fragment_label">User Profile</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- Other -->
+    <string name="email_client">"Choose email client:"</string>
 </resources>
