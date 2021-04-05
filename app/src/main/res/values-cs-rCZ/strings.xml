@@ -51,6 +51,9 @@
     <string name="next">Další</string>
     <string name="previous">Zpět</string>
 
+    <!-- Errors -->
+    <string name="error_fetch_users">Please check your internet connection</string>
+
     <!-- other -->
     <string name="email_client">"Zvolte prohlížeč:"</string>
 

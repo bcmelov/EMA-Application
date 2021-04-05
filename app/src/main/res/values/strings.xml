@@ -68,6 +68,10 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!-- Errors -->
+    <string name="error_fetch_users">Please check your internet connection</string>
+
     <!-- Other -->
     <string name="email_client">"Choose email client:"</string>
+    <string name="base_url" translatable="false">http://emarest.cz.mass-php-1.mit.etn.cz/api/</string>
 </resources>
