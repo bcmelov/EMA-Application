@@ -30,7 +30,12 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
             Glide.with(userIcon.context)
                 .load(user.icon192)
                 .into(userIcon)
-        }
+            when (user.participantType) {
+                "iosMentor" -> platformIcon.setImageResource(R.drawable.ic_apple)
+                "iosStudent" -> platformIcon.setImageResource(R.drawable.ic_apple)
+                "androidMentor" -> platformIcon.setImageResource(R.drawable.ic_android)
+                "androidStudent" -> platformIcon.setImageResource(R.drawable.ic_android)
+            }
     }
 }
 
@@ -95,5 +100,6 @@ class UserAdapter(private val row: ArrayList<User>, private val listener: UserCl
         }
 
     }
+}
 }
 

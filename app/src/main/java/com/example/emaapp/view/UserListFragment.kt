@@ -3,41 +3,24 @@ package com.example.emaapp.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.api.ApiHelper
 import com.example.emaapp.api.RetrofitBuilder
-import com.example.emaapp.api.UserApi
-import com.example.emaapp.service.UserService
-import com.google.android.material.button.MaterialButtonToggleGroup
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import  com.example.emaapp.model.Result
 import com.example.emaapp.model.User
 import com.example.emaapp.utils.Status
+import com.google.android.material.button.MaterialButtonToggleGroup
 
 
 //fragment with display of list of the attendees as RecyclerViewer
-class UserListFragment : Fragment(R.layout.fragment_user_list), UserClickListener {
+class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserClickListener {
     private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: UserAdapter
+    private lateinit var adapter: ViewHolder.UserAdapter
 //    private lateinit var recyclerView: RecyclerView
 //    private var emptyText: TextView? = null
 
@@ -48,7 +31,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), UserClickListene
         setupObservers()
 
 //        val service = UserService(createRetrofit().create(UserApi::class.java))
-        adapter = UserAdapter(arrayListOf(), this)
+        adapter = ViewHolder.UserAdapter(arrayListOf(), this)
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
 
