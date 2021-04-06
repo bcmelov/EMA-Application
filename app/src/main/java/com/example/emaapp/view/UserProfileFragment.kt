@@ -1,39 +1,84 @@
 package com.example.emaapp.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.emaapp.R
-import com.example.emaapp.data.DataSource
-import com.example.emaapp.model.User
+import com.example.emaapp.api.Service
+import com.example.emaapp.api.RetrofitBuilder
+import com.example.emaapp.model.UserProfileData
+import com.example.emaapp.utils.Status
+import com.example.emaapp.view.viewModels.MainViewModel
+import com.example.emaapp.view.viewModels.ViewModelFactory
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
-//
-    companion object {
-        const val KEY_NAME = "name"
-    }
-//
-//    //receiving data from the bundle
-//    private val student: User by lazy {
-//        val name = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No name in args")
-//        DataSource.users.find { getString(it.displayName) == name} ?: throw IllegalStateException("Student is null.")
+
+    //
+//    companion object {
+//        const val KEY_NAME = "id"
 //    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        fillHeader()
+
+    private lateinit var viewModel: MainViewModel //test
+
+//    receiving data from the bundle
+//    private val student: User by lazy {
+//        val id = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No name in args")
+//        List<User>.find { it.name == id } ?: throw IllegalStateException("Student is null.")
+//    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fillHeader()
 //        fillSkills()
 //        fillHomework()
-//    }
+    }
+
+
+    //TEST CODE
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(
+            this,
+            ViewModelFactory(Service(RetrofitBuilder.apiService))
+        ).get(MainViewModel::class.java)
+    }
+
+    private fun setupObservers() {
+        viewModel.getUser().observe(viewLifecycleOwner, Observer {
+            val progressBar = ProgressBar(context)
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        progressBar.visibility = View.GONE
+                        resource.data?.let { user -> retrieveList(user) }!!
+                    }
+                    Status.ERROR -> {
+                        progressBar.visibility = View.GONE
+                        Log.d("TAG", "FAILURE")
+                    }
+                    Status.LOADING -> {
+                        progressBar.visibility = View.VISIBLE
+                        Log.d("TAG", "LOADING")
+                    }
+                }
+            }
+        })
+    }
+
+    private fun retrieveList(user: UserProfileData) {
+    }
 //
-//    private fun fillHeader() {
+
+    //END OF TEST CODE
+    private fun fillHeader() {
 //        view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(student.displayIcon)
 //        view?.findViewById<TextView>(R.id.user_name)?.setText(student.displayName)
 //        view?.findViewById<TextView>(R.id.platform_name)?.text = student.type.toString()
@@ -41,7 +86,23 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 //            val url = Uri.parse(student.slack)
 //            val intent = Intent(Intent.ACTION_VIEW, url)
 //            startActivity(intent)
-//        }
+
+    val name = arguments?.get("name")
+    val icon = arguments?.get("icon")
+    val platform = arguments?.get("platform")
+    val slack = arguments?.get("slack")
+
+//    view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(student.displayIcon)
+
+    view?.findViewById<TextView>(R.id.user_name)?.text = name.toString()
+    view?.findViewById<TextView>(R.id.platform_name)?.text = platform.toString()
+    view?.findViewById<ImageButton>(R.id.slack_icon)?.setOnClickListener {
+        val url = Uri.parse(slack as String?)
+        val intent = Intent(Intent.ACTION_VIEW, url)
+        startActivity(intent)
+    }
+}
+
 //
 //        view?.findViewById<ImageButton>(R.id.email_icon)?.setOnClickListener {
 //            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
@@ -55,18 +116,22 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 //        }
 //    }
 //
+
 //    @SuppressLint("SetTextI18n")
-//    private fun fillSkills() {
-//
-//        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = student.androidSkills * 10
-//        view?.findViewById<TextView>(R.id.progress_android)?.text = "${student.androidSkills}/10"
-//        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = student.kotlinSkills * 10
-//        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${student.kotlinSkills}/10"
-//        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = student.iOsSkills * 10
-//        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${student.iOsSkills}/10"
-//        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = student.swiftSkills * 10
-//        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${student.swiftSkills}/10"
-//    }
+    private fun fillSkills() {
+
+        val homework = arguments?.get("homework")
+    Log.d("TAG", homework.toString())
+
+//        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = android as Int * 10
+//        view?.findViewById<TextView>(R.id.progress_android)?.text = "${android}/10"
+//        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlin as Int * 10
+//        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlin}/10"
+//        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = ios as Int * 10
+//        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${ios}/10"
+//        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swift as Int * 10
+//        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swift}/10"
+    }
 //
 //    private fun fillHomework() {
 //
@@ -101,8 +166,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 //        view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(student.accepted6)
 //    }
 //}
-//
-//private fun TextView.setState(done: Boolean) {
-//    val id = if (done) R.drawable.ic_done else R.drawable.ic_waiting
-//    setCompoundDrawablesWithIntrinsicBounds(0, 0, id, 0)
+
+    private fun TextView.setState(done: Boolean) {
+        val id = if (done) R.drawable.ic_done else R.drawable.ic_waiting
+        setCompoundDrawablesWithIntrinsicBounds(0, 0, id, 0)
+    }
 }
+
+

@@ -12,16 +12,15 @@ data class Homework(
     val id: Int
 )
 
-//class with basic user information (ListView)
+//class with user information (ListView & user profile)
 data class User(
     val id: String,
     val name: String,
     val participantType: String,
     val title: String,
+    val slackURL: String,
     val icon512: String,
     val icon192: String,
     val icon72: String,
     val homework: List<Homework>
 )
-
-// note --> class Root was changed to class User (same with List<User> from List<Root>)

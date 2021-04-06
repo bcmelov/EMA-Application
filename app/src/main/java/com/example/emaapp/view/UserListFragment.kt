@@ -3,17 +3,19 @@ package com.example.emaapp.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.view.isVisible
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
-import com.example.emaapp.api.ApiHelper
+import com.example.emaapp.api.Service
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.model.User
 import com.example.emaapp.utils.Status
+import com.example.emaapp.view.viewModels.MainViewModel
+import com.example.emaapp.view.viewModels.ViewModelFactory
 import com.google.android.material.button.MaterialButtonToggleGroup
 
 
@@ -22,7 +24,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: ViewHolder.UserAdapter
 //    private lateinit var recyclerView: RecyclerView
-//    private var emptyText: TextView? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +46,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
                     R.id.button_all -> "androidMentor"
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
-//                fetchWithCoroutines(service, participantType)
 
 //                adapter.users = when (checkedId) {
 //                    //TODO
@@ -62,27 +62,27 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
+            ViewModelFactory(Service(RetrofitBuilder.apiService))
         ).get(MainViewModel::class.java)
     }
 
     private fun setupObservers() {
         viewModel.getUsers().observe(viewLifecycleOwner, Observer {
+            val progressBar = ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
 //                        recyclerView.visibility = View.VISIBLE
-//                        progressBar.visibility = View.GONE
+                        progressBar.visibility = View.GONE
                         resource.data?.let { users -> retrieveList(users) }
                     }
                     Status.ERROR -> {
 //                        recyclerView.visibility = View.VISIBLE
-//                        progressBar.visibility = View.GONE
-//                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        progressBar.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
                     }
                     Status.LOADING -> {
-//                        progressBar.visibility = View.VISIBLE
+                        progressBar.visibility = View.VISIBLE
 //                        recyclerView.visibility = View.GONE
                         Log.d("TAG", "LOADING")
                     }
@@ -100,8 +100,28 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
 
     override fun onUserClick(user: User) {
         val bundle = Bundle()
-        bundle.putString(UserProfileFragment.KEY_NAME, getString(user.name.toInt()) /*previous version: user.name ... however an int is required)*/
-        )
+//        bundle.putString(UserProfileFragment.KEY_NAME,  getString(user.id.toInt()) /*previous version: user.name ... however an int is required)*/
+//        )
+        bundle.putString("id", user.id)
+        bundle.putString("name", user.name)
+        bundle.putString("icon", user.icon192)
+        bundle.putString("platform", user.participantType)
+        bundle.putString("slack", user.slackURL)
+
+//        //skills values
+//        var j: Int = 0
+//        while (j < user.skills.size) {
+//            when (user.skills[j].skillType) {
+//                "android" -> bundle.putInt("android", user.skills[0].value)
+//                "ios" -> bundle.putInt("ios", user.skills[0].value)
+//                "kotlin" -> bundle.putInt("kotlin", user.skills[0].value)
+//                "swift" -> bundle.putInt("swift", user.skills[0].value)
+//            }
+//            j++
+//        }
+
+
+
         findNavController().navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
     }
 
@@ -147,4 +167,5 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
 //        Log.d("TAG", "FAILURE")
 //    }
 //
+
 }
