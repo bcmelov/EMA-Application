@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.emaapp.R
+import com.example.emaapp.model.Homework
 import com.example.emaapp.model.Result
 import com.example.emaapp.model.User
+import java.lang.reflect.Array.get
 import java.util.Collections.addAll
 
 class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
@@ -36,8 +38,33 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
                 "androidMentor" -> platformIcon.setImageResource(R.drawable.ic_android)
                 "androidStudent" -> platformIcon.setImageResource(R.drawable.ic_android)
             }
+            when (user.homework[0].state) {
+                "comingsoon" -> hw1.setImageResource(R.drawable.ic_one)
+                else -> hw1.setImageResource(R.drawable.ic_one_done)
+            }
+            when (user.homework[1].state) {
+                "comingsoon" -> hw2.setImageResource(R.drawable.ic_two)
+                else -> hw2.setImageResource(R.drawable.ic_two_done)
+            }
+            when (user.homework[2].state) {
+                "comingsoon" -> hw3.setImageResource(R.drawable.ic_three)
+                else -> hw3.setImageResource(R.drawable.ic_three_done)
+            }
+            when (user.homework[3].state) {
+                "comingsoon" -> hw4.setImageResource(R.drawable.ic_four)
+                else -> hw4.setImageResource(R.drawable.ic_four_done)
+            }
+            when (user.homework[4].state) {
+                "comingsoon" -> hw5.setImageResource(R.drawable.ic_five)
+                else -> hw5.setImageResource(R.drawable.ic_five_done)
+            }
+            when (user.homework[5].state) {
+                "comingsoon" -> hw6.setImageResource(R.drawable.ic_six)
+                else -> hw6.setImageResource(R.drawable.ic_six_done)
+            }
     }
 }
+
 
 interface UserClickListener {
     fun onUserClick(user : User)

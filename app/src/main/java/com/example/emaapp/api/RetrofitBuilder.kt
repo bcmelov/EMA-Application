@@ -9,6 +9,7 @@ object RetrofitBuilder {
 
     private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"
 
+    //RETROFIT
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -17,6 +18,7 @@ object RetrofitBuilder {
             .build()
     }
 
+    //OK HTTP CLIENT
     private fun createClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -26,5 +28,6 @@ object RetrofitBuilder {
             .build()
     }
 
+    //API SERVICE
     val apiService: UserApi = getRetrofit().create(UserApi::class.java)
 }
