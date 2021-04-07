@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
-import com.example.emaapp.api.Service
 import com.example.emaapp.api.RetrofitBuilder
+import com.example.emaapp.api.Service
 import com.example.emaapp.model.User
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.MainViewModel
@@ -23,7 +23,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserClickListener {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: ViewHolder.UserAdapter
-//    private lateinit var recyclerView: RecyclerView
+    private var participantType = "androidStudent"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,15 +34,13 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
 
-
-//        currently not working
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
-                val participantType = when (checkedId) {
+                participantType = when (checkedId) {
                     R.id.button_android -> "androidStudent"
                     R.id.button_iOs -> "iosStudent"
-                    R.id.button_all -> "androidMentor"
+                    R.id.button_all -> null.toString()
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
             }
@@ -57,7 +55,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     }
 
     private fun setupObservers() {
-        viewModel.getUsers().observe(viewLifecycleOwner, Observer {
+        viewModel.getUsers(participantType).observe(viewLifecycleOwner, Observer {
             val progressBar = ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {

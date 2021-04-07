@@ -3,7 +3,6 @@ package com.example.emaapp.view.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.emaapp.repository.DetailRepository
-import com.example.emaapp.repository.MainRepository
 import com.example.emaapp.utils.Resource
 import kotlinx.coroutines.Dispatchers
 

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
@@ -32,13 +33,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private lateinit var viewModel: DetailViewModel
     private lateinit var bundleId: String
 
-    //parsing function for user icon URI
-    fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //    receiving ID from the bundle (working)
+
+        //receiving ID from the bundle
         bundleId = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No name in args")
         setupViewModel()
         setupObservers()
@@ -51,6 +49,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         ).get(DetailViewModel::class.java)
     }
 
+    @SuppressLint("InflateParams")
     private fun setupObservers() {
         viewModel.getUser(bundleId).observe(viewLifecycleOwner, Observer {
             val progressBar = ProgressBar(context)
@@ -74,21 +73,23 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         })
     }
 
-
     //LOADING DATA IN USER PROFILE
     @SuppressLint("SetTextI18n")
     private fun retrieveProfile(user: UserProfileData) {
 
-//ICON GLIDE
+//USER ICON GLIDE
         val userIcon = view?.findViewById<ImageView>(R.id.user_icon)
         if (userIcon != null) {
             Glide.with(userIcon.context)
                 .load(user.icon192)
+                .error(R.drawable.no_image_icon)
+                .placeholder(R.drawable.loading_icon)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(userIcon)
         }
 //HEADER
         //view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(student.displayIcon)
-        view?.findViewById<TextView>(R.id.user_name)?.setText(user.name)
+        view?.findViewById<TextView>(R.id.user_name)?.text = user.name
         view?.findViewById<TextView>(R.id.platform_name)?.text = user.participantType
 
         //media buttons (Slack cannot be opened on the Emulator because of missing Slack application, email and linkedIn currently not provided by API)
@@ -130,7 +131,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             }
             i++
         }
-
         view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
         view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
         view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
@@ -139,7 +139,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
         view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
         view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
-
 
 //HOMEWORK
         //1. homework

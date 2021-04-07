@@ -12,7 +12,7 @@ data class Homework(
     val id: Int
 )
 
-//class with user information (ListView & user profile)
+//class with user information (ListView)
 data class User(
     val id: String,
     val name: String,
@@ -24,3 +24,4 @@ data class User(
     val icon72: String,
     val homework: List<Homework>
 )
+

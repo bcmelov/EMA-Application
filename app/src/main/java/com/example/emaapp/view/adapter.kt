@@ -7,25 +7,29 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
 import com.example.emaapp.model.User
 
 class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
     val name: TextView = itemView.findViewById(R.id.list_user_name)
-    val userIcon: ImageView = itemView.findViewById(R.id.list_user_icon)
-    val platformIcon: ImageView = itemView.findViewById(R.id.list_platform_id)
-    val hw1: ImageView = itemView.findViewById(R.id.list_hw1)
-    val hw2: ImageView = itemView.findViewById(R.id.list_hw2)
-    val hw3: ImageView = itemView.findViewById(R.id.list_hw3)
-    val hw4: ImageView = itemView.findViewById(R.id.list_hw4)
-    val hw5: ImageView = itemView.findViewById(R.id.list_hw5)
-    val hw6: ImageView = itemView.findViewById(R.id.list_hw6)
+    private val userIcon: ImageView = itemView.findViewById(R.id.list_user_icon)
+    private val platformIcon: ImageView = itemView.findViewById(R.id.list_platform_id)
+    private val hw1: ImageView = itemView.findViewById(R.id.list_hw1)
+    private val hw2: ImageView = itemView.findViewById(R.id.list_hw2)
+    private val hw3: ImageView = itemView.findViewById(R.id.list_hw3)
+    private val hw4: ImageView = itemView.findViewById(R.id.list_hw4)
+    private val hw5: ImageView = itemView.findViewById(R.id.list_hw5)
+    private val hw6: ImageView = itemView.findViewById(R.id.list_hw6)
 
     fun bind(user: User) {
         itemView.apply {
             name.text = user.name
             Glide.with(userIcon.context)
                 .load(user.icon192)
+                .error(R.drawable.no_image_icon)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.loading_icon)
                 .into(userIcon)
             when (user.participantType) {
                 "iosMentor" -> platformIcon.setImageResource(R.drawable.ic_apple)
@@ -66,7 +70,7 @@ interface UserClickListener {
 }
 
 class UserAdapter(private val row: ArrayList<User>, private val listener: UserClickListener) : RecyclerView.Adapter<ViewHolder>() {
-    var users: ArrayList<User> = row
+    private var users: ArrayList<User> = row
         set(value) {
             field = value
             notifyDataSetChanged()

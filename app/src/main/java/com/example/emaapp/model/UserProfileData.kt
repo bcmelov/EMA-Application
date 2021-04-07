@@ -21,3 +21,5 @@ data class Skill(
     val skillType: String,
     val value: Int
 )
+
+

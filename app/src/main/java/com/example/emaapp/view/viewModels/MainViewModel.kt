@@ -8,21 +8,12 @@ import kotlinx.coroutines.Dispatchers
 
 class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun getUsers() = liveData(Dispatchers.IO) {
+    fun getUsers(participantType : String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = mainRepository.getUsers()))
+            emit(Resource.success(data = mainRepository.getUsers(participantType)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
-
-//    fun getUser() = liveData(Dispatchers.IO) {
-//        emit(Resource.loading(data = null))
-//        try {
-//            emit(Resource.success(data = mainRepository.getUser()))
-//        } catch (exception: Exception) {
-//            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-//        }
-//    }
 }

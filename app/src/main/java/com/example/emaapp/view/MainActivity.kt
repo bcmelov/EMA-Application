@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         // access to navController that is a part of NavHostFragment
         val navController =
             (supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment).navController

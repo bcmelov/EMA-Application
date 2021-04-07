@@ -18,7 +18,7 @@
             android:layout_height="@dimen/square_icon_medium"
             android:contentDescription="@string/user_icon"
             app:shapeAppearanceOverlay="@style/CircleImageView"
-            tools:srcCompat="@drawable/girl4" />
+            tools:srcCompat="@drawable/loading_icon"/>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/list_platform_id"

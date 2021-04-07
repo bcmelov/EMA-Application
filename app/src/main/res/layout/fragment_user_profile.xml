@@ -2,10 +2,10 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_scroll_view"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!--main layout for vertical ScrollView-->
     <LinearLayout
@@ -30,7 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_icon"
                 app:shapeAppearanceOverlay="@style/CircleImageView"
-                app:srcCompat="@drawable/girl4" />
+                tools:srcCompat="@drawable/loading_icon" />
 
             <!--username-->
             <TextView
