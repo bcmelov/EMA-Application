@@ -94,7 +94,6 @@ class UserAdapter(private val row: ArrayList<User>, private val listener: UserCl
             clear()
             addAll(users)
         }
-
     }
 }
 }

@@ -25,18 +25,17 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     private lateinit var adapter: ViewHolder.UserAdapter
 //    private lateinit var recyclerView: RecyclerView
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupObservers()
 
-//        val service = UserService(createRetrofit().create(UserApi::class.java))
         adapter = ViewHolder.UserAdapter(arrayListOf(), this)
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
 
 
+//        currently not working
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
@@ -46,15 +45,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
                     R.id.button_all -> "androidMentor"
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
-
-//                adapter.users = when (checkedId) {
-//                    //TODO
-////                    R.id.button_all -> DataSource.users
-////                    R.id.button_android -> DataSource.android_users
-////                    R.id.button_iOs -> DataSource.iOS_users
-//                    else -> throw IllegalStateException("$checkedId")
-////                }
-//                }
             }
         }
     }
@@ -72,18 +62,15 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-//                        recyclerView.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
                         resource.data?.let { users -> retrieveList(users) }
                     }
                     Status.ERROR -> {
-//                        recyclerView.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
                     }
                     Status.LOADING -> {
                         progressBar.visibility = View.VISIBLE
-//                        recyclerView.visibility = View.GONE
                         Log.d("TAG", "LOADING")
                     }
                 }
@@ -98,74 +85,11 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
         }
     }
 
+    //sending user id in bundle to userProfileFragment
     override fun onUserClick(user: User) {
         val bundle = Bundle()
-//        bundle.putString(UserProfileFragment.KEY_NAME,  getString(user.id.toInt()) /*previous version: user.name ... however an int is required)*/
-//        )
-        bundle.putString("id", user.id)
-        bundle.putString("name", user.name)
-        bundle.putString("icon", user.icon192)
-        bundle.putString("platform", user.participantType)
-        bundle.putString("slack", user.slackURL)
-
-//        //skills values
-//        var j: Int = 0
-//        while (j < user.skills.size) {
-//            when (user.skills[j].skillType) {
-//                "android" -> bundle.putInt("android", user.skills[0].value)
-//                "ios" -> bundle.putInt("ios", user.skills[0].value)
-//                "kotlin" -> bundle.putInt("kotlin", user.skills[0].value)
-//                "swift" -> bundle.putInt("swift", user.skills[0].value)
-//            }
-//            j++
-//        }
-
-
-
+        bundle.putString(UserProfileFragment.KEY_NAME, user.id)
         findNavController().navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
     }
-
-//    private fun fetchWithCallback(service: UserService, participantType: String?) {
-//        service.getCharacters(participantType).enqueue(object : Callback<Result> {
-//            override fun onResponse(call: Call<Result>, response: Response<Result>) {
-//                showSuccess(response.body())
-//            }
-//
-//            override fun onFailure(call: Call<Result>, t: Throwable) {
-//                showFailure()
-//            }
-//        })
-//    }
-
-//////    CURRENTLY NOT BEING USED
-//    private fun fetchWithCoroutines(service: UserService, participantType: String?) {
-//        lifecycleScope.launch {
-//            try {
-//                val result = service.suspendGetCharacters(participantType)
-//                showSuccess(result)
-//            } catch (ex: IOException) {
-//                showFailure()
-//            }
-//        }
-//    }
-
-//    private fun showSuccess(result: Result?) {
-////        loading?.visibility = View.GONE (loading is currently not being used in test phase)
-//        recyclerView.isVisible = true
-//        emptyText?.isVisible = false
-//
-//        Log.d("TAG", "SUCCESS")
-//        if (result != null) {
-//            recyclerView.adapter = UserAdapter(result.results, this)
-//        }
-//    }
-//
-//    private fun showFailure() {
-////        loading?.visibility = View.GONE (loading is currently not being used in test phase)
-//        recyclerView.isVisible = false
-//        emptyText?.isVisible = true
-//        Log.d("TAG", "FAILURE")
-//    }
-//
 
 }
