@@ -13,7 +13,6 @@
     <!--switch to night/day mode-->
     <string name="night_mode">Night mode</string>
 
-
     <!--image descriptions-->
     <string name="hw_number">Home work number</string>
     <string name="email">Email</string>
@@ -47,26 +46,15 @@
     <string name="user_list_title">List of students</string>
     <string name="user_profile_title">User profile</string>
 
-    <!-- academy students - mock names -->
-    <string name="bara_cmelova" translatable="false">Bára Čmelová</string>
-    <string name="kevin_vojco" translatable="false">Kevin Vojco</string>
-    <string name="lucie_zvorilova" translatable="false">Lucie Zvořilová</string>
-    <string name="patrik_mokry" translatable="false">Patrik Mokrý</string>
-    <string name="pavel_stanek" translatable="false">Pavel Staněk</string>
-    <string name="lenka_veselá" translatable="false">Lenka Veselá</string>
-    <string name="roman_trudic" translatable="false">Roman Trudič</string>
-    <string name="petra_novakova" translatable="false">Petra Nováková</string>
-    <string name="igor_stredni" translatable="false">Igor Střední</string>
-    <string name="roman_maly" translatable="false">Roman Malý</string>
-    <string name="pavla_velka" translatable="false">Pavla Velká</string>
-    <string name="karel_vlasak" translatable="false">Karel Vlasák</string>
-    <string name="title_activity_user_profile" translatable="false">UserProfileActivity</string>
-
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Students List</string>
     <string name="second_fragment_label">User Profile</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
+    <!-- User filter -->
+    <string name="android_student" translatable="false">androidStudent</string>
+    <string name="ios_student" translatable="false">iosStudent</string>
 
     <!-- Errors -->
     <string name="error_fetch_users">Please check your internet connection</string>

@@ -11,9 +11,7 @@ interface UserApi {
 
     //function for coroutines -> filtering users
     @GET("v1/participants")
-    suspend fun suspendGetUsers(
-        @Query("participantType") participantType: String?
-    ): List<User>
+    suspend fun suspendGetUsers() : List<User>
 
     @GET("v1/participants/{id}")
     suspend fun suspendGetUser(

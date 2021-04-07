@@ -23,7 +23,6 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserClickListener {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: ViewHolder.UserAdapter
-    private var participantType = "androidStudent"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,12 +36,19 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
-                participantType = when (checkedId) {
-                    R.id.button_android -> "androidStudent"
-                    R.id.button_iOs -> "iosStudent"
-                    R.id.button_all -> null.toString()
+                val type = when (checkedId) {
+                    R.id.button_android -> getString(R.string.android_student)
+                    R.id.button_iOs -> getString(R.string.ios_student)
+                    R.id.button_all -> null
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
+                val all = viewModel.users.value?.data.orEmpty()
+                val list = if (type != null) {
+                    all.filter { it.participantType == type }
+                } else {
+                    all
+                }
+                retrieveList(list)
             }
         }
     }
@@ -55,7 +61,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     }
 
     private fun setupObservers() {
-        viewModel.getUsers(participantType).observe(viewLifecycleOwner, Observer {
+        viewModel.users.observe(viewLifecycleOwner, Observer {
             val progressBar = ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {

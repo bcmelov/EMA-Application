@@ -6,8 +6,8 @@ import com.example.emaapp.model.UserProfileData
 class Service(private val userApi: UserApi) {
 
     //1. get user list
-    suspend fun getUsers(participantType : String): List<User> {
-        return userApi.suspendGetUsers(participantType)
+    suspend fun getUsers(): List<User> {
+        return userApi.suspendGetUsers()
     }
 
     //2.get user profile
