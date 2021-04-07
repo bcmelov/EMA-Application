@@ -2,7 +2,6 @@
 <resources>
     <!--user profile titles-->
     <string name="app_name">EMA App</string>
-    <string name="user_name">Bára Čmelová</string>
     <string name="platform_android">Android</string>
     <string name="skills_headline">Skills</string>
     <string name="home_works">Domácí úkoly</string>
@@ -52,7 +51,11 @@
     <string name="previous">Zpět</string>
 
     <!-- Errors -->
-    <string name="error_fetch_users">Please check your internet connection</string>
+    <string name="error_fetch_users"> Oops, něco se pokazilo! Zkontrolujte, zda jste připojeni k intenetu a zkuste to znovu.</string>
+    <string name="error_email"> Uživatel nemá emailovou adresu. </string>
+    <string name="error_linked_in"> Uživatel nemá LinkedIn profil.</string>
+    <string name="error_slack"> Uživatel nemá Slack profil.</string>
+    <string name="activity_not_found"> Oops! Vypadá to, že nemáte naistalovanou aplikaci pro otevření tohoto odkazu. </string>
 
     <!-- other -->
     <string name="email_client">"Zvolte prohlížeč:"</string>

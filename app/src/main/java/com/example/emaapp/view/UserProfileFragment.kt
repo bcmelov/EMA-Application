@@ -1,15 +1,13 @@
 package com.example.emaapp.view
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,8 +19,7 @@ import com.example.emaapp.api.Service
 import com.example.emaapp.model.UserProfileData
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
-import com.example.emaapp.view.viewModels.DetalViewModelFactory
-
+import com.example.emaapp.view.viewModels.DetailViewModelFactory
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
@@ -45,7 +42,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            DetalViewModelFactory(Service(RetrofitBuilder.apiService))
+            DetailViewModelFactory(Service(RetrofitBuilder.apiService))
         ).get(DetailViewModel::class.java)
     }
 
@@ -55,6 +52,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             val progressBar = ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
+                    Status.LOADING -> {
+                        progressBar.visibility = View.VISIBLE
+                        Log.d("TAG", "LOADING")
+                    }
                     Status.SUCCESS -> {
                         progressBar.visibility = View.GONE
                         resource.data?.let { user -> retrieveProfile(user) }
@@ -63,10 +64,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                         progressBar.visibility = View.GONE
                         layoutInflater.inflate(R.layout.fragment_user_list, null)
                         Log.d("TAG", "FAILURE")
-                    }
-                    Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        Log.d("TAG", "LOADING")
+                        Toast.makeText(
+                            context,
+                            getString(R.string.error_fetch_users),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
                     }
                 }
             }
@@ -88,29 +91,50 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 .into(userIcon)
         }
 //HEADER
-        //view?.findViewById<ImageView>(R.id.user_icon)?.setImageResource(student.displayIcon)
         view?.findViewById<TextView>(R.id.user_name)?.text = user.name
         view?.findViewById<TextView>(R.id.platform_name)?.text = user.participantType
 
-        //media buttons (Slack cannot be opened on the Emulator because of missing Slack application, email and linkedIn currently not provided by API)
+        //media buttons
         view?.findViewById<ImageButton>(R.id.slack_icon)?.setOnClickListener {
-            val url = Uri.parse(user.slackURL)
-            val intent = Intent(Intent.ACTION_VIEW, url)
-            startActivity(intent)
+            try {
+                val url = parseSlashedUri(user.slackURL)
+                val intent = Intent(Intent.ACTION_VIEW, url)
+                startActivity(intent)
+            } catch (e: NullPointerException) {
+                Toast.makeText(context, getString(R.string.error_slack), Toast.LENGTH_LONG).show()
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_LONG)
+                    .show()
+            }
         }
         view?.findViewById<ImageButton>(R.id.email_icon)?.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
-            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(user.email))
-            startActivity(Intent.createChooser(intent, getString(R.string.email_client)))
+            try {
+                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
+                intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(user.email))
+                startActivity(Intent.createChooser(intent, getString(R.string.email_client)))
+            } catch (e: NullPointerException) {
+                Toast.makeText(context, getString(R.string.error_email), Toast.LENGTH_LONG).show()
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_LONG)
+                    .show()
+            }
         }
         view?.findViewById<ImageButton>(R.id.linkedin_icon)?.setOnClickListener {
-            val url = Uri.parse(user.linkedIn)
-            val intent = Intent(Intent.ACTION_VIEW, url)
-            startActivity(intent)
+            try {
+                val url = Uri.parse(user.linkedIn)
+                val intent = Intent(Intent.ACTION_VIEW, url)
+                startActivity(intent)
+            } catch (e: NullPointerException) {
+                Toast.makeText(context, getString(R.string.error_linked_in), Toast.LENGTH_LONG)
+                    .show()
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_LONG)
+                    .show()
+            }
         }
 
 //SKILLS
-        //beginning levels of skills
+        //beginning level of skills
         view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = 0
         view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = 0
         view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
@@ -242,6 +266,9 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         val id = if (done) R.drawable.ic_done else R.drawable.ic_waiting
         setCompoundDrawablesWithIntrinsicBounds(0, 0, id, 0)
     }
+
+    //parse damaged Slack URI from API
+    private fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
 }
 
 

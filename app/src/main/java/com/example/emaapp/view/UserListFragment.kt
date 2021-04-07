@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,7 +14,7 @@ import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
 import com.example.emaapp.model.User
-import com.example.emaapp.utils.Status
+import com.example.emaapp.utils.Status.*
 import com.example.emaapp.view.viewModels.MainViewModel
 import com.example.emaapp.view.viewModels.ViewModelFactory
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -65,17 +66,23 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
             val progressBar = ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
-                    Status.SUCCESS -> {
+                    LOADING -> {
+                        progressBar.visibility = View.VISIBLE
+                        Log.d("TAG", "LOADING")
+                    }
+                    SUCCESS -> {
                         progressBar.visibility = View.GONE
                         resource.data?.let { users -> retrieveList(users) }
                     }
-                    Status.ERROR -> {
+                    ERROR -> {
                         progressBar.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
-                    }
-                    Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        Log.d("TAG", "LOADING")
+                        Toast.makeText(
+                            context,
+                            getString(R.string.error_fetch_users),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
                     }
                 }
             }
@@ -89,11 +96,10 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
         }
     }
 
-    //sending user id in bundle to userProfileFragment
+    //Bundle with UserID
     override fun onUserClick(user: User) {
         val bundle = Bundle()
         bundle.putString(UserProfileFragment.KEY_NAME, user.id)
         findNavController().navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
     }
-
 }

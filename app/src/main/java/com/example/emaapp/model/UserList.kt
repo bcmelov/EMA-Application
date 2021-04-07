@@ -1,10 +1,5 @@
 package com.example.emaapp.model
 
-//class with list of all users (RecyclerView)
-data class Result(
-    val results: List<User>
-)
-
 //class with homework status (ListView)
 data class Homework(
     val state: String,

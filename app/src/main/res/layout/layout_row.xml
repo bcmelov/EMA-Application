@@ -42,8 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_toEndOf="@id/list_platform_id"
-            android:text="@string/user_name" />
+            android:layout_toEndOf="@id/list_platform_id"/>
 
         <LinearLayout
             android:layout_below="@id/list_user_name"
