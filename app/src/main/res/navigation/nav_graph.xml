@@ -4,7 +4,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/userListFragment">
 
-    <!--start fragment-->
+    <!--Start fragment (user list)-->
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.example.emaapp.view.UserListFragment"
@@ -14,7 +14,7 @@
             app:destination="@id/userProfileFragment" />
     </fragment>
 
-   <!-- end fragment-->
+   <!-- End fragment (user profile) -->
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.emaapp.view.UserProfileFragment"
@@ -23,5 +23,7 @@
             android:name="name"
             app:argType="string" />
     </fragment>
+
+    <!-- Error page fragment -->
 
 </navigation>

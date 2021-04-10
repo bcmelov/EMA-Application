@@ -56,11 +56,11 @@
     <string name="ios_student" translatable="false">iosStudent</string>
 
     <!-- Errors -->
-    <string name="error_fetch_users">Oops, something went wrong! Please check your internet connection and try again.</string>
+    <string name="error_fetch_users">Oops, something went wrong! <br /> Please check your internet connection and try again.</string>
     <string name="error_email"> User does not have an email address.</string>
     <string name="error_linked_in"> User does not have a LinkedIn profile.</string>
     <string name="error_slack"> User does not have a Slack profile. </string>
-    <string name="activity_not_found"> Oops! We did not find any suitable application on your device to open this link. </string>
+    <string name="activity_not_found">"We did not find any suitable application on your device to open this link. "</string>
 
     <!-- Other -->
     <string name="email_client">"Choose email client:"</string>

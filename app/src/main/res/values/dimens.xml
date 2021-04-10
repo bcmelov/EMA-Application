@@ -18,4 +18,6 @@
     <dimen name="medium_text">15sp</dimen>
     <dimen name="large_text">20sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <!-- error handling text overlap -->
+    <dimen name="overlap_error">-150dp</dimen>
 </resources>

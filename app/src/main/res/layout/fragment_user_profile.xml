@@ -15,6 +15,15 @@
         android:paddingHorizontal="@dimen/spacing_large"
         android:paddingBottom="@dimen/spacing_large">
 
+        //page loading progress bar
+        <ProgressBar
+            android:id="@+id/progressBarUserProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_gravity="center"/>
+
+
         <!--layout for user icon, user name and platform specification-->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -131,7 +140,7 @@
                 android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:progress="0"
+                tools:progress="0"
                 app:layout_constraintBottom_toBottomOf="@id/android_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_android"
                 app:layout_constraintStart_toEndOf="@+id/android_icon"
@@ -141,7 +150,7 @@
                 android:id="@+id/progress_android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/zero"
+                tools:text="@string/zero"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBarAndroid"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -166,7 +175,7 @@
                 android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:progress="10"
+                tools:progress="10"
                 app:layout_constraintBottom_toBottomOf="@id/kotlin_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_kotlin"
                 app:layout_constraintStart_toEndOf="@+id/kotlin_icon"
@@ -177,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="@string/one"
+                tools:text="@string/one"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBarKotlin"
                 app:layout_constraintTop_toBottomOf="@+id/progress_android" />
@@ -203,7 +212,7 @@
                 android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:progress="0"
+                tools:progress="0"
                 app:layout_constraintBottom_toBottomOf="@id/apple_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_iOS"
                 app:layout_constraintStart_toEndOf="@+id/apple_icon"
@@ -214,7 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="@string/zero"
+                tools:text="@string/zero"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBariOS"
                 app:layout_constraintTop_toBottomOf="@+id/progress_kotlin" />
@@ -239,7 +248,7 @@
                 android:layout_height="@dimen/spacing_small"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:progress="0"
+                tools:progress="0"
                 app:layout_constraintBottom_toBottomOf="@id/swift_icon"
                 app:layout_constraintEnd_toStartOf="@+id/progress_swift"
                 app:layout_constraintStart_toEndOf="@+id/swift_icon"
@@ -250,7 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="@string/zero"
+                tools:text="@string/zero"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
                 app:layout_constraintTop_toBottomOf="@id/progress_iOS" />
@@ -299,7 +308,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/push"
-                        app:drawableEndCompat="@drawable/ic_done" />
+                        tools:drawableEndCompat="@drawable/ic_done" />
 
                     <TextView
                         android:id="@+id/title_review_1"
@@ -309,7 +318,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/review"
-                        app:drawableEndCompat="@drawable/ic_done" />
+                        tools:drawableEndCompat="@drawable/ic_done" />
 
                     <TextView
                         android:id="@+id/title_acceptance_1"
@@ -319,7 +328,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/acceptance"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                 </RelativeLayout>
 
@@ -350,7 +359,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/push"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_review_2"
@@ -360,7 +369,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/review"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_acceptance_2"
@@ -370,7 +379,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/acceptance"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
 
                 <!--homework3-->
@@ -410,7 +419,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/review"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_acceptance_3"
@@ -420,7 +429,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/acceptance"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
 
                 <!--homework 4 -->
@@ -449,7 +458,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/push"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_review_4"
@@ -459,7 +468,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/review"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_acceptance_4"
@@ -469,7 +478,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/acceptance"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
 
                 <!--homework5-->
@@ -498,7 +507,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/push"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_review_5"
@@ -508,7 +517,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/review"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_acceptance_5"
@@ -518,7 +527,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/acceptance"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                 </RelativeLayout>
 
@@ -548,7 +557,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/push"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_review_6"
@@ -558,7 +567,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/review"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
 
                     <TextView
                         android:id="@+id/title_acceptance_6"
@@ -568,7 +577,7 @@
                         android:layout_marginStart="@dimen/spacing_Xsmall"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:text="@string/acceptance"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
+                        tools:drawableEndCompat="@drawable/ic_waiting" />
                 </RelativeLayout>
             </RelativeLayout>
         </HorizontalScrollView>

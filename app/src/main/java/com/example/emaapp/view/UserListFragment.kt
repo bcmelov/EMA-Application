@@ -62,20 +62,21 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     }
 
     private fun setupObservers() {
+        val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
         viewModel.users.observe(viewLifecycleOwner, Observer {
-            val progressBar = ProgressBar(context)
+           ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {
-                        progressBar.visibility = View.VISIBLE
+                        progressBar?.visibility = View.VISIBLE
                         Log.d("TAG", "LOADING")
                     }
                     SUCCESS -> {
-                        progressBar.visibility = View.GONE
+                        progressBar?.visibility = View.GONE
                         resource.data?.let { users -> retrieveList(users) }
                     }
                     ERROR -> {
-                        progressBar.visibility = View.GONE
+                        progressBar?.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
                         Toast.makeText(
                             context,

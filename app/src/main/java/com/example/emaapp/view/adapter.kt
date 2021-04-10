@@ -32,10 +32,8 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
                 .placeholder(R.drawable.loading_icon)
                 .into(userIcon)
             when (user.participantType) {
-                "iosMentor" -> platformIcon.setImageResource(R.drawable.ic_apple)
-                "iosStudent" -> platformIcon.setImageResource(R.drawable.ic_apple)
-                "androidMentor" -> platformIcon.setImageResource(R.drawable.ic_android)
-                "androidStudent" -> platformIcon.setImageResource(R.drawable.ic_android)
+                "iosMentor", "iosStudent" -> platformIcon.setImageResource(R.drawable.ic_apple)
+                "androidMentor", "androidStudent" -> platformIcon.setImageResource(R.drawable.ic_android)
             }
             when (user.homework[0].state) {
                 "comingsoon" -> hw1.setImageResource(R.drawable.ic_one)
