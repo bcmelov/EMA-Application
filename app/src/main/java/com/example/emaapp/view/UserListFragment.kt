@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -64,7 +63,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
         viewModel.users.observe(viewLifecycleOwner, Observer {
-           ProgressBar(context)
+            ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {
@@ -78,12 +77,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
                     ERROR -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
-                        Toast.makeText(
-                            context,
-                            getString(R.string.error_fetch_users),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                     }
                 }
             }

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_userListFragment_to_userProfileFragment4"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_userListFragment_to_errorPageFragment2"
+            app:destination="@id/errorPageFragment2" />
     </fragment>
 
    <!-- End fragment (user profile) -->
@@ -22,6 +25,17 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_errorPageFragment2"
+            app:destination="@id/errorPageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorPageFragment2"
+        android:name="com.example.emaapp.view.ErrorPageFragment"
+        android:label="ErrorPageFragment" >
+        <action
+            android:id="@+id/action_errorPageFragment2_to_userListFragment"
+            app:destination="@id/userListFragment" />
     </fragment>
 
     <!-- Error page fragment -->

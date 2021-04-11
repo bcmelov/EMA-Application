@@ -24,6 +24,7 @@
     <string name="user_icon">Uživatelská ikona</string>
     <string name="check_mark">Splněno</string>
     <string name="clock">Hodiny</string>
+    <string name="error_image">Chyba</string>
 
     <!--progress titles-->
     <string name="zero">0/10</string>
@@ -51,7 +52,9 @@
     <string name="previous">Zpět</string>
 
     <!-- Errors -->
-    <string name="error_fetch_users">Oops, něco se pokazilo.<br />Zkontrolujte, zda jste připojeni k intenetu a zkuste to znovu.</string>
+    <string name="error_title">Oops, něco se pokazilo!</string>
+    <string name="error_connection">Zkontrolujte, zda jste připojeni k internetu a zkuste to znovu.</string>
+    <string name="error_button">Opakovat</string>
     <string name="error_email"> Uživatel nemá emailovou adresu. </string>
     <string name="error_linked_in"> Uživatel nemá LinkedIn profil.</string>
     <string name="error_slack"> Uživatel nemá Slack profil.</string>
@@ -59,5 +62,6 @@
 
     <!-- other -->
     <string name="email_client">"Zvolte prohlížeč:"</string>
+
 
 </resources>

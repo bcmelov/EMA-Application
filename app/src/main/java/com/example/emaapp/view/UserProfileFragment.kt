@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
@@ -20,7 +21,6 @@ import com.example.emaapp.model.UserProfileData
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
 import com.example.emaapp.view.viewModels.DetailViewModelFactory
-import androidx.navigation.fragment.findNavController
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
@@ -65,12 +65,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                     Status.ERROR -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
-                        Toast.makeText(
-                            context,
-                            getString(R.string.error_fetch_users),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        findNavController().navigate(R.id.action_userProfileFragment_to_errorPageFragment2)
                     }
                 }
             }
@@ -98,7 +93,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         //media buttons
         view?.findViewById<ImageButton>(R.id.slack_icon)?.setOnClickListener {
             try {
-                val url = user.slackURL?.let { parseSlashedUri(it)} ?: return@setOnClickListener(Toast.makeText(context, getString(R.string.error_slack), Toast.LENGTH_LONG).show())
+                val url = user.slackURL?.let { parseSlashedUri(it) }
+                    ?: return@setOnClickListener (Toast.makeText(context,
+                        getString(R.string.error_slack),
+                        Toast.LENGTH_LONG).show())
                 val intent = Intent(Intent.ACTION_VIEW, url)
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
@@ -120,8 +118,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
         view?.findViewById<ImageButton>(R.id.linkedin_icon)?.setOnClickListener {
             try {
-                val url = user.linkedIn?.let {Uri.parse(it)} ?: return@setOnClickListener(Toast.makeText(context, getString(R.string.error_linked_in), Toast.LENGTH_LONG)
-                    .show())
+                val url = user.linkedIn?.let { Uri.parse(it) }
+                    ?: return@setOnClickListener (Toast.makeText(context,
+                        getString(R.string.error_linked_in),
+                        Toast.LENGTH_LONG)
+                        .show())
                 val intent = Intent(Intent.ACTION_VIEW, url)
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
