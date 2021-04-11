@@ -2,585 +2,585 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
-    <!--main layout for vertical ScrollView-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_large">
-
-        <!-- page loading progress bar-->
-        <ProgressBar
-            android:id="@+id/progressBarUserProfile"
+        <!--main layout for vertical ScrollView-->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:layout_gravity="center"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_large"
+            android:paddingBottom="@dimen/spacing_large">
 
-
-        <!--layout for user icon, user name and platform specification-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_medium">
-
-            <!--user icon (temporary icon for now)-->
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/user_icon"
+            <!-- page loading progress bar-->
+            <ProgressBar
+                android:id="@+id/progressBarUserProfile"
                 android:layout_width="@dimen/large_square_icon"
                 android:layout_height="@dimen/large_square_icon"
-                android:layout_centerHorizontal="true"
-                android:contentDescription="@string/user_icon"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
-                tools:srcCompat="@drawable/loading_icon" />
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:indeterminateDrawable="@drawable/circular_progress_bar" />
 
-            <!--username-->
-            <TextView
-                android:id="@+id/user_name"
-                style="@style/Username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/user_icon"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/spacing_small" />
-
-            <!--platform name-->
-            <TextView
-                android:id="@+id/platform_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/user_name"
-                android:layout_centerInParent="true"
-                android:text="@string/platform_android" />
-
-            <!--layout for horizontal icons: Slack, Email, LinkedIn-->
+            <!--layout for user icon, user name and platform specification-->
             <RelativeLayout
-                android:id="@+id/contact_icons_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/platform_name"
-                android:layout_centerInParent="true"
-                android:layout_marginVertical="@dimen/spacing_small">
-
-                <ImageButton
-                    android:id="@+id/slack_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_medium"
-                    android:background="@drawable/ic_slack"
-                    android:backgroundTint="?attr/colorControlNormal"
-                    android:contentDescription="@string/slack" />
-
-                <ImageButton
-                    android:id="@+id/email_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_medium"
-                    android:layout_toEndOf="@+id/slack_icon"
-                    android:background="@drawable/ic_email2"
-                    android:backgroundTint="?attr/colorControlNormal"
-                    android:contentDescription="@string/email" />
-
-                <ImageButton
-                    android:id="@+id/linkedin_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/email_icon"
-                    android:background="@drawable/ic_linkedin"
-                    android:backgroundTint="?attr/colorControlNormal"
-                    android:contentDescription="@string/linked_in" />
-            </RelativeLayout>
-
-            <!--break line-->
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/contact_icons_layout"
-                android:layout_marginVertical="@dimen/spacing_Xsmall"
-                android:background="@android:color/darker_gray" />
-        </RelativeLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_medium">
 
-        <!--Skills Headline-->
-        <TextView
-            style="@style/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/skills_headline" />
+                <!--user icon (temporary icon for now)-->
 
-        <!--Layout for progress in skills-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/relativeLayout7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="@dimen/large_square_icon"
+                    android:layout_height="@dimen/large_square_icon"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/user_icon"
+                    app:shapeAppearanceOverlay="@style/CircleImageView"
+                    tools:srcCompat="@drawable/loading_icon" />
 
-            <!--Progress in Android-->
-            <ImageView
-                android:id="@+id/android_icon"
-                android:layout_width="@dimen/square_icon_Xsmall"
-                android:layout_height="@dimen/square_icon_Xsmall"
-                android:contentDescription="@string/android"
-                android:src="@drawable/ic_android"
-                app:layout_constraintEnd_toStartOf="@+id/progressBarAndroid"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="?attr/colorControlNormal" />
-
-            <ProgressBar
-                android:id="@+id/progressBarAndroid"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_small"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                tools:progress="0"
-                app:layout_constraintBottom_toBottomOf="@id/android_icon"
-                app:layout_constraintEnd_toStartOf="@+id/progress_android"
-                app:layout_constraintStart_toEndOf="@+id/android_icon"
-                app:layout_constraintTop_toTopOf="@+id/android_icon" />
-
-            <TextView
-                android:id="@+id/progress_android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/zero"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarAndroid"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!--Progress in Kotlin-->
-            <ImageView
-                android:id="@+id/kotlin_icon"
-                android:layout_width="@dimen/square_icon_Xsmall"
-                android:layout_height="@dimen/square_icon_Xsmall"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:contentDescription="@string/kotlin"
-                android:src="@drawable/ic_kotlin"
-                app:layout_constraintEnd_toStartOf="@+id/progressBarKotlin"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/android_icon"
-                app:tint="?attr/colorControlNormal" />
-
-            <ProgressBar
-                android:id="@+id/progressBarKotlin"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_small"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                tools:progress="10"
-                app:layout_constraintBottom_toBottomOf="@id/kotlin_icon"
-                app:layout_constraintEnd_toStartOf="@+id/progress_kotlin"
-                app:layout_constraintStart_toEndOf="@+id/kotlin_icon"
-                app:layout_constraintTop_toTopOf="@+id/kotlin_icon" />
-
-            <TextView
-                android:id="@+id/progress_kotlin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
-                tools:text="@string/one"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarKotlin"
-                app:layout_constraintTop_toBottomOf="@+id/progress_android" />
-
-
-            <!--Progress in iOS-->
-            <ImageView
-                android:id="@+id/apple_icon"
-                android:layout_width="@dimen/square_icon_Xsmall"
-                android:layout_height="@dimen/square_icon_Xsmall"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:contentDescription="@string/ios"
-                android:src="@drawable/ic_apple"
-                app:layout_constraintEnd_toStartOf="@+id/progressBariOS"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kotlin_icon"
-                app:tint="?attr/colorControlNormal" />
-
-            <ProgressBar
-                android:id="@+id/progressBariOS"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_small"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                tools:progress="0"
-                app:layout_constraintBottom_toBottomOf="@id/apple_icon"
-                app:layout_constraintEnd_toStartOf="@+id/progress_iOS"
-                app:layout_constraintStart_toEndOf="@+id/apple_icon"
-                app:layout_constraintTop_toTopOf="@+id/apple_icon" />
-
-            <TextView
-                android:id="@+id/progress_iOS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
-                tools:text="@string/zero"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBariOS"
-                app:layout_constraintTop_toBottomOf="@+id/progress_kotlin" />
-
-            <!--Progress in Swift-->
-            <ImageView
-                android:id="@+id/swift_icon"
-                android:layout_width="@dimen/square_icon_Xsmall"
-                android:layout_height="@dimen/square_icon_Xsmall"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:contentDescription="@string/swift"
-                android:src="@drawable/ic_swift"
-                app:layout_constraintEnd_toStartOf="@+id/progressBarSwift"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/apple_icon"
-                app:tint="?attr/colorControlNormal" />
-
-            <ProgressBar
-                android:id="@+id/progressBarSwift"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_small"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                tools:progress="0"
-                app:layout_constraintBottom_toBottomOf="@id/swift_icon"
-                app:layout_constraintEnd_toStartOf="@+id/progress_swift"
-                app:layout_constraintStart_toEndOf="@+id/swift_icon"
-                app:layout_constraintTop_toTopOf="@+id/progress_swift" />
-
-            <TextView
-                android:id="@+id/progress_swift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
-                tools:text="@string/zero"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
-                app:layout_constraintTop_toBottomOf="@id/progress_iOS" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--Homework title-->
-        <TextView
-            style="@style/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_works" />
-
-        <!--homework scroll view-->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <!--homework1-->
-                <RelativeLayout
-                    android:id="@+id/layout_homework1"
-                    android:layout_width="@dimen/xl_square_icon"
+                <!--username-->
+                <TextView
+                    android:id="@+id/user_name"
+                    style="@style/Username"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_Xmedium"
-                    android:background="@drawable/border_homeworks"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_small">
+                    android:layout_below="@+id/user_icon"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/spacing_small" />
 
+                <!--platform name-->
+                <TextView
+                    android:id="@+id/platform_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_name"
+                    android:layout_centerInParent="true"
+                    android:text="@string/platform_android" />
 
-                    <ImageView
-                        android:id="@+id/homework_number_1"
-                        android:layout_width="@dimen/square_icon_small"
-                        android:layout_height="@dimen/square_icon_small"
-                        android:contentDescription="@string/hw_number"
-                        android:src="@drawable/ic_one" />
+                <!--layout for horizontal icons: Slack, Email, LinkedIn-->
+                <RelativeLayout
+                    android:id="@+id/contact_icons_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/platform_name"
+                    android:layout_centerInParent="true"
+                    android:layout_marginVertical="@dimen/spacing_small">
 
-                    <TextView
-                        android:id="@+id/title_push_1"
-                        android:layout_width="match_parent"
+                    <ImageButton
+                        android:id="@+id/slack_icon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/homework_number_1"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/push"
-                        tools:drawableEndCompat="@drawable/ic_done" />
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/ic_slack"
+                        android:backgroundTint="?attr/colorControlNormal"
+                        android:contentDescription="@string/slack" />
 
-                    <TextView
-                        android:id="@+id/title_review_1"
-                        android:layout_width="match_parent"
+                    <ImageButton
+                        android:id="@+id/email_icon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_push_1"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/review"
-                        tools:drawableEndCompat="@drawable/ic_done" />
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:layout_toEndOf="@+id/slack_icon"
+                        android:background="@drawable/ic_email2"
+                        android:backgroundTint="?attr/colorControlNormal"
+                        android:contentDescription="@string/email" />
 
-                    <TextView
-                        android:id="@+id/title_acceptance_1"
-                        android:layout_width="match_parent"
+                    <ImageButton
+                        android:id="@+id/linkedin_icon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_review_1"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/acceptance"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
+                        android:layout_toEndOf="@+id/email_icon"
+                        android:background="@drawable/ic_linkedin"
+                        android:backgroundTint="?attr/colorControlNormal"
+                        android:contentDescription="@string/linked_in" />
                 </RelativeLayout>
 
-                <!--homework2-->
-                <RelativeLayout
-                    android:id="@+id/layout_homework2"
-                    android:layout_width="@dimen/xl_square_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_Xmedium"
-                    android:layout_toEndOf="@+id/layout_homework1"
-                    android:background="@drawable/border_homeworks"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_small">
-
-
-                    <ImageView
-                        android:id="@+id/homework_number_2"
-                        android:layout_width="@dimen/square_icon_small"
-                        android:layout_height="@dimen/square_icon_small"
-                        android:contentDescription="@string/hw_number"
-                        android:src="@drawable/ic_two" />
-
-                    <TextView
-                        android:id="@+id/title_push_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homework_number_2"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/push"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_review_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_push_2"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/review"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_acceptance_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_review_2"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/acceptance"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-                </RelativeLayout>
-
-                <!--homework3-->
-                <RelativeLayout
-                    android:id="@+id/layout_homework3"
-                    android:layout_width="@dimen/xl_square_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_Xmedium"
-                    android:layout_toEndOf="@+id/layout_homework2"
-                    android:background="@drawable/border_homeworks"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_small">
-
-
-                    <ImageView
-                        android:id="@+id/homework_number_3"
-                        android:layout_width="@dimen/square_icon_small"
-                        android:layout_height="@dimen/square_icon_small"
-                        android:contentDescription="@string/hw_number"
-                        android:src="@drawable/ic_three" />
-
-                    <TextView
-                        android:id="@+id/title_push_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homework_number_3"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/push"
-                        app:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_review_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_push_3"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/review"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_acceptance_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_review_3"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/acceptance"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-                </RelativeLayout>
-
-                <!--homework 4 -->
-                <RelativeLayout
-                    android:id="@+id/layout_homework4"
-                    android:layout_width="@dimen/xl_square_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_Xmedium"
-                    android:layout_toEndOf="@+id/layout_homework3"
-                    android:background="@drawable/border_homeworks"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_small">
-
-                    <ImageView
-                        android:id="@+id/homework_number_4"
-                        android:layout_width="@dimen/square_icon_small"
-                        android:layout_height="@dimen/square_icon_small"
-                        android:contentDescription="@string/hw_number"
-                        android:src="@drawable/ic_four" />
-
-                    <TextView
-                        android:id="@+id/title_push_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homework_number_4"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/push"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_review_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_push_4"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/review"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_acceptance_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_review_4"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/acceptance"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-                </RelativeLayout>
-
-                <!--homework5-->
-                <RelativeLayout
-                    android:id="@+id/layout_homework5"
-                    android:layout_width="@dimen/xl_square_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_Xmedium"
-                    android:layout_toEndOf="@+id/layout_homework4"
-                    android:background="@drawable/border_homeworks"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_small">
-
-                    <ImageView
-                        android:id="@+id/homework_number_5"
-                        android:layout_width="@dimen/square_icon_small"
-                        android:layout_height="@dimen/square_icon_small"
-                        android:contentDescription="@string/hw_number"
-                        android:src="@drawable/ic_five" />
-
-                    <TextView
-                        android:id="@+id/title_push_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homework_number_5"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/push"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_review_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_push_5"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/review"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_acceptance_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_review_5"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/acceptance"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                </RelativeLayout>
-
-                <!--homework6-->
-                <RelativeLayout
-                    android:id="@+id/layout_homework6"
-                    android:layout_width="@dimen/xl_square_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_Xmedium"
-                    android:layout_toEndOf="@+id/layout_homework5"
-                    android:background="@drawable/border_homeworks"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_small">
-
-                    <ImageView
-                        android:id="@+id/homework_number_6"
-                        android:layout_width="@dimen/square_icon_small"
-                        android:layout_height="@dimen/square_icon_small"
-                        android:contentDescription="@string/hw_number"
-                        android:src="@drawable/ic_six" />
-
-                    <TextView
-                        android:id="@+id/title_push_6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/homework_number_6"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/push"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_review_6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_push_6"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/review"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-
-                    <TextView
-                        android:id="@+id/title_acceptance_6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_review_6"
-                        android:layout_marginStart="@dimen/spacing_Xsmall"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:text="@string/acceptance"
-                        tools:drawableEndCompat="@drawable/ic_waiting" />
-                </RelativeLayout>
+                <!--break line-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/contact_icons_layout"
+                    android:layout_marginVertical="@dimen/spacing_Xsmall"
+                    android:background="@android:color/darker_gray" />
             </RelativeLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
+
+            <!--Skills Headline-->
+            <TextView
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skills_headline" />
+
+            <!--Layout for progress in skills-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/relativeLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <!--Progress in Android-->
+                <ImageView
+                    android:id="@+id/android_icon"
+                    android:layout_width="@dimen/square_icon_Xsmall"
+                    android:layout_height="@dimen/square_icon_Xsmall"
+                    android:contentDescription="@string/android"
+                    android:src="@drawable/ic_android"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBarAndroid"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?attr/colorControlNormal" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarAndroid"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_small"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    app:layout_constraintBottom_toBottomOf="@id/android_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_android"
+                    app:layout_constraintStart_toEndOf="@+id/android_icon"
+                    app:layout_constraintTop_toTopOf="@+id/android_icon"
+                    tools:progress="0" />
+
+                <TextView
+                    android:id="@+id/progress_android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/progressBarAndroid"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/zero" />
+
+                <!--Progress in Kotlin-->
+                <ImageView
+                    android:id="@+id/kotlin_icon"
+                    android:layout_width="@dimen/square_icon_Xsmall"
+                    android:layout_height="@dimen/square_icon_Xsmall"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:contentDescription="@string/kotlin"
+                    android:src="@drawable/ic_kotlin"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBarKotlin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/android_icon"
+                    app:tint="?attr/colorControlNormal" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarKotlin"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_small"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    app:layout_constraintBottom_toBottomOf="@id/kotlin_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_kotlin"
+                    app:layout_constraintStart_toEndOf="@+id/kotlin_icon"
+                    app:layout_constraintTop_toTopOf="@+id/kotlin_icon"
+                    tools:progress="10" />
+
+                <TextView
+                    android:id="@+id/progress_kotlin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/progressBarKotlin"
+                    app:layout_constraintTop_toBottomOf="@+id/progress_android"
+                    tools:text="@string/one" />
+
+
+                <!--Progress in iOS-->
+                <ImageView
+                    android:id="@+id/apple_icon"
+                    android:layout_width="@dimen/square_icon_Xsmall"
+                    android:layout_height="@dimen/square_icon_Xsmall"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:contentDescription="@string/ios"
+                    android:src="@drawable/ic_apple"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBariOS"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/kotlin_icon"
+                    app:tint="?attr/colorControlNormal" />
+
+                <ProgressBar
+                    android:id="@+id/progressBariOS"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_small"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    app:layout_constraintBottom_toBottomOf="@id/apple_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_iOS"
+                    app:layout_constraintStart_toEndOf="@+id/apple_icon"
+                    app:layout_constraintTop_toTopOf="@+id/apple_icon"
+                    tools:progress="0" />
+
+                <TextView
+                    android:id="@+id/progress_iOS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/progressBariOS"
+                    app:layout_constraintTop_toBottomOf="@+id/progress_kotlin"
+                    tools:text="@string/zero" />
+
+                <!--Progress in Swift-->
+                <ImageView
+                    android:id="@+id/swift_icon"
+                    android:layout_width="@dimen/square_icon_Xsmall"
+                    android:layout_height="@dimen/square_icon_Xsmall"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:contentDescription="@string/swift"
+                    android:src="@drawable/ic_swift"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBarSwift"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/apple_icon"
+                    app:tint="?attr/colorControlNormal" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarSwift"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_small"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    app:layout_constraintBottom_toBottomOf="@id/swift_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_swift"
+                    app:layout_constraintStart_toEndOf="@+id/swift_icon"
+                    app:layout_constraintTop_toTopOf="@+id/progress_swift"
+                    tools:progress="0" />
+
+                <TextView
+                    android:id="@+id/progress_swift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
+                    app:layout_constraintTop_toBottomOf="@id/progress_iOS"
+                    tools:text="@string/zero" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Homework title-->
+            <TextView
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_works" />
+
+            <!--homework scroll view-->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!--homework1-->
+                    <RelativeLayout
+                        android:id="@+id/layout_homework1"
+                        android:layout_width="@dimen/xl_square_icon"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_Xmedium"
+                        android:background="@drawable/border_homeworks"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_small">
+
+
+                        <ImageView
+                            android:id="@+id/homework_number_1"
+                            android:layout_width="@dimen/square_icon_small"
+                            android:layout_height="@dimen/square_icon_small"
+                            android:contentDescription="@string/hw_number"
+                            android:src="@drawable/ic_one" />
+
+                        <TextView
+                            android:id="@+id/title_push_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homework_number_1"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/push"
+                            tools:drawableEndCompat="@drawable/ic_done" />
+
+                        <TextView
+                            android:id="@+id/title_review_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_push_1"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/review"
+                            tools:drawableEndCompat="@drawable/ic_done" />
+
+                        <TextView
+                            android:id="@+id/title_acceptance_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_review_1"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/acceptance"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                    </RelativeLayout>
+
+                    <!--homework2-->
+                    <RelativeLayout
+                        android:id="@+id/layout_homework2"
+                        android:layout_width="@dimen/xl_square_icon"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_Xmedium"
+                        android:layout_toEndOf="@+id/layout_homework1"
+                        android:background="@drawable/border_homeworks"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_small">
+
+
+                        <ImageView
+                            android:id="@+id/homework_number_2"
+                            android:layout_width="@dimen/square_icon_small"
+                            android:layout_height="@dimen/square_icon_small"
+                            android:contentDescription="@string/hw_number"
+                            android:src="@drawable/ic_two" />
+
+                        <TextView
+                            android:id="@+id/title_push_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homework_number_2"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/push"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_review_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_push_2"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/review"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_acceptance_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_review_2"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/acceptance"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+                    </RelativeLayout>
+
+                    <!--homework3-->
+                    <RelativeLayout
+                        android:id="@+id/layout_homework3"
+                        android:layout_width="@dimen/xl_square_icon"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_Xmedium"
+                        android:layout_toEndOf="@+id/layout_homework2"
+                        android:background="@drawable/border_homeworks"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_small">
+
+
+                        <ImageView
+                            android:id="@+id/homework_number_3"
+                            android:layout_width="@dimen/square_icon_small"
+                            android:layout_height="@dimen/square_icon_small"
+                            android:contentDescription="@string/hw_number"
+                            android:src="@drawable/ic_three" />
+
+                        <TextView
+                            android:id="@+id/title_push_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homework_number_3"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/push"
+                            app:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_review_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_push_3"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/review"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_acceptance_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_review_3"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/acceptance"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+                    </RelativeLayout>
+
+                    <!--homework 4 -->
+                    <RelativeLayout
+                        android:id="@+id/layout_homework4"
+                        android:layout_width="@dimen/xl_square_icon"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_Xmedium"
+                        android:layout_toEndOf="@+id/layout_homework3"
+                        android:background="@drawable/border_homeworks"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_small">
+
+                        <ImageView
+                            android:id="@+id/homework_number_4"
+                            android:layout_width="@dimen/square_icon_small"
+                            android:layout_height="@dimen/square_icon_small"
+                            android:contentDescription="@string/hw_number"
+                            android:src="@drawable/ic_four" />
+
+                        <TextView
+                            android:id="@+id/title_push_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homework_number_4"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/push"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_review_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_push_4"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/review"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_acceptance_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_review_4"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/acceptance"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+                    </RelativeLayout>
+
+                    <!--homework5-->
+                    <RelativeLayout
+                        android:id="@+id/layout_homework5"
+                        android:layout_width="@dimen/xl_square_icon"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_Xmedium"
+                        android:layout_toEndOf="@+id/layout_homework4"
+                        android:background="@drawable/border_homeworks"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_small">
+
+                        <ImageView
+                            android:id="@+id/homework_number_5"
+                            android:layout_width="@dimen/square_icon_small"
+                            android:layout_height="@dimen/square_icon_small"
+                            android:contentDescription="@string/hw_number"
+                            android:src="@drawable/ic_five" />
+
+                        <TextView
+                            android:id="@+id/title_push_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homework_number_5"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/push"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_review_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_push_5"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/review"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_acceptance_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_review_5"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/acceptance"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                    </RelativeLayout>
+
+                    <!--homework6-->
+                    <RelativeLayout
+                        android:id="@+id/layout_homework6"
+                        android:layout_width="@dimen/xl_square_icon"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_Xmedium"
+                        android:layout_toEndOf="@+id/layout_homework5"
+                        android:background="@drawable/border_homeworks"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_small">
+
+                        <ImageView
+                            android:id="@+id/homework_number_6"
+                            android:layout_width="@dimen/square_icon_small"
+                            android:layout_height="@dimen/square_icon_small"
+                            android:contentDescription="@string/hw_number"
+                            android:src="@drawable/ic_six" />
+
+                        <TextView
+                            android:id="@+id/title_push_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/homework_number_6"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/push"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_review_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_push_6"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/review"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+
+                        <TextView
+                            android:id="@+id/title_acceptance_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_review_6"
+                            android:layout_marginStart="@dimen/spacing_Xsmall"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:text="@string/acceptance"
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
 </ScrollView>
 
