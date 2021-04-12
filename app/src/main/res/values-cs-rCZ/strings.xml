@@ -62,6 +62,10 @@
 
     <!-- other -->
     <string name="email_client">"Zvolte prohlížeč:"</string>
+    <string name="login_icon">Ikona přihlášení</string>
+    <string name="hint_password">HESLO</string>
+    <string name="hint_username">UŽIVATELSKÉ JMÉNO</string>
+    <string name="login_button">PŘIHLÁSIT</string>
 
 
 </resources>

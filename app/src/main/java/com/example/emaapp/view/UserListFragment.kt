@@ -63,7 +63,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
         viewModel.users.observe(viewLifecycleOwner, Observer {
-            ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {

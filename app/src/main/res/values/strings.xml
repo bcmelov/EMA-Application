@@ -25,6 +25,7 @@
     <string name="check_mark">Check_mark</string>
     <string name="clock">Clock</string>
     <string name="error_image">Error</string>
+    <string name="login_icon">Login icon</string>
 
     <!--progress titles-->
     <string name="zero">0/10</string>
@@ -64,6 +65,13 @@
     <string name="error_linked_in"> User does not have a LinkedIn profile.</string>
     <string name="error_slack"> User does not have a Slack profile. </string>
     <string name="activity_not_found">"We did not find any suitable application on your device to open this link. "</string>
+
+    <!-- Hints -->
+    <string name="hint_password">PASSWORD</string>
+    <string name="hint_username">USERNAME</string>
+
+    <!-- Buttons -->
+    <string name="login_button">LOGIN</string>
 
     <!-- Other -->
     <string name="email_client">"Choose email client:"</string>

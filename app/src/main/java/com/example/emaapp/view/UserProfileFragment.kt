@@ -51,7 +51,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserProfile)
         viewModel.getUser(bundleId).observe(viewLifecycleOwner, Observer {
-            ProgressBar(context)
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
