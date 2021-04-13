@@ -42,7 +42,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
                     R.id.button_all -> null
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
-                val all = viewModel.users.value?.data.orEmpty()
+                val all = viewModel.getUsers("").value?.data.orEmpty() //TODO TOKEN
                 val list = if (type != null) {
                     all.filter { it.participantType == type }
                 } else {
@@ -62,7 +62,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
 
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
-        viewModel.users.observe(viewLifecycleOwner, Observer {
+        viewModel.getUsers("").observe(viewLifecycleOwner, Observer {//TODO TOKEN
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {

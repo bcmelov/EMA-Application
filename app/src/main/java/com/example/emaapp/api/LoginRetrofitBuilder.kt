@@ -7,12 +7,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitBuilder {
+object LoginRetrofitBuilder {
 
     private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"
 
     //RETROFIT
-    private fun getRetrofit(): Retrofit {
+    fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(createClient())
@@ -22,19 +22,14 @@ object RetrofitBuilder {
 
     //OK HTTP CLIENT
     private fun createClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor().apply {
+        val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
         return OkHttpClient.Builder()
-            .addInterceptor {
-                val request = it.request().newBuilder().addHeader("access_token", LoginFragment.ResponseStorage().response.access_token).build()
-                it.proceed(request)
-            }
-            .authenticator(AppAuthenticator(LoginFragment.ResponseStorage()))
-            .addInterceptor(interceptor)
+            .addInterceptor(httpLoggingInterceptor)
             .build()
     }
 
     //API SERVICE
-    val apiService: UserApi = getRetrofit().create(UserApi::class.java)
+    var apiService: UserApi = getRetrofit().create(UserApi::class.java)
 }

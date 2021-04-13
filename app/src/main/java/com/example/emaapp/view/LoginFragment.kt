@@ -7,30 +7,32 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import com.example.emaapp.R
-import com.example.emaapp.api.RetrofitBuilder
+import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
-import com.example.emaapp.model.User
+import com.example.emaapp.model.LoginRequest
+import com.example.emaapp.model.LoginResponse
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.login_activity) {
     private lateinit var button: Button
     private lateinit var usernameText: EditText
     private lateinit var passwordText: EditText
     private lateinit var viewModel: LoginViewModel
-    private var username: String = "cmelova.b"
-    private var password: String = "ursispal09"
+    private lateinit var username: String
+    private lateinit var password: String
+    val responseStorage = ResponseStorage()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,23 +43,23 @@ class LoginFragment : Fragment(R.layout.login_activity) {
         usernameText = view.findViewById(R.id.inputUserName)
         passwordText = view.findViewById(R.id.inputPassword)
 
-        setupObservers()
+        button.setOnClickListener {
+            username = usernameText.text.toString()
+            password = passwordText.text.toString()
+            setupObservers()
+        }
+
     }
 
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            LoginViewModelFactory(Service(RetrofitBuilder.apiService))
+            LoginViewModelFactory(Service(apiService))
         ).get(LoginViewModel::class.java)
     }
 
     @SuppressLint("InflateParams")
     private fun setupObservers() {
-        button.setOnClickListener {
-            username = usernameText.text.toString()
-            password = passwordText.text.toString()
-            findNavController().navigate(R.id.action_loginFragment_to_userListFragment)
-        }
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserProfile)
         viewModel.loginUser(username, password).observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
@@ -68,7 +70,11 @@ class LoginFragment : Fragment(R.layout.login_activity) {
                     }
                     Status.SUCCESS -> {
                         progressBar?.visibility = View.GONE
-                        resource.data?.let { token -> retrieveToken(token) }
+                        //TODO
+                        extractResponse()
+                        Log.d("TAG", "SUCCESS")
+                        println(responseStorage.response.access_token)
+//                        findNavController().navigate(R.id.action_loginFragment_to_userListFragment)
                     }
                     Status.ERROR -> {
                         progressBar?.visibility = View.GONE
@@ -79,9 +85,15 @@ class LoginFragment : Fragment(R.layout.login_activity) {
         })
     }
 
-    //LOADING DATA IN USER PROFILE
-    @SuppressLint("SetTextI18n")
-    private fun retrieveToken(token: Unit) {
+    //TODO
+    // storing the HTTP response (expiration and access_token)
+    class ResponseStorage {
+        var response: LoginResponse = LoginResponse("","")
+    }
 
+    private fun extractResponse() {
+            lifecycleScope.launch {
+                responseStorage.response = apiService.suspendLoginUser(LoginRequest(username,password))
+            }
     }
 }

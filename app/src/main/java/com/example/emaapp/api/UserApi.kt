@@ -10,7 +10,9 @@ interface UserApi {
 
     //login user
     @POST ("v2/login")
-    suspend fun suspendLoginUser(@Body loginRequest: LoginRequest): LoginResponse
+     suspend fun suspendLoginUser(@Body loginRequest: LoginRequest): LoginResponse
+//    suspend fun suspendLoginUser(username:String, password: String): LoginResponse
+
 
     //load user list
     @GET("v2/participants")

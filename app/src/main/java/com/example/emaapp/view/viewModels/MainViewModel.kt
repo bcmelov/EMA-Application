@@ -6,13 +6,23 @@ import androidx.lifecycle.liveData
 import com.example.emaapp.model.User
 import com.example.emaapp.repository.MainRepository
 import com.example.emaapp.utils.Resource
+import kotlinx.coroutines.Dispatchers
 
 class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    val users: LiveData<Resource<List<User>>> = liveData {
+//    val users: LiveData<Resource<List<User>>> = liveData {
+//        emit(Resource.loading(data = null))
+//        try {
+//            emit(Resource.success(data = mainRepository.getUsers("token"))) //TODO - token has to be rewritten
+//        } catch (exception: Exception) {
+//            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+//        }
+//    }
+
+    fun getUsers(token : String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = mainRepository.getUsers("token"))) //TODO - token has to be rewritten
+            emit(Resource.success(data = mainRepository.getUsers(token)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }

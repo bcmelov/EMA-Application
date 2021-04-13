@@ -1,6 +1,6 @@
 package com.example.emaapp.model
 
 data class LoginResponse( //aka User
-    val expiration: String,
-    val accessToken: String
+    var expiration: String,
+    var access_token: String
 )
