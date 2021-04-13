@@ -5,5 +5,5 @@ import com.example.emaapp.model.User
 
 class MainRepository(private val service: Service) {
     //get list of users
-    suspend fun getUsers(): List<User> = service.getUsers()
+    suspend fun getUsers(token: String): List<User> = token.let { service.getUsers(it) }
 }

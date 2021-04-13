@@ -12,7 +12,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     val users: LiveData<Resource<List<User>>> = liveData {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = mainRepository.getUsers()))
+            emit(Resource.success(data = mainRepository.getUsers("token"))) //TODO - token has to be rewritten
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }

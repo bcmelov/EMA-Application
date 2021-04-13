@@ -13,7 +13,6 @@ data class User(
     val name: String,
     val participantType: String,
     val title: String,
-    val slackURL: String,
     val icon512: String,
     val icon192: String,
     val icon72: String,

@@ -24,6 +24,17 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:indeterminateDrawable="@drawable/circular_progress_bar" />
 
+
+            <ToggleButton
+                android:id="@+id/fav_button"
+                android:layout_gravity="end"
+                android:layout_width="@dimen/square_icon_small"
+                android:layout_height="@dimen/square_icon_small"
+                android:background="@drawable/fav_button"
+                android:checked="false"
+                android:textOff=""
+                android:textOn=""/>
+
             <!--layout for user icon, user name and platform specification-->
             <RelativeLayout
                 android:layout_width="match_parent"
