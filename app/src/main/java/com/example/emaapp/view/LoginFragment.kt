@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.emaapp.R
 import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
-import com.example.emaapp.repository.LoginRepository
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
@@ -27,8 +26,7 @@ class LoginFragment : Fragment(R.layout.login_activity) {
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
-
-
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -80,7 +78,7 @@ class LoginFragment : Fragment(R.layout.login_activity) {
 
 
     // storing the HTTP response (access_token)
-    class TokenRepository {
-        var token: String = "some token"
+    object TokenRepository {
+        var token: String = ""
     }
 }

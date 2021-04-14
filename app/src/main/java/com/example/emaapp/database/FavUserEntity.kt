@@ -3,8 +3,8 @@ package com.example.emaapp.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity (tableName = "users")
 data class FavUserEntity (
-    @PrimaryKey
-    var id: String //storing only UserID
+    @PrimaryKey val id: String,
+    val username:String
 )

@@ -2,6 +2,8 @@ package com.example.emaapp.view.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.room.Room
+import com.example.emaapp.database.Database
 import com.example.emaapp.repository.DetailRepository
 import com.example.emaapp.utils.Resource
 import kotlinx.coroutines.Dispatchers

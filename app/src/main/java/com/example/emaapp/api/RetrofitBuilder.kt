@@ -1,6 +1,5 @@
 package com.example.emaapp.api
 
-import com.example.emaapp.utils.AppAuthenticator
 import com.example.emaapp.view.LoginFragment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,10 +26,11 @@ object RetrofitBuilder {
         }
         return OkHttpClient.Builder()
             .addInterceptor {
-                val request = it.request().newBuilder().header("access_token", LoginFragment.TokenRepository().token).build()
-                it.proceed(request)
+                val request = it.request().newBuilder().header("access_token", LoginFragment.TokenRepository.token)
+//                TokenRepository().token).build()
+                it.proceed(request.build())
             }
-            .authenticator(AppAuthenticator(LoginFragment.TokenRepository()))
+//            .authenticator(AppAuthenticator(LoginFragment.TokenRepository()))
             .addInterceptor(interceptor)
             .build()
     }

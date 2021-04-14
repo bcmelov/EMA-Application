@@ -27,7 +27,8 @@
 
             <ToggleButton
                 android:id="@+id/fav_button"
-                android:layout_gravity="end"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_width="@dimen/square_icon_small"
                 android:layout_height="@dimen/square_icon_small"
                 android:background="@drawable/fav_button"

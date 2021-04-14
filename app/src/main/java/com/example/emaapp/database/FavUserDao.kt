@@ -1,16 +1,17 @@
 package com.example.emaapp.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.example.emaapp.model.UserProfileData
 
 @Dao
 interface FavUserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: FavUserEntity)
 
-    @Query("SELECT * FROM FavUserEntity")
+    @Query("SELECT * FROM users")
     fun getAll(): List<FavUserEntity>
+
+    @Delete
+    fun delete(user: FavUserEntity)
 
 }

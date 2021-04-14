@@ -1,6 +1,7 @@
 package com.example.emaapp.view
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -17,6 +18,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
+import com.example.emaapp.database.DatabaseViewModel
 import com.example.emaapp.model.UserProfileData
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
@@ -30,6 +32,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private lateinit var viewModel: DetailViewModel
     private lateinit var bundleId: String
+    private lateinit var button: Button
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,6 +42,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         bundleId = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No id in args.")
         setupViewModel()
         setupObservers()
+
+        button = view.findViewById(R.id.fav_button)
+        button.setOnClickListener {
+            Log.d("TAG", "USER ADDED TO FAVOURITES")
+        }
     }
 
     private fun setupViewModel() {
@@ -59,7 +68,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                     }
                     Status.SUCCESS -> {
                         progressBar?.visibility = View.GONE
-                        resource.data?.let { user -> retrieveProfile(user) }
+                        resource.data?.let { user -> retrieveProfile(user)
+                        }
                     }
                     Status.ERROR -> {
                         progressBar?.visibility = View.GONE
@@ -266,6 +276,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     //parse damaged Slack URI from API
     private fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
-}
 
+    //FavouriteButton
+}
 
