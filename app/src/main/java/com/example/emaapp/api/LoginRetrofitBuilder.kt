@@ -1,7 +1,5 @@
 package com.example.emaapp.api
 
-import com.example.emaapp.utils.AppAuthenticator
-import com.example.emaapp.view.LoginFragment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -8,9 +8,9 @@ import okhttp3.Route
 
 
 class AppAuthenticator(
-    private val tokensProvider: LoginFragment.ResponseStorage
+    private val tokensProvider: LoginFragment.TokenRepository
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
-        return response.request.newBuilder().header("AccessToken", tokensProvider.response.access_token).build()
+        return response.request.newBuilder().header("AccessToken", tokensProvider.token).build()
     }
 }
