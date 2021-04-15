@@ -76,4 +76,5 @@
     <!-- Other -->
     <string name="email_client">"Choose email client:"</string>
     <string name="base_url" translatable="false">http://emarest.cz.mass-php-1.mit.etn.cz/api/</string>
+    <string name="mobile_academy_2021">Mobile Academy 2021</string>
 </resources>

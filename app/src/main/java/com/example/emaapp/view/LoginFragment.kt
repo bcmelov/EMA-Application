@@ -2,7 +2,6 @@ package com.example.emaapp.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -26,7 +25,7 @@ class LoginFragment : Fragment(R.layout.login_activity) {
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -66,7 +65,7 @@ class LoginFragment : Fragment(R.layout.login_activity) {
                         Log.d("TAG", "SUCCESS")
                         setupViewModel()
                         findNavController().navigate(R.id.action_loginFragment_to_userListFragment)
-                        }
+                    }
                     Status.ERROR -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
@@ -75,7 +74,6 @@ class LoginFragment : Fragment(R.layout.login_activity) {
             }
         })
     }
-
 
     // storing the HTTP response (access_token)
     object TokenRepository {

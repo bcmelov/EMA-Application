@@ -9,5 +9,5 @@ class FavRepository (private val dao:FavUserDao) {
     suspend fun deleteFavUser (user : FavUserEntity) = dao.delete(user)
 
     //getting all fav users
-     fun getAllFavUsers (): List<FavUserEntity> = dao.getAll()
+    suspend fun getAllFavUsers (): List<FavUserEntity> = dao.getAll()
 }

@@ -13,6 +13,7 @@ import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
 import com.example.emaapp.model.User
+import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status.*
 import com.example.emaapp.view.viewModels.MainViewModel
 import com.example.emaapp.view.viewModels.ViewModelFactory
@@ -23,6 +24,8 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserClickListener {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: ViewHolder.UserAdapter
+    private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +65,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list), ViewHolder.UserC
 
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
-        viewModel.getUsers("").observe(viewLifecycleOwner, Observer {//TODO TOKEN
+        viewModel.getUsers("").observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {

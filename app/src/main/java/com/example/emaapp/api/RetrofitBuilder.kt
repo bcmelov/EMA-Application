@@ -26,11 +26,10 @@ object RetrofitBuilder {
         }
         return OkHttpClient.Builder()
             .addInterceptor {
-                val request = it.request().newBuilder().header("access_token", LoginFragment.TokenRepository.token)
-//                TokenRepository().token).build()
+                val request = it.request().newBuilder()
+                    .header("access_token", LoginFragment.TokenRepository.token)
                 it.proceed(request.build())
             }
-//            .authenticator(AppAuthenticator(LoginFragment.TokenRepository()))
             .addInterceptor(interceptor)
             .build()
     }

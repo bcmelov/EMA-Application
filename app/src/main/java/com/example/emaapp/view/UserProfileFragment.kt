@@ -1,7 +1,6 @@
 package com.example.emaapp.view
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -12,40 +11,72 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
-import com.example.emaapp.database.DatabaseViewModel
+import com.example.emaapp.database.Database
+import com.example.emaapp.database.FavUserDao
+import com.example.emaapp.database.FavUserEntity
 import com.example.emaapp.model.UserProfileData
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
 import com.example.emaapp.view.viewModels.DetailViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
+    //KEYNAME to retrieve the user information from the bundle
     companion object {
         const val KEY_NAME = "id"
     }
 
     private lateinit var viewModel: DetailViewModel
     private lateinit var bundleId: String
-    private lateinit var button: Button
+    private lateinit var favButton: Button
+    private lateinit var database: Database
+    private lateinit var favDao: FavUserDao
+    private var isFavourite = false
 
-
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        favButton = view.findViewById(R.id.fav_button)
+
+        //database with the favourite users
+        database = Database.getDatabase(requireActivity().applicationContext)
+        favDao = database.userDao()
+
         //receiving ID from the bundle
         bundleId = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No id in args.")
+
         setupViewModel()
         setupObservers()
+        isFavourite()
+        setButtonState()
 
-        button = view.findViewById(R.id.fav_button)
-        button.setOnClickListener {
-            Log.d("TAG", "USER ADDED TO FAVOURITES")
+//        //TODO - SET THE BUTTON TO REFLECT THE STATE OF FAV EVEN AFTER LEAVING THE FRAGMENT (isPressed bellow is not working)
+
+        favButton.setOnClickListener {
+            if (!isFavourite) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    favDao.insert(FavUserEntity(bundleId))
+                    isFavourite = true
+                }
+                Log.d("TAG", "USER ADDED TO FAVOURITES")
+            } else {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    favDao.delete(FavUserEntity(bundleId))
+                    isFavourite = false
+                }
+                Log.d("TAG", "USER REMOVED FROM FAVOURITES")
+            }
         }
     }
 
@@ -68,7 +99,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                     }
                     Status.SUCCESS -> {
                         progressBar?.visibility = View.GONE
-                        resource.data?.let { user -> retrieveProfile(user)
+                        resource.data?.let { user ->
+                            retrieveProfile(user)
                         }
                     }
                     Status.ERROR -> {
@@ -147,29 +179,29 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
         view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = 0
 
-        //updating skills based on profile information
-        var i = 0
-        var androidSkill = 0
-        var kotlinSkill = 0
-        var iosSkill = 0
-        var swiftSkill = 0
-        while (i < user.skills.size) {
-            when (user.skills[i].skillType) {
-                "android" -> androidSkill = user.skills[i].value
-                "kotlin" -> kotlinSkill = user.skills[i].value
-                "ios" -> iosSkill = user.skills[i].value
-                "swift" -> swiftSkill = user.skills[i].value
-            }
-            i++
-        }
-        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
-        view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
-        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
-        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlinSkill}/10"
-        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = iosSkill * 10
-        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
-        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
-        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
+//        //updating skills based on profile information
+//        var i = 0
+//        var androidSkill = 0
+//        var kotlinSkill = 0
+//        var iosSkill = 0
+//        var swiftSkill = 0
+//        while (i < user.skills.size) {
+//            when (user.skills[i].skillType) {
+//                "android" -> androidSkill = user.skills[i].value
+//                "kotlin" -> kotlinSkill = user.skills[i].value
+//                "ios" -> iosSkill = user.skills[i].value
+//                "swift" -> swiftSkill = user.skills[i].value
+//            }
+//            i++
+//        }
+//        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
+//        view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
+//        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
+//        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlinSkill}/10"
+//        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = iosSkill * 10
+//        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
+//        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
+//        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
 
 //HOMEWORK
         //1. homework
@@ -277,6 +309,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     //parse damaged Slack URI from API
     private fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
 
-    //FavouriteButton
+    private fun isFavourite() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            isFavourite = favDao.isFavourite()
+            Log.d("TAG", isFavourite.toString())
+        }
+    }
+
+    private fun setButtonState() {
+        if (isFavourite) {
+            favButton.isPressed = true
+        }
+    }
 }
 

@@ -1,5 +1,7 @@
 package com.example.emaapp.model
 
+import com.google.gson.annotations.SerializedName
+
 //class with user profile information
 data class UserProfileData(
 val id: String,
@@ -18,8 +20,21 @@ val skills: List<Skill>
 
 //class with skills
 data class Skill(
-    val skillType: String,
-    val value: Int
+    val swift: String,
+    val ios: String,
+    val kotlin: String,
+    val android: String
 )
+
+enum class SkillType {
+    @SerializedName("swift")
+    SWIFT,
+    @SerializedName("ios")
+    IOS,
+    @SerializedName("kotlin")
+    KOTLIN,
+    @SerializedName("android")
+    ANDROID,
+}
 
 
