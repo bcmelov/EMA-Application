@@ -65,7 +65,11 @@
     <string name="login_icon">Ikona přihlášení</string>
     <string name="hint_password">HESLO</string>
     <string name="hint_username">UŽIVATELSKÉ JMÉNO</string>
+
+    <!-- login -->
     <string name="login_button">PŘIHLÁSIT</string>
+    <string name="login_success">Byli jste úspěšně přihlášeni.</string>
+    <string name="wrong_credentials">Zadejte platné přihlašovací jméno a heslo.</string>
 
 
 </resources>

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -35,12 +36,13 @@ class LoginFragment : Fragment(R.layout.login_activity) {
         usernameText = view.findViewById(R.id.inputUserName)
         passwordText = view.findViewById(R.id.inputPassword)
 
+
+
         button.setOnClickListener {
             username = usernameText.text.toString()
             password = passwordText.text.toString()
             setupObservers()
         }
-
     }
 
     private fun setupViewModel() {
@@ -64,10 +66,16 @@ class LoginFragment : Fragment(R.layout.login_activity) {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
                         setupViewModel()
+                        Toast.makeText(context,
+                            getString(R.string.login_success),
+                            Toast.LENGTH_LONG).show()
                         findNavController().navigate(R.id.action_loginFragment_to_userListFragment)
                     }
                     Status.ERROR -> {
                         progressBar?.visibility = View.GONE
+                        Toast.makeText(context,
+                            getString(R.string.wrong_credentials),
+                            Toast.LENGTH_LONG).show()
                         Log.d("TAG", "FAILURE")
                     }
                 }

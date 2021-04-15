@@ -1,0 +1,32 @@
+package com.example.emaapp.utils
+
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContract
+import com.example.emaapp.model.LoginResponse
+import com.example.emaapp.view.LoginFragment
+
+class LoginContract : ActivityResultContract<LoginResponse, LoginResponse?>() {
+
+    //key for intent extras
+    companion object {
+        const val TOKEN = "token"
+    }
+
+    //explicit intent
+    override fun createIntent(context: Context, input: LoginResponse?): Intent =
+        Intent(context, LoginFragment::class.java).apply {
+            input?.let {
+                putExtra(TOKEN, it.access_token)
+            }
+        }
+
+    override fun parseResult(resultCode: Int, intent: Intent?): LoginResponse? =
+        if (resultCode == Activity.RESULT_OK && intent != null) {
+            val token = intent.getStringExtra(TOKEN) ?: ""
+            LoginResponse(token)
+        } else {
+            null
+        }
+}
