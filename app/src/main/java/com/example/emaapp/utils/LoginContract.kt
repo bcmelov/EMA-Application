@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import com.example.emaapp.model.LoginResponse
-import com.example.emaapp.view.LoginFragment
+import com.example.emaapp.view.LoginActivity
 
 class LoginContract : ActivityResultContract<LoginResponse, LoginResponse?>() {
 
@@ -16,7 +16,7 @@ class LoginContract : ActivityResultContract<LoginResponse, LoginResponse?>() {
 
     //explicit intent
     override fun createIntent(context: Context, input: LoginResponse?): Intent =
-        Intent(context, LoginFragment::class.java).apply {
+        Intent(context, LoginActivity::class.java).apply {
             input?.let {
                 putExtra(TOKEN, it.access_token)
             }

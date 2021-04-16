@@ -1,6 +1,6 @@
 package com.example.emaapp.api
 
-import com.example.emaapp.view.LoginFragment
+import com.example.emaapp.utils.LoginContract
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
 
     private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"
+    private val tokenResource =  LoginContract.TOKEN
 
     //RETROFIT
     private fun getRetrofit(): Retrofit {
@@ -27,7 +28,7 @@ object RetrofitBuilder {
         return OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request().newBuilder()
-                    .header("access_token", LoginFragment.TokenRepository.token)
+                    .header("access_token", tokenResource)
                 it.proceed(request.build())
             }
             .addInterceptor(interceptor)
@@ -35,5 +36,5 @@ object RetrofitBuilder {
     }
 
     //API SERVICE
-    val apiService: UserApi = getRetrofit().create(UserApi::class.java)
+    val apiService : UserApi = getRetrofit().create(UserApi::class.java)
 }
