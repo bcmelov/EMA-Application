@@ -1,16 +1,16 @@
 package com.example.emaapp.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +18,7 @@ import com.example.emaapp.R
 import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
 import com.example.emaapp.model.LoginRequest
+import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Resource
 import com.example.emaapp.view.viewModels.LoginViewModel
@@ -45,33 +46,40 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
         usernameText = findViewById(R.id.inputUserName)
         passwordText = findViewById(R.id.inputPassword)
 
+        //temporary 'button' for login (test purposes)
+        val icon = findViewById<ImageView>(R.id.loginIcon)
+        icon.setOnClickListener() {
+            usernameText.setText("cmelova.b")
+            passwordText.setText("ursispal09")
+        }
+
         button.setOnClickListener {
             username = usernameText.text.toString()
             password = passwordText.text.toString()
             setupObservers()
-            lifecycleScope.launch {
-                try {
-                    val response = apiService.suspendLoginUser(LoginRequest(username, password))
-                    val intent = Intent().apply {
-                        putExtra(LoginContract.TOKEN, response.access_token)
-                    }
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-                } catch (ie: IOException) {
-                    Toast.makeText(applicationContext,
-                        getString(R.string.error_title),
-                        Toast.LENGTH_SHORT).show()
-                } catch (http: HttpException) {
-                    when (http.code()) {
-                        403 -> Toast.makeText(applicationContext,
-                            getString(R.string.wrong_credentials),
-                            Toast.LENGTH_LONG).show()
-                        else -> Toast.makeText(applicationContext,
-                            getString(R.string.error_title),
-                            Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
+//            lifecycleScope.launch {
+//                try {
+//                    val response = apiService.suspendLoginUser(LoginRequest(username, password))
+//                    val intent = Intent().apply {
+//                        putExtra(LoginContract.TOKEN, response.access_token)
+//                    }
+//                    setResult(Activity.RESULT_OK, intent)
+//                    finish()
+//                } catch (ie: IOException) {
+//                    Toast.makeText(applicationContext,
+//                        getString(R.string.error_title),
+//                        Toast.LENGTH_SHORT).show()
+//                } catch (http: HttpException) {
+//                    when (http.code()) {
+//                        403 -> Toast.makeText(applicationContext,
+//                            getString(R.string.wrong_credentials),
+//                            Toast.LENGTH_LONG).show()
+//                        else -> Toast.makeText(applicationContext,
+//                            getString(R.string.error_title),
+//                            Toast.LENGTH_LONG).show()
+//                    }
+//                }
+//            }
         }
     }
 
@@ -84,6 +92,7 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 
     private fun setupObservers() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
+        viewModel.loginUser(username,password)
         viewModel.loginResourceData.observe(this, Observer { resource ->
             when (resource) {
                 Resource.loading(T) -> {

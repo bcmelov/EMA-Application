@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
 
     private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"
-    private val tokenResource =  LoginContract.TOKEN
+    private val tokenResource =  LoginContract.TOKEN //TODO: change to AppPreferences resource
 
     //RETROFIT
     private fun getRetrofit(): Retrofit {
@@ -28,7 +28,7 @@ object RetrofitBuilder {
         return OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request().newBuilder()
-                    .header("access_token", tokenResource)
+                    .header("access_token", tokenResource) //TODO: change to AppPreferences resource
                 it.proceed(request.build())
             }
             .addInterceptor(interceptor)

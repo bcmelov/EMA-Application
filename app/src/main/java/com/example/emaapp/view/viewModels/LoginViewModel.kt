@@ -1,19 +1,19 @@
 package com.example.emaapp.view.viewModels
 
-import android.content.res.Resources
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.LoginRepository
-import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Resource
-import com.example.emaapp.view.LoginActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class LoginViewModel(
     private val mainRepository: LoginRepository,
     private val appPreferences: AppPreferences
+
 ) : ViewModel() {
 
     // Private mutable live data for login response
@@ -23,12 +23,14 @@ class LoginViewModel(
     val loginResourceData: LiveData<Resource<Any>> get() = _loginResourceData
 
 
+    //login fun -> updates the value of _loginResourceData, stores the token to AppPreferences
     fun loginUser(name: String, password: String) {
         viewModelScope.launch {
             _loginResourceData.value = Resource.loading(data = null)
             try {
                 val result = mainRepository.loginUser(name, password)
-                appPreferences.setToken(LoginContract.TOKEN)
+//                appPreferences.setToken(LoginContract.TOKEN)
+                appPreferences.setToken(result.access_token)
                 _loginResourceData.value = Resource.success(data = result)
             } catch (exception: HttpException) {
                 _loginResourceData.value =
