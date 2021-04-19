@@ -35,6 +35,8 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        LoginResponse().access_token = appPreferences.getToken()
+
         loginResult = registerForActivityResult(LoginContract()) {
             if (it != null) {
                 lifecycleScope.launch {
@@ -64,13 +66,15 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                     R.id.button_all -> null
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
-                val all = viewModel.getUsers(appPreferences.getToken()).value?.data.orEmpty()
-                val list = if (type != null) {
-                    all.filter { it.participantType == type }
-                } else {
-                    all
+                lifecycleScope.launch {
+                    val all = viewModel.getUsers(appPreferences.getToken()).value?.data.orEmpty()
+                    val list = if (type != null) {
+                        all.filter { it.participantType == type }
+                    } else {
+                        all
+                    }
+                    retrieveList(list)
                 }
-                retrieveList(list)
             }
         }
     }
@@ -98,7 +102,9 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                     ERROR -> {
                         progressBar?.visibility = View.GONE
 //                         (HttpException(this).code() == 401) {
+                        lifecycleScope.launch {
                         loginResult.launch(LoginResponse(appPreferences.getToken()))
+                        }
                         Log.d("TAG", "FAILURE")
 //                            findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                     }

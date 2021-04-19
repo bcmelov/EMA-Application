@@ -1,11 +1,14 @@
 package com.example.emaapp.view.viewModels
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.LoginRepository
+import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -29,8 +32,7 @@ class LoginViewModel(
             _loginResourceData.value = Resource.loading(data = null)
             try {
                 val result = mainRepository.loginUser(name, password)
-//                appPreferences.setToken(LoginContract.TOKEN)
-                appPreferences.setToken(result.access_token)
+                LoginContract.TOKEN = result.access_token
                 _loginResourceData.value = Resource.success(data = result)
             } catch (exception: HttpException) {
                 _loginResourceData.value =

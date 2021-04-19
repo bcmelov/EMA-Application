@@ -1,16 +1,13 @@
 package com.example.emaapp.view
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +15,6 @@ import com.example.emaapp.R
 import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
 import com.example.emaapp.model.LoginRequest
-import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Resource
 import com.example.emaapp.view.viewModels.LoginViewModel
@@ -59,10 +55,7 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
             setupObservers()
 //            lifecycleScope.launch {
 //                try {
-//                    val response = apiService.suspendLoginUser(LoginRequest(username, password))
-//                    val intent = Intent().apply {
-//                        putExtra(LoginContract.TOKEN, response.access_token)
-//                    }
+//                    setupViewModel()
 //                    setResult(Activity.RESULT_OK, intent)
 //                    finish()
 //                } catch (ie: IOException) {
@@ -74,12 +67,16 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 //                        403 -> Toast.makeText(applicationContext,
 //                            getString(R.string.wrong_credentials),
 //                            Toast.LENGTH_LONG).show()
+//                        401 -> Toast.makeText(applicationContext,
+//                            "Access denied.",
+//                            Toast.LENGTH_LONG).show()
 //                        else -> Toast.makeText(applicationContext,
 //                            getString(R.string.error_title),
 //                            Toast.LENGTH_LONG).show()
 //                    }
 //                }
 //            }
+
         }
     }
 
@@ -92,35 +89,60 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 
     private fun setupObservers() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
-        viewModel.loginUser(username,password)
-        viewModel.loginResourceData.observe(this, Observer { resource ->
-            when (resource) {
-                Resource.loading(T) -> {
-                    progressBar?.visibility = View.VISIBLE
-                    Log.d("TAG", "LOADING")
-                }
-                Resource.success(T) -> {
-                    progressBar?.visibility = View.GONE
-                    Log.d("TAG", "SUCCESS")
-                    setupViewModel()
-                    Toast.makeText(this,
-                        getString(R.string.login_success),
-                        Toast.LENGTH_LONG).show()
-                }
-                Resource.error(T, "An error occurred.") -> {
-                    progressBar?.visibility = View.GONE
-                    Toast.makeText(this,
-                        getString(R.string.wrong_credentials),
-                        Toast.LENGTH_LONG).show()
-                    Log.d("TAG", "FAILURE")
-                }
+        try {
+            viewModel.loginUser(username,password)
+            setupViewModel()
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        } catch (ie: IOException) {
+            Toast.makeText(applicationContext,
+                getString(R.string.error_title),
+                Toast.LENGTH_SHORT).show()
+        } catch (http: HttpException) {
+            when (http.code()) {
+                403 -> Toast.makeText(applicationContext,
+                    getString(R.string.wrong_credentials),
+                    Toast.LENGTH_LONG).show()
+                401 -> Toast.makeText(applicationContext,
+                    "Access denied.",
+                    Toast.LENGTH_LONG).show()
+                else -> Toast.makeText(applicationContext,
+                    getString(R.string.error_title),
+                    Toast.LENGTH_LONG).show()
             }
-        })
-    }
 
-
-    // storing the HTTP response (access_token)
-    object TokenRepository {
-        var token: String = ""
+            viewModel.loginResourceData.observe(this, Observer { resource ->
+                when (resource) {
+                    Resource.loading(T) -> {
+                        progressBar?.visibility = View.VISIBLE
+                        Log.d("TAG", "LOADING")
+                    }
+                    Resource.success(T) -> {
+                        progressBar?.visibility = View.GONE
+                        Log.d("TAG", "SUCCESS")
+                        setupViewModel()
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                        Toast.makeText(this,
+                            getString(R.string.login_success),
+                            Toast.LENGTH_LONG).show()
+                    }
+                    Resource.error(T, "An error occurred.") -> {
+                        progressBar?.visibility = View.GONE
+                        Toast.makeText(this,
+                            getString(R.string.wrong_credentials),
+                            Toast.LENGTH_LONG).show()
+                        Log.d("TAG", "FAILURE")
+                    }
+                }
+            })
+        }
     }
 }
+
+
+//    // storing the HTTP response (access_token)
+//    object TokenRepository {
+//        var token: String = ""
+//    }
+//}
