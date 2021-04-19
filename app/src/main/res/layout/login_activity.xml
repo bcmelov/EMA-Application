@@ -26,15 +26,15 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
-            app:layout_constraintBottom_toBottomOf="@id/loginIcon"
-            style="@style/Title"
             android:id="@+id/academyTitle"
+            style="@style/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/mobile_academy_2021"
             android:textColor="@color/black"
-            android:text="@string/mobile_academy_2021"/>
+            app:layout_constraintBottom_toBottomOf="@id/loginIcon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <RelativeLayout
             android:id="@+id/loginInfoLayout"
@@ -48,34 +48,40 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputUserName"
+                style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/border_homeworks"
                 android:hint="@string/hint_username"
-                style="@style/Title"
                 android:inputType="text"
                 android:maxLines="1"
+                android:padding="@dimen/spacing_small"
                 android:textColor="@android:color/white" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputPassword"
+                style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/inputUserName"
+                android:background="@drawable/border_homeworks"
                 android:hint="@string/hint_password"
-                style="@style/Title"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:padding="@dimen/spacing_small"
+                android:paddingHorizontal="@dimen/spacing_medium"
                 android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/loginButton"
+                style="@style/LoginButton"
                 android:layout_width="@dimen/large_square_icon"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/inputPassword"
+                android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_centerHorizontal="true"
-                style="@style/LoginButton"
+                android:background="@drawable/border_homeworks"
                 android:text="@string/login_button" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

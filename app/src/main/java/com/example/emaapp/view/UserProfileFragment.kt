@@ -62,7 +62,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         setButtonState()
 
 //        //TODO - SET THE BUTTON TO REFLECT THE STATE OF FAV EVEN AFTER LEAVING THE FRAGMENT (isPressed bellow is not working)
-
         favButton.setOnClickListener {
             if (!isFavourite) {
                 lifecycleScope.launch(Dispatchers.IO) {

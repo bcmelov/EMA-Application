@@ -1,6 +1,7 @@
 package com.example.emaapp.view
 
 import android.os.Bundle
+import android.os.Debug.startMethodTracing
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -35,13 +36,13 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //updating the login response access token with the value of Token from appPreferences from previous usages
         LoginResponse().access_token = appPreferences.getToken()
 
+
         loginResult = registerForActivityResult(LoginContract()) {
-            if (it != null) {
-                lifecycleScope.launch {
-                    appPreferences.setToken(LoginContract.TOKEN)
-                }
+            if (LoginResponse().access_token != "access_token") {
+                setupViewModel()
                 setupObservers()
             }
         }
@@ -102,11 +103,14 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                     ERROR -> {
                         progressBar?.visibility = View.GONE
 //                         (HttpException(this).code() == 401) {
-                        lifecycleScope.launch {
-                        loginResult.launch(LoginResponse(appPreferences.getToken()))
+                        if (appPreferences.getToken() == "") {
+                            lifecycleScope.launch {
+                                loginResult.launch(LoginResponse(appPreferences.getToken()))
+                            }
+                        } else {
+                            Log.d("TAG", "FAILURE")
+                            findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                         }
-                        Log.d("TAG", "FAILURE")
-//                            findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                     }
                 }
             }

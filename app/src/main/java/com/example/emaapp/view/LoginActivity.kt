@@ -1,8 +1,5 @@
 package com.example.emaapp.view
 
-import android.app.Activity
-import android.content.Intent
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,18 +7,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import com.example.emaapp.R
 import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
-import com.example.emaapp.model.LoginRequest
-import com.example.emaapp.utils.LoginContract
-import com.example.emaapp.utils.Resource
+import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
 class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 
@@ -31,7 +22,6 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,30 +43,6 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
             username = usernameText.text.toString()
             password = passwordText.text.toString()
             setupObservers()
-//            lifecycleScope.launch {
-//                try {
-//                    setupViewModel()
-//                    setResult(Activity.RESULT_OK, intent)
-//                    finish()
-//                } catch (ie: IOException) {
-//                    Toast.makeText(applicationContext,
-//                        getString(R.string.error_title),
-//                        Toast.LENGTH_SHORT).show()
-//                } catch (http: HttpException) {
-//                    when (http.code()) {
-//                        403 -> Toast.makeText(applicationContext,
-//                            getString(R.string.wrong_credentials),
-//                            Toast.LENGTH_LONG).show()
-//                        401 -> Toast.makeText(applicationContext,
-//                            "Access denied.",
-//                            Toast.LENGTH_LONG).show()
-//                        else -> Toast.makeText(applicationContext,
-//                            getString(R.string.error_title),
-//                            Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            }
-
         }
     }
 
@@ -87,47 +53,58 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
         ).get(LoginViewModel::class.java)
     }
 
+
+//    CODE BELOW WILL BE USED LATER ON - DO NOT DELETE
+
+//    private fun setupObservers() {
+//        val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
+//        viewModel.loginResourceData.observe(this, Observer { resource ->
+//            when (resource) {
+//                Resource.loading(T) -> {
+//                    progressBar?.visibility = View.VISIBLE
+//                    Log.d("TAG", "LOADING")
+//                }
+//                Resource.success(T) -> {
+//                    progressBar?.visibility = View.GONE
+//                    Log.d("TAG", "SUCCESS")
+//                    setupViewModel()
+//                    setResult(RESULT_OK)
+//                    finish()
+//                    Toast.makeText(this,
+//                        getString(R.string.login_success),
+//                        Toast.LENGTH_LONG).show()
+//                }
+//                Resource.error(T, "An error occurred.") -> {
+//                    progressBar?.visibility = View.GONE
+//                    Toast.makeText(this,
+//                        getString(R.string.wrong_credentials),
+//                        Toast.LENGTH_LONG).show()
+//                    Log.d("TAG", "FAILURE")
+//                }
+//            }
+//        })
+
+
     private fun setupObservers() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
-        try {
-            viewModel.loginUser(username,password)
-            setupViewModel()
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-        } catch (ie: IOException) {
-            Toast.makeText(applicationContext,
-                getString(R.string.error_title),
-                Toast.LENGTH_SHORT).show()
-        } catch (http: HttpException) {
-            when (http.code()) {
-                403 -> Toast.makeText(applicationContext,
-                    getString(R.string.wrong_credentials),
-                    Toast.LENGTH_LONG).show()
-                401 -> Toast.makeText(applicationContext,
-                    "Access denied.",
-                    Toast.LENGTH_LONG).show()
-                else -> Toast.makeText(applicationContext,
-                    getString(R.string.error_title),
-                    Toast.LENGTH_LONG).show()
-            }
-
-            viewModel.loginResourceData.observe(this, Observer { resource ->
-                when (resource) {
-                    Resource.loading(T) -> {
+        viewModel.loginUser(username, password).observe(this, Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
                         progressBar?.visibility = View.VISIBLE
                         Log.d("TAG", "LOADING")
                     }
-                    Resource.success(T) -> {
+                    Status.SUCCESS -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
                         setupViewModel()
-                        setResult(Activity.RESULT_OK)
+                        setResult(RESULT_OK)
                         finish()
                         Toast.makeText(this,
                             getString(R.string.login_success),
                             Toast.LENGTH_LONG).show()
                     }
-                    Resource.error(T, "An error occurred.") -> {
+                    Status.ERROR -> {
                         progressBar?.visibility = View.GONE
                         Toast.makeText(this,
                             getString(R.string.wrong_credentials),
@@ -135,14 +112,7 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
                         Log.d("TAG", "FAILURE")
                     }
                 }
-            })
-        }
+            }
+        })
     }
 }
-
-
-//    // storing the HTTP response (access_token)
-//    object TokenRepository {
-//        var token: String = ""
-//    }
-//}

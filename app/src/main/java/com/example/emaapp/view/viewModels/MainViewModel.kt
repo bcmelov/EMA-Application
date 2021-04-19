@@ -18,6 +18,7 @@ class MainViewModel(
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = mainRepository.getUsers(LoginContract.TOKEN)))
+//            emit(Resource.success(data = mainRepository.getUsers(appPreferences.getToken())))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
