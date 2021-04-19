@@ -2,8 +2,8 @@ package com.example.emaapp.api
 
 import com.example.emaapp.model.LoginRequest
 import com.example.emaapp.model.LoginResponse
-import com.example.emaapp.model.User
-import com.example.emaapp.model.UserProfileData
+import com.example.emaapp.data.User
+import com.example.emaapp.data.UserProfileData
 import retrofit2.http.*
 
 interface UserApi {

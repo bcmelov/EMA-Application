@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
-import com.example.emaapp.model.User
+import com.example.emaapp.data.ParticipantType
+import com.example.emaapp.data.User
 
 class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
     val name: TextView = itemView.findViewById(R.id.list_user_name)
@@ -32,8 +33,11 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
                 .placeholder(R.drawable.loading_icon)
                 .into(userIcon)
             when (user.participantType) {
-                "iosMentor", "iosStudent" -> platformIcon.setImageResource(R.drawable.ic_apple)
-                "androidMentor", "androidStudent" -> platformIcon.setImageResource(R.drawable.ic_android)
+                ParticipantType.ANDROID_MENTOR, ParticipantType.ANDROID_STUDENT -> platformIcon.setImageResource(
+                    R.drawable.ic_android)
+                ParticipantType.IOS_MENTOR, ParticipantType.IOS_STUDENT -> platformIcon.setImageResource(
+                    R.drawable.ic_apple)
+                ParticipantType.WATCHER -> platformIcon.setImageResource(R.drawable.watcher)
             }
             when (user.homework[0].state) {
                 "comingsoon" -> hw1.setImageResource(R.drawable.ic_one)
@@ -59,44 +63,46 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
                 "comingsoon" -> hw6.setImageResource(R.drawable.ic_six)
                 else -> hw6.setImageResource(R.drawable.ic_six_done)
             }
-    }
-}
-
-
-interface UserClickListener {
-    fun onUserClick(user : User)
-}
-
-class UserAdapter(private val row: ArrayList<User>, private val listener: UserClickListener) : RecyclerView.Adapter<ViewHolder>() {
-    private var users: ArrayList<User> = row
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_row, parent, false)
-        val viewHolder = ViewHolder(view)
-        viewHolder.itemView.setOnClickListener {
-            listener.onUserClick(users[viewHolder.adapterPosition])
-        }
-        return viewHolder
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(row[position])
-    }
-
-    override fun getItemCount(): Int {
-        return this.users.size
-    }
-
-    fun addUsers(users: List<User>) {
-        this.users.apply {
-            clear()
-            addAll(users)
         }
     }
-}
+
+
+    interface UserClickListener {
+        fun onUserClick(user: User)
+    }
+
+    class UserAdapter(private val row: ArrayList<User>, private val listener: UserClickListener) :
+        RecyclerView.Adapter<ViewHolder>() {
+        private var users: ArrayList<User> = row
+            set(value) {
+                field = value
+                notifyDataSetChanged()
+            }
+
+        override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int): ViewHolder {
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.layout_row, parent, false)
+            val viewHolder = ViewHolder(view)
+            viewHolder.itemView.setOnClickListener {
+                listener.onUserClick(users[viewHolder.adapterPosition])
+            }
+            return viewHolder
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            holder.bind(row[position])
+        }
+
+        override fun getItemCount(): Int {
+            return this.users.size
+        }
+
+        fun addUsers(users: List<User>) {
+            this.users.apply {
+                clear()
+                addAll(users)
+            }
+        }
+    }
 }
 

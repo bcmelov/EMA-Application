@@ -18,10 +18,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
+import com.example.emaapp.data.UserProfileData
 import com.example.emaapp.database.Database
 import com.example.emaapp.database.FavUserDao
 import com.example.emaapp.database.FavUserEntity
-import com.example.emaapp.model.UserProfileData
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
 import com.example.emaapp.view.viewModels.DetailViewModelFactory
@@ -41,13 +41,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private lateinit var favButton: Button
     private lateinit var database: Database
     private lateinit var favDao: FavUserDao
-    private var isFavourite = false
+    private var favUser = false
+
 
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        favButton = view.findViewById(R.id.fav_button)
 
         //database with the favourite users
         database = Database.getDatabase(requireActivity().applicationContext)
@@ -56,23 +55,34 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         //receiving ID from the bundle
         bundleId = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No id in args.")
 
+        //check, whether the user is in fav database
+        favButton = view.findViewById(R.id.fav_button)
+        lifecycleScope.launch (Dispatchers. IO) {
+            favUser = favDao.isFavourite(bundleId)
+            setButtonState()
+        }
+
         setupViewModel()
         setupObservers()
-        isFavourite()
-        setButtonState()
+
+        //check, whether the user is/is not in favourite users
+
+
 
 //        //TODO - SET THE BUTTON TO REFLECT THE STATE OF FAV EVEN AFTER LEAVING THE FRAGMENT (isPressed bellow is not working)
         favButton.setOnClickListener {
-            if (!isFavourite) {
+            if (!favUser) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     favDao.insert(FavUserEntity(bundleId))
-                    isFavourite = true
+                    favUser = true
+                    setButtonState()
                 }
                 Log.d("TAG", "USER ADDED TO FAVOURITES")
             } else {
                 lifecycleScope.launch(Dispatchers.IO) {
                     favDao.delete(FavUserEntity(bundleId))
-                    isFavourite = false
+                    favUser = false
+                    setButtonState()
                 }
                 Log.d("TAG", "USER REMOVED FROM FAVOURITES")
             }
@@ -101,6 +111,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                         resource.data?.let { user ->
                             retrieveProfile(user)
                         }
+                        Log.d("TAG", "SUCCESS")
                     }
                     Status.ERROR -> {
                         progressBar?.visibility = View.GONE
@@ -171,37 +182,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             }
         }
 
-//SKILLS
-        //beginning level of skills
-        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = 0
-        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = 0
-        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
-        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = 0
-
-//        //updating skills based on profile information
-//        var i = 0
-//        var androidSkill = 0
-//        var kotlinSkill = 0
-//        var iosSkill = 0
-//        var swiftSkill = 0
-//        while (i < user.skills.size) {
-//            when (user.skills[i].skillType) {
-//                "android" -> androidSkill = user.skills[i].value
-//                "kotlin" -> kotlinSkill = user.skills[i].value
-//                "ios" -> iosSkill = user.skills[i].value
-//                "swift" -> swiftSkill = user.skills[i].value
-//            }
-//            i++
-//        }
-//        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
-//        view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
-//        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
-//        view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlinSkill}/10"
-//        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = iosSkill * 10
-//        view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
-//        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
-//        view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
-
 //HOMEWORK
         //1. homework
         when (user.homework[0].state) {
@@ -213,9 +193,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             "review" -> {
                 view?.findViewById<TextView>(R.id.title_review_1)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_push_1)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_1)?.setState(false)
             }
             "push" -> {
                 view?.findViewById<TextView>(R.id.title_push_1)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_push_1)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_1)?.setState(false)
+            }
+            "comingsoon" -> {
+                view?.findViewById<TextView>(R.id.title_push_1)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_review_1)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_1)?.setState(false)
             }
         }
 
@@ -229,9 +217,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             "review" -> {
                 view?.findViewById<TextView>(R.id.title_push_2)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_review_2)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_2)?.setState(false)
             }
             "push" -> {
                 view?.findViewById<TextView>(R.id.title_push_2)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_review_2)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_2)?.setState(false)
+            }
+            "comingsoon" -> {
+                view?.findViewById<TextView>(R.id.title_push_2)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_review_2)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_2)?.setState(false)
             }
         }
 
@@ -245,9 +241,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             "review" -> {
                 view?.findViewById<TextView>(R.id.title_push_3)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_review_3)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_3)?.setState(false)
             }
             "push" -> {
                 view?.findViewById<TextView>(R.id.title_push_3)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_review_3)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_3)?.setState(false)
+            }
+            "comingsoon" -> {
+                view?.findViewById<TextView>(R.id.title_push_3)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_review_3)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_3)?.setState(false)
             }
         }
 
@@ -261,9 +265,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             "review" -> {
                 view?.findViewById<TextView>(R.id.title_push_4)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_review_4)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_4)?.setState(false)
             }
             "push" -> {
                 view?.findViewById<TextView>(R.id.title_push_4)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_review_4)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_4)?.setState(false)
+            }
+            "comingsoon" -> {
+                view?.findViewById<TextView>(R.id.title_push_4)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_review_4)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_4)?.setState(false)
             }
         }
 
@@ -277,9 +289,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             "review" -> {
                 view?.findViewById<TextView>(R.id.title_push_5)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_review_5)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_5)?.setState(false)
             }
             "push" -> {
                 view?.findViewById<TextView>(R.id.title_push_5)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_review_5)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_5)?.setState(false)
+            }
+            "comingsoon" -> {
+                view?.findViewById<TextView>(R.id.title_push_5)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_review_5)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_5)?.setState(false)
             }
         }
 
@@ -288,16 +308,52 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             "acceptance" -> {
                 view?.findViewById<TextView>(R.id.title_push_6)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_review_6)?.setState(true)
-                view?.findViewById<TextView>(R.id.title_acceptance_5)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(true)
             }
             "review" -> {
                 view?.findViewById<TextView>(R.id.title_push_6)?.setState(true)
                 view?.findViewById<TextView>(R.id.title_review_6)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(false)
             }
             "push" -> {
                 view?.findViewById<TextView>(R.id.title_push_6)?.setState(true)
+                view?.findViewById<TextView>(R.id.title_review_6)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(false)
+            }
+            "comingsoon" -> {
+                view?.findViewById<TextView>(R.id.title_push_6)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_review_6)?.setState(false)
+                view?.findViewById<TextView>(R.id.title_acceptance_6)?.setState(false)
             }
         }
+
+//        //SKILLS
+//        if (user.skills.isNotEmpty()) {
+//            Log.d("TAG", "SKILLS LOADING")
+//            //beginning level of skills
+//            view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = 0
+//            view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = 0
+//            view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
+//            view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = 0
+//
+//            // updating skills based on profile information
+//            val kotlinSkill =
+//                user.skills.firstOrNull { it.skillType == SkillType.KOTLIN }?.value ?: 0
+//            val androidSkill =
+//                user.skills.firstOrNull { it.skillType == SkillType.ANDROID }?.value ?: 0
+//            val iosSkill = user.skills.firstOrNull { it.skillType == SkillType.IOS }?.value ?: 0
+//            val swiftSkill =
+//                user.skills.firstOrNull { it.skillType == SkillType.SWIFT }?.value ?: 0
+//
+//            view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
+//            view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
+//            view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
+//            view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlinSkill}/10"
+//            view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = iosSkill * 10
+//            view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
+//            view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
+//            view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
+//        }
     }
 
     private fun TextView.setState(done: Boolean) {
@@ -308,17 +364,22 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     //parse damaged Slack URI from API
     private fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
 
-    private fun isFavourite() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            isFavourite = favDao.isFavourite()
-            Log.d("TAG", isFavourite.toString())
-        }
-    }
+//    private fun isFavourite() {
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            isFavourite = favDao.isFavourite(bundleId)
+//            Log.d("TAG", isFavourite.toString())
+//        }
+//    }
 
     private fun setButtonState() {
-        if (isFavourite) {
-            favButton.isPressed = true
+        if (favUser) {
+            favButton.setBackgroundResource(R.drawable.fav_button_full)
+            Log.d("Tag", "user is in favourites")
+        } else {
+            favButton.setBackgroundResource(R.drawable.fav_button_empty)
+            Log.d("Tag", "user not found in favourites")
         }
     }
 }
+
 

@@ -32,9 +32,9 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
         usernameText = findViewById(R.id.inputUserName)
         passwordText = findViewById(R.id.inputPassword)
 
-        //temporary 'button' for login (test purposes)
+        //temporary 'button' for login (test purposes -> on button click inserts the credentials)
         val icon = findViewById<ImageView>(R.id.loginIcon)
-        icon.setOnClickListener() {
+        icon.setOnClickListener {
             usernameText.setText("cmelova.b")
             passwordText.setText("ursispal09")
         }
@@ -52,37 +52,6 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
             LoginViewModelFactory(Service(apiService))
         ).get(LoginViewModel::class.java)
     }
-
-
-//    CODE BELOW WILL BE USED LATER ON - DO NOT DELETE
-
-//    private fun setupObservers() {
-//        val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
-//        viewModel.loginResourceData.observe(this, Observer { resource ->
-//            when (resource) {
-//                Resource.loading(T) -> {
-//                    progressBar?.visibility = View.VISIBLE
-//                    Log.d("TAG", "LOADING")
-//                }
-//                Resource.success(T) -> {
-//                    progressBar?.visibility = View.GONE
-//                    Log.d("TAG", "SUCCESS")
-//                    setupViewModel()
-//                    setResult(RESULT_OK)
-//                    finish()
-//                    Toast.makeText(this,
-//                        getString(R.string.login_success),
-//                        Toast.LENGTH_LONG).show()
-//                }
-//                Resource.error(T, "An error occurred.") -> {
-//                    progressBar?.visibility = View.GONE
-//                    Toast.makeText(this,
-//                        getString(R.string.wrong_credentials),
-//                        Toast.LENGTH_LONG).show()
-//                    Log.d("TAG", "FAILURE")
-//                }
-//            }
-//        })
 
 
     private fun setupObservers() {
@@ -116,3 +85,36 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
         })
     }
 }
+
+/** PLEASE DO NOT DELETE CODE BELOW - IT IS PREPARED FOR HOMEWORK N.4
+
+//    CODE BELOW WILL BE USED LATER ON - DO NOT DELETE
+
+//    private fun setupObservers() {
+//        val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
+//        viewModel.loginResourceData.observe(this, Observer { resource ->
+//            when (resource) {
+//                Resource.loading(T) -> {
+//                    progressBar?.visibility = View.VISIBLE
+//                    Log.d("TAG", "LOADING")
+//                }
+//                Resource.success(T) -> {
+//                    progressBar?.visibility = View.GONE
+//                    Log.d("TAG", "SUCCESS")
+//                    setupViewModel()
+//                    setResult(RESULT_OK)
+//                    finish()
+//                    Toast.makeText(this,
+//                        getString(R.string.login_success),
+//                        Toast.LENGTH_LONG).show()
+//                }
+//                Resource.error(T, "An error occurred.") -> {
+//                    progressBar?.visibility = View.GONE
+//                    Toast.makeText(this,
+//                        getString(R.string.wrong_credentials),
+//                        Toast.LENGTH_LONG).show()
+//                    Log.d("TAG", "FAILURE")
+//                }
+//            }
+//        })
+*/

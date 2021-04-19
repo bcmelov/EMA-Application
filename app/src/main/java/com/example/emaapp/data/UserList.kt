@@ -1,4 +1,4 @@
-package com.example.emaapp.model
+package com.example.emaapp.data
 
 //class with homework status (ListView)
 data class Homework(
@@ -11,7 +11,7 @@ data class Homework(
 data class User(
     val id: String,
     val name: String,
-    val participantType: String,
+    val participantType: ParticipantType,
     val title: String,
     val icon512: String,
     val icon192: String,

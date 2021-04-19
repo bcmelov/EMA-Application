@@ -1,4 +1,4 @@
-package com.example.emaapp.model
+package com.example.emaapp.data
 
 import com.google.gson.annotations.SerializedName
 
@@ -20,21 +20,20 @@ val skills: List<Skill>
 
 //class with skills
 data class Skill(
-    val swift: String,
-    val ios: String,
-    val kotlin: String,
-    val android: String
+    val skillType: String,
+    val value: Int
 )
 
-enum class SkillType {
-    @SerializedName("swift")
-    SWIFT,
-    @SerializedName("ios")
-    IOS,
-    @SerializedName("kotlin")
-    KOTLIN,
-    @SerializedName("android")
-    ANDROID,
-}
+//enum class SkillType {
+//    @SerializedName("swift")
+//    SWIFT,
+//    @SerializedName("ios")
+//    IOS,
+//    @SerializedName("kotlin")
+//    KOTLIN,
+//    @SerializedName("android")
+//    ANDROID,
+//}
+
 
 

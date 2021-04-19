@@ -31,7 +31,7 @@
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_width="@dimen/square_icon_small"
                 android:layout_height="@dimen/square_icon_small"
-                android:background="@drawable/fav_button"
+                tools:background="@drawable/fav_button"
                 android:checked="false"
                 android:textOff=""
                 android:textOn=""/>
@@ -421,7 +421,7 @@
                             android:layout_marginStart="@dimen/spacing_Xsmall"
                             android:layout_marginTop="@dimen/spacing_small"
                             android:text="@string/push"
-                            app:drawableEndCompat="@drawable/ic_waiting" />
+                            tools:drawableEndCompat="@drawable/ic_waiting" />
 
                         <TextView
                             android:id="@+id/title_review_3"

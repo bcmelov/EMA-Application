@@ -1,7 +1,6 @@
 package com.example.emaapp.view
 
 import android.os.Bundle
-import android.os.Debug.startMethodTracing
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -16,7 +15,8 @@ import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
 import com.example.emaapp.model.LoginResponse
-import com.example.emaapp.model.User
+import com.example.emaapp.data.ParticipantType
+import com.example.emaapp.data.User
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Status.*
@@ -32,22 +32,24 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
     private lateinit var adapter: ViewHolder.UserAdapter
     private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
     private lateinit var loginResult: ActivityResultLauncher<LoginResponse>
+    private  var loginResponse: LoginResponse = LoginResponse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //updating the login response access token with the value of Token from appPreferences from previous usages
-        LoginResponse().access_token = appPreferences.getToken()
-
+        //updating the login response access token with the value of Token from appPreferences from previous app usages
+        lifecycleScope.launch {
+            LoginResponse().access_token = appPreferences.getToken()
+        }
 
         loginResult = registerForActivityResult(LoginContract()) {
-            if (LoginResponse().access_token != "access_token") {
-                setupViewModel()
-                setupObservers()
+            setupViewModel()
+            setupObservers()
+            lifecycleScope.launch {
+                appPreferences.setToken(LoginResponse().access_token)
             }
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,8 +64,8 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 val type = when (checkedId) {
-                    R.id.button_android -> getString(R.string.android_student)
-                    R.id.button_iOs -> getString(R.string.ios_student)
+                    R.id.button_android -> ParticipantType.ANDROID_STUDENT
+                    R.id.button_iOs -> ParticipantType.IOS_STUDENT
                     R.id.button_all -> null
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
@@ -103,13 +105,16 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                     ERROR -> {
                         progressBar?.visibility = View.GONE
 //                         (HttpException(this).code() == 401) {
-                        if (appPreferences.getToken() == "") {
-                            lifecycleScope.launch {
-                                loginResult.launch(LoginResponse(appPreferences.getToken()))
+                        lifecycleScope.launch {
+                            if (appPreferences.getToken() == "") {
+                                lifecycleScope.launch {
+                                    loginResult.launch(LoginResponse(appPreferences.getToken()))
+                                }
+
+                            } else {
+                                Log.d("TAG", "FAILURE")
+                                findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                             }
-                        } else {
-                            Log.d("TAG", "FAILURE")
-                            findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                         }
                     }
                 }

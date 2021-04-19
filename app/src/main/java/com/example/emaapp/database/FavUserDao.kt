@@ -13,8 +13,8 @@ interface FavUserDao {
     suspend fun getAll(): List<FavUserEntity>
 
     //finding out whether the user is in favourites or not
-    @Query("SELECT EXISTS(SELECT * FROM users)")
-    suspend fun isFavourite(): Boolean
+    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE id = :id)")
+    suspend fun isFavourite(id: String): Boolean
 
 
     //delete a user from the database based on his ID
