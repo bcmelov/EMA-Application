@@ -30,7 +30,9 @@ class RetrofitBuilder
         return OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request().newBuilder()
-//                    .header("access_token", LoginContract.TOKEN)
+                    //header to prevent EOFException (https://github.com/square/okhttp/issues/1517)
+                    .addHeader("Connection", "close")
+                    //header to connect to server
                     .header("access_token", appPreferences.getToken())
                 it.proceed(request.build())
             }
