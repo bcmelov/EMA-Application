@@ -18,4 +18,3 @@ data class User(
     val icon72: String,
     val homework: List<Homework>
 )
-

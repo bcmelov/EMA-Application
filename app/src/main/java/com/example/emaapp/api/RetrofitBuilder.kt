@@ -1,14 +1,17 @@
 package com.example.emaapp.api
 
-import com.example.emaapp.utils.LoginContract
+import androidx.appcompat.app.AppCompatActivity
+import com.example.emaapp.preferences.AppPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-object RetrofitBuilder {
-
-    // TODO: udelat instanci appPreferences
+@AndroidEntryPoint
+class RetrofitBuilder
+    @Inject constructor(private var appPreferences: AppPreferences) : AppCompatActivity() {
 
     //RETROFIT
     private fun getRetrofit(): Retrofit {
@@ -27,7 +30,8 @@ object RetrofitBuilder {
         return OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request().newBuilder()
-                    .header("access_token", LoginContract.TOKEN)
+//                    .header("access_token", LoginContract.TOKEN)
+                    .header("access_token", appPreferences.getToken())
                 it.proceed(request.build())
             }
             .addInterceptor(interceptor)
@@ -37,6 +41,9 @@ object RetrofitBuilder {
     //API SERVICE
     val apiService: UserApi = getRetrofit().create(UserApi::class.java)
 
-    private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"
+    //Base API URL
+    companion object {
+        private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"
+    }
 
 }

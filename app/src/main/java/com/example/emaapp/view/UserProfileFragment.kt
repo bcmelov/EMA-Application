@@ -22,14 +22,17 @@ import com.example.emaapp.data.UserProfileData
 import com.example.emaapp.database.Database
 import com.example.emaapp.database.FavUserDao
 import com.example.emaapp.database.FavUserEntity
+import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
 import com.example.emaapp.view.viewModels.DetailViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment
+    @Inject constructor(private var appPreferences: AppPreferences): Fragment(R.layout.fragment_user_profile) {
 
     //KEYNAME to retrieve the user information from the bundle
     companion object {
@@ -57,7 +60,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
         //check, whether the user is in fav database
         favButton = view.findViewById(R.id.fav_button)
-        lifecycleScope.launch (Dispatchers. IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             favUser = favDao.isFavourite(bundleId)
             setButtonState()
         }
@@ -65,11 +68,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         setupViewModel()
         setupObservers()
 
-        //check, whether the user is/is not in favourite users
-
-
-
-//        //TODO - SET THE BUTTON TO REFLECT THE STATE OF FAV EVEN AFTER LEAVING THE FRAGMENT (isPressed bellow is not working)
+        //TODO - SET THE BUTTON TO REFLECT THE STATE OF FAV EVEN AFTER LEAVING THE FRAGMENT (isPressed bellow is not working)
         favButton.setOnClickListener {
             if (!favUser) {
                 lifecycleScope.launch(Dispatchers.IO) {
@@ -92,7 +91,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            DetailViewModelFactory(Service(RetrofitBuilder.apiService))
+            DetailViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService)) //TODO
         ).get(DetailViewModel::class.java)
     }
 
@@ -139,7 +138,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
 //HEADER
         view?.findViewById<TextView>(R.id.user_name)?.text = user.name
-        view?.findViewById<TextView>(R.id.platform_name)?.text = user.participantType
+        view?.findViewById<TextView>(R.id.platform_name)?.text = user.participantType.toString()
 
         //media buttons
         view?.findViewById<ImageButton>(R.id.slack_icon)?.setOnClickListener {
@@ -327,34 +326,39 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             }
         }
 
-//        //SKILLS
-//        if (user.skills.isNotEmpty()) {
-//            Log.d("TAG", "SKILLS LOADING")
-//            //beginning level of skills
-//            view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = 0
-//            view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = 0
-//            view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
-//            view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = 0
-//
-//            // updating skills based on profile information
-//            val kotlinSkill =
-//                user.skills.firstOrNull { it.skillType == SkillType.KOTLIN }?.value ?: 0
-//            val androidSkill =
-//                user.skills.firstOrNull { it.skillType == SkillType.ANDROID }?.value ?: 0
-//            val iosSkill = user.skills.firstOrNull { it.skillType == SkillType.IOS }?.value ?: 0
-//            val swiftSkill =
-//                user.skills.firstOrNull { it.skillType == SkillType.SWIFT }?.value ?: 0
-//
-//            view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
-//            view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
-//            view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
-//            view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlinSkill}/10"
-//            view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = iosSkill * 10
-//            view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
-//            view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
-//            view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
-//        }
+        //SKILLS
+        //beginning level of skills
+        view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = 0
+        view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = 0
+        view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
+        view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = 0
+
+        // updating skills based on profile information
+        val kotlinSkill = user.skills?.kotlin
+        val androidSkill = user.skills?.android
+        val iosSkill = user.skills?.ios
+        val swiftSkill = user.skills?.swift
+
+        if (androidSkill != null) {
+            view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = androidSkill * 10
+            view?.findViewById<TextView>(R.id.progress_android)?.text = "${androidSkill}/10"
+        }
+        if (kotlinSkill != null) {
+            view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = kotlinSkill * 10
+            view?.findViewById<TextView>(R.id.progress_kotlin)?.text = "${kotlinSkill}/10"
+        }
+
+        if (iosSkill != null) {
+            view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = iosSkill * 10
+            view?.findViewById<TextView>(R.id.progress_iOS)?.text = "${iosSkill}/10"
+        }
+
+        if (swiftSkill != null) {
+            view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = swiftSkill * 10
+            view?.findViewById<TextView>(R.id.progress_swift)?.text = "${swiftSkill}/10"
+        }
     }
+
 
     private fun TextView.setState(done: Boolean) {
         val id = if (done) R.drawable.ic_done else R.drawable.ic_waiting
@@ -363,13 +367,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     //parse damaged Slack URI from API
     private fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
-
-//    private fun isFavourite() {
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            isFavourite = favDao.isFavourite(bundleId)
-//            Log.d("TAG", isFavourite.toString())
-//        }
-//    }
 
     private fun setButtonState() {
         if (favUser) {
@@ -381,5 +378,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 }
+
 
 

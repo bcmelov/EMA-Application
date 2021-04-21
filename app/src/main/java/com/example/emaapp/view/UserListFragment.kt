@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
-import com.example.emaapp.model.LoginResponse
 import com.example.emaapp.data.ParticipantType
 import com.example.emaapp.data.User
+import com.example.emaapp.model.LoginResponse
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Status.*
@@ -27,27 +27,21 @@ import kotlinx.coroutines.launch
 
 
 //fragment with display of list of the attendees as RecyclerViewer
-class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.UserClickListener {
+class UserListFragment (): Fragment(R.layout.fragment_user_list),
+    ViewHolder.UserClickListener {
+
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: ViewHolder.UserAdapter
     private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
     private lateinit var loginResult: ActivityResultLauncher<LoginResponse>
-    private  var loginResponse: LoginResponse = LoginResponse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //updating the login response access token with the value of Token from appPreferences from previous app usages
-        lifecycleScope.launch {
-            LoginResponse().access_token = appPreferences.getToken()
-        }
-
+        //registering activity as result activity for LoginContract()
         loginResult = registerForActivityResult(LoginContract()) {
             setupViewModel()
             setupObservers()
-            lifecycleScope.launch {
-                appPreferences.setToken(LoginResponse().access_token)
-            }
         }
     }
 
@@ -60,6 +54,8 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
 
+
+        //FILTER DOES NOT WORK BECAUSE TOKEN IS NOT BEING SAVED TO SHARED PREFERENCES
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
@@ -70,6 +66,7 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
                 lifecycleScope.launch {
+                    Log.d("TAG", "token" + appPreferences.getToken())
                     val all = viewModel.getUsers(appPreferences.getToken()).value?.data.orEmpty()
                     val list = if (type != null) {
                         all.filter { it.participantType == type }
@@ -85,9 +82,10 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(Service(RetrofitBuilder.apiService))
+            ViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService),appPreferences)
         ).get(MainViewModel::class.java)
     }
+
 
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
@@ -100,6 +98,7 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                     }
                     SUCCESS -> {
                         progressBar?.visibility = View.GONE
+                        Log.d("TAG", "SUCCESS")
                         resource.data?.let { users -> retrieveList(users) }
                     }
                     ERROR -> {
@@ -110,7 +109,6 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
                                 lifecycleScope.launch {
                                     loginResult.launch(LoginResponse(appPreferences.getToken()))
                                 }
-
                             } else {
                                 Log.d("TAG", "FAILURE")
                                 findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
@@ -135,4 +133,5 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list), ViewHolder.Use
         bundle.putString(UserProfileFragment.KEY_NAME, user.id)
         findNavController().navigate(R.id.action_userListFragment_to_userProfileFragment4, bundle)
     }
+
 }

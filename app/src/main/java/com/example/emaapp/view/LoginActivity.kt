@@ -1,5 +1,6 @@
 package com.example.emaapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,11 +11,17 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.emaapp.R
 import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
+import com.example.emaapp.model.LoginResponse
+import com.example.emaapp.preferences.AppPreferences
+import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity(R.layout.login_activity) {
+
+class LoginActivity (): AppCompatActivity(R.layout.login_activity) {
 
     private lateinit var button: Button
     private lateinit var usernameText: EditText
@@ -22,6 +29,7 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
+    private lateinit var appPreferences : AppPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +55,10 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
     }
 
     private fun setupViewModel() {
+        appPreferences = AppPreferences(this)
         viewModel = ViewModelProviders.of(
             this,
-            LoginViewModelFactory(Service(apiService))
+            LoginViewModelFactory(Service(apiService), appPreferences)
         ).get(LoginViewModel::class.java)
     }
 
@@ -67,7 +76,10 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
                         setupViewModel()
-                        setResult(RESULT_OK)
+//                        val intent = Intent().apply {
+//                            putExtra(LoginContract.TOKEN, LoginResponse().access_token)
+//                        }
+                        setResult(RESULT_OK, intent)
                         finish()
                         Toast.makeText(this,
                             getString(R.string.login_success),
@@ -117,4 +129,4 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 //                }
 //            }
 //        })
-*/
+ */

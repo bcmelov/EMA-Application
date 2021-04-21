@@ -5,17 +5,24 @@ import android.content.SharedPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+
 class AppPreferences(context: Context) {
 
     private val sharedPrefs: SharedPreferences by lazy {
         context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
     }
 
+
+//    //get token from shared preferences
+//    suspend fun getToken(): String {
+//        return withContext(Dispatchers.IO) {
+//            sharedPrefs.getString(TOKEN, "").toString()
+//        }
+//    }
+
     //get token from shared preferences
-    suspend fun getToken(): String {
-        return withContext(Dispatchers.IO) {
-            sharedPrefs.getString(TOKEN, "").toString()
-        }
+    fun getToken(): String {
+           return sharedPrefs.getString(TOKEN, "").toString()
     }
 
     //insert the token into shared preferences

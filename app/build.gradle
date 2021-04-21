@@ -8,14 +8,29 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    //Hilt plugin
+    apply plugin: 'dagger.hilt.android.plugin'
+
+    //enable Java 8 (Hilt)
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.example.emaapp"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+                arg("room.incremental", "true")
+                arg("room.expandProjection", "true")
+            }
+        }
     }
 
     buildTypes {
@@ -87,4 +102,13 @@ dependencies {
     //Contract
     implementation "androidx.activity:activity-ktx:1.2.2"
     implementation "androidx.fragment:fragment-ktx:1.3.2"
+
+    //KOIN
+    implementation 'org.koin:koin-core:2.2.2'
+    implementation 'org.koin:koin-android:2.2.2'
+    implementation 'org.koin:koin-android-viewmodel:2.2.2'
+
+    //HILT
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }
