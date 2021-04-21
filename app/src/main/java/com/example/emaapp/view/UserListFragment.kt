@@ -15,7 +15,6 @@ import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
 import com.example.emaapp.data.FilterType
-import com.example.emaapp.data.ParticipantType
 import com.example.emaapp.data.User
 import com.example.emaapp.model.LoginResponse
 import com.example.emaapp.preferences.AppPreferences

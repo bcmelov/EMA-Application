@@ -2,15 +2,13 @@ package com.example.emaapp.view.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import androidx.room.Room
-import com.example.emaapp.database.Database
 import com.example.emaapp.repository.DetailRepository
 import com.example.emaapp.utils.Resource
 import kotlinx.coroutines.Dispatchers
 
-class DetailViewModel( private val mainRepository: DetailRepository) : ViewModel() {
+class DetailViewModel(private val mainRepository: DetailRepository) : ViewModel() {
 
-    fun getUser(id : String) = liveData(Dispatchers.IO) {
+    fun getUser(id: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = mainRepository.getUser(id)))

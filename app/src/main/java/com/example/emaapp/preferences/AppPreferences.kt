@@ -12,20 +12,12 @@ class AppPreferences(context: Context) {
         context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
     }
 
-
-//    //get token from shared preferences
-//    suspend fun getToken(): String {
-//        return withContext(Dispatchers.IO) {
-//            sharedPrefs.getString(TOKEN, "").toString()
-//        }
-//    }
-
     //get token from shared preferences
     fun getToken(): String {
-           return sharedPrefs.getString(TOKEN, "").toString()
+        return sharedPrefs.getString(TOKEN, "").toString()
     }
 
-    //insert the token into shared preferences
+    //insert token into shared preferences
     suspend fun setToken(value: String) {
         withContext(Dispatchers.IO) {
             sharedPrefs.edit().putString(TOKEN, value).commit()

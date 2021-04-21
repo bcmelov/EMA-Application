@@ -13,4 +13,5 @@
     <color name="user_name">#FF000000</color>
     <color name="navy">#02064a</color>
     <color name="hot_pink">#FF69B4</color>
+    <color name="grey_light_x">#11000000</color>
 </resources>

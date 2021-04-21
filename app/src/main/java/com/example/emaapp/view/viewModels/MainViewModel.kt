@@ -33,7 +33,8 @@ class MainViewModel(
             _usersData.value = Resource.loading(null)
 
             try {
-                _usersData.value = Resource.success(mainRepository.getUsers(appPreferences.getToken()))
+                _usersData.value =
+                    Resource.success(mainRepository.getUsers(appPreferences.getToken()))
             } catch (http: HttpException) {
                 when (http.code()) {
                     //clearing saved token from previous sessions

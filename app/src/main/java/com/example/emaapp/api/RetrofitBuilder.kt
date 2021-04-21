@@ -11,9 +11,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RetrofitBuilder
-    @Inject constructor(private var appPreferences: AppPreferences) : AppCompatActivity() {
+@Inject constructor(private var appPreferences: AppPreferences) : AppCompatActivity() {
 
-    //RETROFIT
+    //Retrofit
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -22,7 +22,7 @@ class RetrofitBuilder
             .build()
     }
 
-    //OK HTTP CLIENT
+    //OK HTTP client
     private fun createClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -40,7 +40,7 @@ class RetrofitBuilder
             .build()
     }
 
-    //API SERVICE
+    //API service
     val apiService: UserApi = getRetrofit().create(UserApi::class.java)
 
     //Base API URL

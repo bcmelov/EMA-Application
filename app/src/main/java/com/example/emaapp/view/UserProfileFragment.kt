@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -69,22 +68,22 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
 
         PushDownAnim.setPushDownAnimTo(favButton)
             .setOnClickListener {
-            if (!favUser) {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    favDao.insert(FavUserEntity(bundleId))
-                    favUser = true
-                    setButtonState()
+                if (!favUser) {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        favDao.insert(FavUserEntity(bundleId))
+                        favUser = true
+                        setButtonState()
+                    }
+                    Log.d("TAG", "USER ADDED TO FAVOURITES")
+                } else {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        favDao.delete(FavUserEntity(bundleId))
+                        favUser = false
+                        setButtonState()
+                    }
+                    Log.d("TAG", "USER REMOVED FROM FAVOURITES")
                 }
-                Log.d("TAG", "USER ADDED TO FAVOURITES")
-            } else {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    favDao.delete(FavUserEntity(bundleId))
-                    favUser = false
-                    setButtonState()
-                }
-                Log.d("TAG", "USER REMOVED FROM FAVOURITES")
             }
-        }
     }
 
     private fun setupViewModel() {
@@ -121,11 +120,11 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
         })
     }
 
-    //LOADING DATA IN USER PROFILE
+    //Loading data in user profile
     @SuppressLint("SetTextI18n")
     private fun retrieveProfile(user: UserProfileData) {
 
-//USER ICON GLIDE
+//User icon Glide
         val userIcon = view?.findViewById<ImageView>(R.id.user_icon)
         if (userIcon != null) {
             Glide.with(userIcon.context)
@@ -135,7 +134,7 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(userIcon)
         }
-//HEADER
+//Header
         view?.findViewById<TextView>(R.id.user_name)?.text = user.name
         view?.findViewById<TextView>(R.id.platform_name)?.text = user.participantType.toString()
 
@@ -180,7 +179,7 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
             }
         }
 
-//HOMEWORK
+//Homework
         //1. homework
         when (user.homework[0].state) {
             "acceptance" -> {
@@ -325,14 +324,14 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
             }
         }
 
-        //SKILLS
+        //Skills
         //beginning level of skills
         view?.findViewById<ProgressBar>(R.id.progressBarAndroid)?.progress = 0
         view?.findViewById<ProgressBar>(R.id.progressBarKotlin)?.progress = 0
         view?.findViewById<ProgressBar>(R.id.progressBariOS)?.progress = 0
         view?.findViewById<ProgressBar>(R.id.progressBarSwift)?.progress = 0
 
-        // updating skills based on profile information
+        //updating skills based on profile information
         val kotlinSkill = user.skills?.kotlin
         val androidSkill = user.skills?.android
         val iosSkill = user.skills?.ios
@@ -367,6 +366,8 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
     //parse damaged Slack URI from API
     private fun parseSlashedUri(value: String) = Uri.parse(value.replace("\\", ""))
 
+
+    //favourite button
     private fun setButtonState() {
         if (favUser) {
             favButton.setBackgroundResource(R.drawable.fav_button_full)
