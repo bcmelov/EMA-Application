@@ -12,20 +12,18 @@ class MainViewModel(
     private val mainRepository: MainRepository,
     private val appPreferences: AppPreferences,
 ) : ViewModel() {
-
-    //note: working
     fun getUsers() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.loading(null))
         try {
-            emit(Resource.success(data = mainRepository.getUsers(appPreferences.getToken())))
+            emit(Resource.success(mainRepository.getUsers(appPreferences.getToken())))
         } catch (http: HttpException) {
             when (http.code()) {
-                //clearing the saved token from previous sessions
+                //clearing saved token from previous sessions
                 401 -> appPreferences.setToken("")
             }
-            emit(Resource.error(data = null, http.message ?: "Error Occurred!"))
+            emit(Resource.error(null, http.message ?: "Error Occurred!"))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.error(null, exception.message ?: "Error Occurred!"))
         }
     }
 }

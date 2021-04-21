@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 
 
 //fragment with display of list of the attendees as RecyclerViewer
-class UserListFragment() : Fragment(R.layout.fragment_user_list),
+class UserListFragment : Fragment(R.layout.fragment_user_list),
     ViewHolder.UserClickListener {
 
     private lateinit var viewModel: MainViewModel
@@ -62,25 +62,18 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
             setupObservers()
         }
 
-        //FILTER (DOES NOT WORK) //TODO
+
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            val all = viewModel.getUsers().value?.data.orEmpty()
             if (isChecked) {
-                val type = when (checkedId) {
-                    R.id.button_android -> ParticipantType.ANDROID_STUDENT
-                    R.id.button_iOs -> ParticipantType.IOS_STUDENT
-                    R.id.button_all -> null
+                val list = when (checkedId) {
+                    R.id.button_android -> all.filter { it.participantType == ParticipantType.ANDROID_STUDENT || it.participantType == ParticipantType.ANDROID_MENTOR }
+                    R.id.button_iOs -> all.filter { it.participantType == ParticipantType.ANDROID_STUDENT || it.participantType == ParticipantType.ANDROID_MENTOR }
+                    R.id.button_all -> all
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
-                lifecycleScope.launch {
-                    val all = viewModel.getUsers().value?.data.orEmpty()
-                    val list = if (type != null) {
-                        all.filter { it.participantType == type }
-                    } else {
-                        all
-                    }
-                    retrieveList(list)
-                }
+                retrieveList(list)
             }
         }
     }

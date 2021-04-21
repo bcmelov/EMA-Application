@@ -1,5 +1,6 @@
 package com.example.emaapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -72,9 +73,6 @@ class LoginActivity() : AppCompatActivity(R.layout.login_activity) {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
                         setupViewModel()
-//                        val intent = Intent().apply {
-//                            putExtra(LoginContract.TOKEN, LoginResponse().access_token)
-//                        }
                         setResult(RESULT_OK, intent)
                         finish()
                         Toast.makeText(this,
@@ -94,7 +92,7 @@ class LoginActivity() : AppCompatActivity(R.layout.login_activity) {
     }
 }
 
-/** PLEASE DO NOT DELETE CODE BELOW - IT IS PREPARED FOR HOMEWORK N.4
+/** PLEASE DO NOT DELETE CODE BELOW - IT IS A POTENTIAL PART OF HOMEWORK N.4
 
 //    CODE BELOW WILL BE USED LATER ON - DO NOT DELETE
 
