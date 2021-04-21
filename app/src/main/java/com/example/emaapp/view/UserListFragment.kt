@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
+import com.example.emaapp.data.FilterType
 import com.example.emaapp.data.ParticipantType
 import com.example.emaapp.data.User
 import com.example.emaapp.model.LoginResponse
@@ -67,15 +68,14 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
 
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            val all = viewModel.usersData.value?.data.orEmpty()
             if (isChecked) {
-                val list = when (checkedId) {
-                    R.id.button_android -> all.filter { it.participantType == ParticipantType.ANDROID_STUDENT || it.participantType == ParticipantType.ANDROID_MENTOR }
-                    R.id.button_iOs -> all.filter { it.participantType == ParticipantType.IOS_STUDENT || it.participantType == ParticipantType.IOS_MENTOR }
-                    R.id.button_all -> all
+                val type = when (checkedId) {
+                    R.id.button_android -> FilterType.ANDROID
+                    R.id.button_iOs -> FilterType.IOS
+                    R.id.button_all -> FilterType.ALL
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
-                retrieveList(list)
+                viewModel.setFilterType(type)
             }
         }
     }

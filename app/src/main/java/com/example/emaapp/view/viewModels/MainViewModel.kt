@@ -1,6 +1,7 @@
 package com.example.emaapp.view.viewModels
 
 import androidx.lifecycle.*
+import com.example.emaapp.data.FilterType
 import com.example.emaapp.data.User
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.MainRepository
@@ -13,8 +14,19 @@ class MainViewModel(
     private val appPreferences: AppPreferences,
 ) : ViewModel() {
 
+    private val _filterData: MutableLiveData<FilterType> = MutableLiveData(FilterType.ALL)
+
     private val _usersData: MutableLiveData<Resource<List<User>>> = MutableLiveData()
-    val usersData: LiveData<Resource<List<User>>> get() = _usersData
+
+    val usersData: LiveData<Resource<List<User>>> = MediatorLiveData<Resource<List<User>>>().apply {
+        addSource(_usersData) {
+            value = merge(it, _filterData.value ?: return@addSource)
+        }
+
+        addSource(_filterData) {
+            value = merge(_usersData.value ?: return@addSource, it)
+        }
+    }
 
     fun getUsers() {
         viewModelScope.launch {
@@ -32,5 +44,14 @@ class MainViewModel(
                 _usersData.value = Resource.error(null, exception.message ?: "Error Occurred!")
             }
         }
+    }
+
+    fun setFilterType(filterType: FilterType) {
+        _filterData.value = filterType
+    }
+
+    private fun merge(users: Resource<List<User>>, filterType: FilterType): Resource<List<User>> {
+        val filteredUsers = users.data?.filter { it.participantType in filterType.types }
+        return Resource(users.status, filteredUsers, users.message)
     }
 }
