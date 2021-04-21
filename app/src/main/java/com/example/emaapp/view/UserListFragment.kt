@@ -42,7 +42,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
         //registering activity as result activity for LoginContract()
         loginResult = registerForActivityResult(LoginContract()) {
             setupViewModel()
-            setupObservers()
+            viewModel.getUsers()
         }
     }
 
@@ -50,6 +50,8 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupObservers()
+
+        viewModel.getUsers()
 
         adapter = ViewHolder.UserAdapter(arrayListOf(), this)
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
@@ -59,17 +61,17 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
         swipe = view.findViewById(R.id.swipeLayout_items)
         swipe.setOnRefreshListener {
             setupViewModel()
-            setupObservers()
+            viewModel.getUsers()
         }
 
 
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            val all = viewModel.getUsers().value?.data.orEmpty()
+            val all = viewModel.usersData.value?.data.orEmpty()
             if (isChecked) {
                 val list = when (checkedId) {
                     R.id.button_android -> all.filter { it.participantType == ParticipantType.ANDROID_STUDENT || it.participantType == ParticipantType.ANDROID_MENTOR }
-                    R.id.button_iOs -> all.filter { it.participantType == ParticipantType.ANDROID_STUDENT || it.participantType == ParticipantType.ANDROID_MENTOR }
+                    R.id.button_iOs -> all.filter { it.participantType == ParticipantType.IOS_STUDENT || it.participantType == ParticipantType.IOS_MENTOR }
                     R.id.button_all -> all
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
@@ -88,7 +90,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
 
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
-        viewModel.getUsers().observe(viewLifecycleOwner, {
+        viewModel.usersData.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {
