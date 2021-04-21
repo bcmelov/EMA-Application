@@ -26,13 +26,12 @@ import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
 import com.example.emaapp.view.viewModels.DetailViewModelFactory
+import com.thekhaeng.pushdownanim.PushDownAnim
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
-class UserProfileFragment
-    @Inject constructor(private var appPreferences: AppPreferences): Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
 
     //KEYNAME to retrieve the user information from the bundle
     companion object {
@@ -45,9 +44,9 @@ class UserProfileFragment
     private lateinit var database: Database
     private lateinit var favDao: FavUserDao
     private var favUser = false
+    private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
 
 
-    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,8 +67,8 @@ class UserProfileFragment
         setupViewModel()
         setupObservers()
 
-        //TODO - SET THE BUTTON TO REFLECT THE STATE OF FAV EVEN AFTER LEAVING THE FRAGMENT (isPressed bellow is not working)
-        favButton.setOnClickListener {
+        PushDownAnim.setPushDownAnimTo(favButton)
+            .setOnClickListener {
             if (!favUser) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     favDao.insert(FavUserEntity(bundleId))
@@ -98,7 +97,7 @@ class UserProfileFragment
     @SuppressLint("InflateParams")
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserProfile)
-        viewModel.getUser(bundleId).observe(viewLifecycleOwner, Observer {
+        viewModel.getUser(bundleId).observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {

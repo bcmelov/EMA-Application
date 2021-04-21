@@ -39,8 +39,7 @@
             <!--layout for user icon, user name and platform specification-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/spacing_medium">
+                android:layout_height="match_parent">
 
                 <!--user icon (temporary icon for now)-->
 
@@ -165,7 +164,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/progressBarAndroid"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/zero" />
+                    android:text="@string/unknown_progress" />
 
                 <!--Progress in Kotlin-->
                 <ImageView
@@ -201,7 +200,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/progressBarKotlin"
                     app:layout_constraintTop_toBottomOf="@+id/progress_android"
-                    tools:text="@string/one" />
+                    android:text="@string/unknown_progress" />
 
 
                 <!--Progress in iOS-->
@@ -238,7 +237,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/progressBariOS"
                     app:layout_constraintTop_toBottomOf="@+id/progress_kotlin"
-                    tools:text="@string/zero" />
+                    android:text="@string/unknown_progress" />
 
                 <!--Progress in Swift-->
                 <ImageView
@@ -274,7 +273,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/progressBarSwift"
                     app:layout_constraintTop_toBottomOf="@id/progress_iOS"
-                    tools:text="@string/zero" />
+                    android:text="@string/unknown_progress" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,4 +20,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <!-- error handling text overlap -->
     <dimen name="overlap_error">-150dp</dimen>
+    <dimen name="spacing_XXL">60dp</dimen>
 </resources>

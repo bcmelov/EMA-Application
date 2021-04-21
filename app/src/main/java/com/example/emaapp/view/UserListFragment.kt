@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 
 
 //fragment with display of list of the attendees as RecyclerViewer
-class UserListFragment (): Fragment(R.layout.fragment_user_list),
+class UserListFragment() : Fragment(R.layout.fragment_user_list),
     ViewHolder.UserClickListener {
 
     private lateinit var viewModel: MainViewModel
@@ -55,7 +55,7 @@ class UserListFragment (): Fragment(R.layout.fragment_user_list),
         rv.adapter = adapter
 
 
-        //FILTER DOES NOT WORK BECAUSE TOKEN IS NOT BEING SAVED TO SHARED PREFERENCES
+        //FILTER (DOES NOT WORK) //TODO
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
         toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
@@ -82,14 +82,14 @@ class UserListFragment (): Fragment(R.layout.fragment_user_list),
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService),appPreferences)
+            ViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService), appPreferences)
         ).get(MainViewModel::class.java)
     }
 
 
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
-        viewModel.getUsers("").observe(viewLifecycleOwner, Observer {
+        viewModel.getUsers("").observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {
@@ -103,7 +103,6 @@ class UserListFragment (): Fragment(R.layout.fragment_user_list),
                     }
                     ERROR -> {
                         progressBar?.visibility = View.GONE
-//                         (HttpException(this).code() == 401) {
                         lifecycleScope.launch {
                             if (appPreferences.getToken() == "") {
                                 lifecycleScope.launch {

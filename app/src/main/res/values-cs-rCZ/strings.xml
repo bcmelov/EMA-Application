@@ -27,6 +27,7 @@
     <string name="error_image">Chyba</string>
 
     <!--progress titles-->
+    <string name="unknown_progress">—/—</string>
     <string name="zero">0/10</string>
     <string name="one">1/10</string>
     <string name="two">2/10</string>
@@ -70,6 +71,7 @@
     <string name="login_button">PŘIHLÁSIT</string>
     <string name="login_success">Byli jste úspěšně přihlášeni.</string>
     <string name="wrong_credentials">Zadejte platné přihlašovací jméno a heslo.</string>
+    <string name="etnetera_logo">Etnetera logo</string>
 
 
 </resources>

@@ -28,6 +28,7 @@
     <string name="login_icon">Login icon</string>
 
     <!--progress titles-->
+    <string name="unknown_progress">—/—</string>
     <string name="zero">0/10</string>
     <string name="one">1/10</string>
     <string name="two">2/10</string>
@@ -81,4 +82,5 @@
     <!-- Login -->
     <string name="login_success">You were successfully logged in.</string>
     <string name="wrong_credentials">Please enter a valid username and password.</string>
+    <string name="etnetera_logo">Etnetera logo</string>
 </resources>

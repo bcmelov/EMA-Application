@@ -1,14 +1,14 @@
 package com.example.emaapp.api
 
-import com.example.emaapp.model.LoginRequest
-import com.example.emaapp.model.LoginResponse
 import com.example.emaapp.data.User
 import com.example.emaapp.data.UserProfileData
+import com.example.emaapp.model.LoginRequest
+import com.example.emaapp.model.LoginResponse
 
 class Service(private val userApi: UserApi) {
 
     //1. login user - request
-    suspend fun loginUser(user_id: String, password:String): LoginResponse {
+    suspend fun loginUser(user_id: String, password: String): LoginResponse {
         return userApi.suspendLoginUser(LoginRequest(user_id, password))
     }
 

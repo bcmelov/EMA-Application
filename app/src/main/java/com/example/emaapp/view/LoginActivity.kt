@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.emaapp.R
@@ -41,7 +42,7 @@ class LoginActivity (): AppCompatActivity(R.layout.login_activity) {
         passwordText = findViewById(R.id.inputPassword)
 
         //temporary 'button' for login (test purposes -> on button click inserts the credentials)
-        val icon = findViewById<ImageView>(R.id.loginIcon)
+        val icon = findViewById<ImageView>(R.id.etneteraIcon)
         icon.setOnClickListener {
             usernameText.setText("cmelova.b")
             passwordText.setText("ursispal09")
@@ -65,7 +66,7 @@ class LoginActivity (): AppCompatActivity(R.layout.login_activity) {
 
     private fun setupObservers() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
-        viewModel.loginUser(username, password).observe(this, Observer {
+        viewModel.loginUser(username, password).observe(this, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
