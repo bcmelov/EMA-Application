@@ -14,7 +14,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     //note: working
-    fun getUsers(token: String) = liveData(Dispatchers.IO) {
+    fun getUsers() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = mainRepository.getUsers(appPreferences.getToken())))

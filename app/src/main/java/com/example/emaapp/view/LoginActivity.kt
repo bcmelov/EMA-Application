@@ -1,28 +1,22 @@
 package com.example.emaapp.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.emaapp.R
 import com.example.emaapp.api.LoginRetrofitBuilder.apiService
 import com.example.emaapp.api.Service
-import com.example.emaapp.model.LoginResponse
 import com.example.emaapp.preferences.AppPreferences
-import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.thekhaeng.pushdownanim.PushDownAnim
 
 
-class LoginActivity (): AppCompatActivity(R.layout.login_activity) {
+class LoginActivity() : AppCompatActivity(R.layout.login_activity) {
 
     private lateinit var button: Button
     private lateinit var usernameText: EditText
@@ -30,7 +24,7 @@ class LoginActivity (): AppCompatActivity(R.layout.login_activity) {
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
-    private lateinit var appPreferences : AppPreferences
+    private lateinit var appPreferences: AppPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +42,12 @@ class LoginActivity (): AppCompatActivity(R.layout.login_activity) {
             passwordText.setText("ursispal09")
         }
 
-        button.setOnClickListener {
-            username = usernameText.text.toString()
-            password = passwordText.text.toString()
-            setupObservers()
-        }
+        PushDownAnim.setPushDownAnimTo(button)
+            .setOnClickListener {
+                username = usernameText.text.toString()
+                password = passwordText.text.toString()
+                setupObservers()
+            }
     }
 
     private fun setupViewModel() {

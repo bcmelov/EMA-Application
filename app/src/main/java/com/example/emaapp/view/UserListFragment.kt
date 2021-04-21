@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
@@ -34,6 +34,7 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
     private lateinit var adapter: ViewHolder.UserAdapter
     private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
     private lateinit var loginResult: ActivityResultLauncher<LoginResponse>
+    private lateinit var swipe: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,12 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
         val rv = view.findViewById<RecyclerView>(R.id.recyclerView)
         rv.adapter = adapter
 
+        //Refresh feature
+        swipe = view.findViewById(R.id.swipeLayout_items)
+        swipe.setOnRefreshListener {
+            setupViewModel()
+            setupObservers()
+        }
 
         //FILTER (DOES NOT WORK) //TODO
         val toggleButton = view.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
@@ -66,8 +73,7 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
                     else -> throw java.lang.IllegalStateException("$checkedId")
                 }
                 lifecycleScope.launch {
-                    Log.d("TAG", "token" + appPreferences.getToken())
-                    val all = viewModel.getUsers(appPreferences.getToken()).value?.data.orEmpty()
+                    val all = viewModel.getUsers().value?.data.orEmpty()
                     val list = if (type != null) {
                         all.filter { it.participantType == type }
                     } else {
@@ -89,7 +95,7 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
 
     private fun setupObservers() {
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBarUserList)
-        viewModel.getUsers("").observe(viewLifecycleOwner, {
+        viewModel.getUsers().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     LOADING -> {
@@ -99,7 +105,10 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
                     SUCCESS -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
-                        resource.data?.let { users -> retrieveList(users) }
+                        resource.data?.let { users ->
+                            retrieveList(users)
+                            swipe.isRefreshing = false
+                        }
                     }
                     ERROR -> {
                         progressBar?.visibility = View.GONE
@@ -110,6 +119,7 @@ class UserListFragment() : Fragment(R.layout.fragment_user_list),
                                 }
                             } else {
                                 Log.d("TAG", "FAILURE")
+                                swipe.isRefreshing = false
                                 findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                             }
                         }
