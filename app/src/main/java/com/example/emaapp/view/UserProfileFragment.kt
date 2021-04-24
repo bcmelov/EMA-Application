@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -49,7 +50,7 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //database with the favourite users
+        //database with favourite users
         database = Database.getDatabase(requireActivity().applicationContext)
         favDao = database.userDao()
 
@@ -87,9 +88,9 @@ class UserProfileFragment() : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
+        viewModel = ViewModelProvider(
             this,
-            DetailViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService)) //TODO
+            DetailViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService))
         ).get(DetailViewModel::class.java)
     }
 

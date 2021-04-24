@@ -11,7 +11,7 @@ class LoginContract : ActivityResultContract<LoginResponse, LoginResponse?>() {
 
     //key for intent extras
     companion object {
-        var TOKEN = "access_token"
+        private const val TOKEN = "access_token"
     }
 
     //explicit intent

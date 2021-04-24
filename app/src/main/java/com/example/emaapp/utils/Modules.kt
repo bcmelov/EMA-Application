@@ -18,10 +18,4 @@ object AppModule {
     fun provideSharedPreferences(@ApplicationContext app: Context): AppPreferences {
         return AppPreferences(app)
     }
-
-    @Singleton
-    @Provides
-    fun provideRandomString(): String {
-        return "Hey look a random String!!!!!!!!!!!"
-    }
 }

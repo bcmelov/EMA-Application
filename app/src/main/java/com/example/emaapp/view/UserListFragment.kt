@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -23,7 +23,6 @@ import com.example.emaapp.utils.Status.*
 import com.example.emaapp.view.viewModels.MainViewModel
 import com.example.emaapp.view.viewModels.ViewModelFactory
 import com.google.android.material.button.MaterialButtonToggleGroup
-import kotlinx.coroutines.launch
 
 
 //fragment with display of list of the attendees as RecyclerViewer
@@ -80,7 +79,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
+        viewModel = ViewModelProvider(
             this,
             ViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService), appPreferences)
         ).get(MainViewModel::class.java)
@@ -106,16 +105,12 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
                     }
                     ERROR -> {
                         progressBar?.visibility = View.GONE
-                        lifecycleScope.launch {
-                            if (appPreferences.getToken() == "") {
-                                lifecycleScope.launch {
-                                    loginResult.launch(LoginResponse(appPreferences.getToken()))
-                                }
-                            } else {
-                                Log.d("TAG", "FAILURE")
-                                swipe.isRefreshing = false
-                                findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
-                            }
+                        if (appPreferences.getToken() == "") {
+                            loginResult.launch(LoginResponse(appPreferences.getToken()))
+                        } else {
+                            Log.d("TAG", "FAILURE")
+                            swipe.isRefreshing = false
+                            findNavController().navigate(R.id.action_userListFragment_to_errorPageFragment2)
                         }
                     }
                 }

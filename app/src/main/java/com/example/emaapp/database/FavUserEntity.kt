@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity (tableName = "users")
 data class FavUserEntity (
-    @PrimaryKey var id: String
+    @PrimaryKey val id: String
 )

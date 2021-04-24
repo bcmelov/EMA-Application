@@ -5,22 +5,23 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.emaapp.R
-import com.example.emaapp.api.LoginRetrofitBuilder.apiService
+import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
 import com.thekhaeng.pushdownanim.PushDownAnim
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class LoginActivity() : AppCompatActivity(R.layout.login_activity) {
+class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 
     private lateinit var button: Button
     private lateinit var usernameText: EditText
     private lateinit var passwordText: EditText
+
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
@@ -52,9 +53,10 @@ class LoginActivity() : AppCompatActivity(R.layout.login_activity) {
 
     private fun setupViewModel() {
         appPreferences = AppPreferences(this)
-        viewModel = ViewModelProviders.of(
+        viewModel = ViewModelProvider(
             this,
-            LoginViewModelFactory(Service(apiService), appPreferences)
+            LoginViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService),
+                appPreferences)
         ).get(LoginViewModel::class.java)
     }
 
@@ -71,7 +73,8 @@ class LoginActivity() : AppCompatActivity(R.layout.login_activity) {
                     Status.SUCCESS -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
-                        setupViewModel()
+//                        setupViewModel()
+                        viewModel
                         setResult(RESULT_OK, intent)
                         finish()
                         Toast.makeText(this,

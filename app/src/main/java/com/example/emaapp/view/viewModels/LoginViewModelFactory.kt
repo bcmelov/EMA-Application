@@ -6,7 +6,6 @@ import com.example.emaapp.api.Service
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.LoginRepository
 
-
 class LoginViewModelFactory(
     private val service: Service,
     private val appPreferences: AppPreferences,

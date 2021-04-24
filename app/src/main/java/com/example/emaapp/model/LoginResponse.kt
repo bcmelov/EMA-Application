@@ -1,5 +1,5 @@
 package com.example.emaapp.model
 
 data class LoginResponse(
-    var access_token: String = ""
+    val access_token: String = ""
 )
