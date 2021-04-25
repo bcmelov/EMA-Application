@@ -8,6 +8,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    //View Binding
+    buildFeatures {
+        viewBinding true
+    }
+
     //Hilt plugin
     apply plugin: 'dagger.hilt.android.plugin'
 

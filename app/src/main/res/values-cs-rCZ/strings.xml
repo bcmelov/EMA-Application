@@ -74,4 +74,9 @@
     <string name="etnetera_logo">Etnetera logo</string>
 
 
+    <!--edit profile -->
+    <string name="edit_skills">Upravit znalosti</string>
+    <string name="edit">Upravit</string>
+    <string name="submit">Uložit</string>
+
 </resources>

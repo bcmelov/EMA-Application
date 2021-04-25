@@ -83,4 +83,13 @@
     <string name="login_success">You were successfully logged in.</string>
     <string name="wrong_credentials">Please enter a valid username and password.</string>
     <string name="etnetera_logo">Etnetera logo</string>
+
+    <!-- Edit profile -->
+    <string name="edit">Edit</string>
+    <string name="submit">Save</string>
+    <string name="edit_skills">Edit skills</string>
+    <string name="android_skill">Android skill</string>
+    <string name="kotlin_skill">Kotlin skill</string>
+    <string name="ios_skill">iOS skill</string>
+    <string name="swift_skill">Swift skill</string>
 </resources>

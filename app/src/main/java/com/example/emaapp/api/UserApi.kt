@@ -22,4 +22,11 @@ interface UserApi {
     suspend fun suspendGetUser(
         @Path("id") id: String?,
     ): UserProfileData
+
+    //update skills
+    @POST("v2/participants/{id}/skills")
+    suspend fun suspendUpdateSkills(
+        @Path("id") id: String?,
+    ): UserProfileData
+
 }

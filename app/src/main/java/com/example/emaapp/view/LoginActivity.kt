@@ -9,18 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.emaapp.R
 import com.example.emaapp.api.RetrofitBuilder
 import com.example.emaapp.api.Service
+import com.example.emaapp.databinding.LoginActivityBinding
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
 import com.thekhaeng.pushdownanim.PushDownAnim
-import dagger.hilt.android.AndroidEntryPoint
 
 class LoginActivity : AppCompatActivity(R.layout.login_activity) {
-
-    private lateinit var button: Button
-    private lateinit var usernameText: EditText
-    private lateinit var passwordText: EditText
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
@@ -30,23 +26,24 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //View Binding
+        val binding = LoginActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setupViewModel()
 
-        button = findViewById(R.id.loginButton)
-        usernameText = findViewById(R.id.inputUserName)
-        passwordText = findViewById(R.id.inputPassword)
-
         //temporary 'button' for login (test purposes -> on button click inserts the credentials)
-        val icon = findViewById<ImageView>(R.id.etneteraIcon)
-        icon.setOnClickListener {
-            usernameText.setText("cmelova.b")
-            passwordText.setText("ursispal09")
+        binding.etneteraIcon.setOnClickListener {
+            binding.inputUserName.setText("cmelova.b")
+            binding.inputPassword.setText("ursispal09")
         }
 
-        PushDownAnim.setPushDownAnimTo(button)
+
+        //onClickListener for LoginButton
+        PushDownAnim.setPushDownAnimTo(binding.loginButton)
             .setOnClickListener {
-                username = usernameText.text.toString()
-                password = passwordText.text.toString()
+                username = binding.inputUserName.text.toString()
+                password = binding.inputPassword.text.toString()
                 setupObservers()
             }
     }

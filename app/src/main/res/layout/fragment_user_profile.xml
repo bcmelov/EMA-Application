@@ -24,24 +24,33 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:indeterminateDrawable="@drawable/circular_progress_bar" />
 
-
-            <ToggleButton
-                android:id="@+id/fav_button"
-                android:layout_gravity="start"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_width="@dimen/square_icon_small"
-                android:layout_height="@dimen/square_icon_small"
-                tools:background="@drawable/fav_button"
-                android:checked="false"
-                android:textOff=""
-                android:textOn=""/>
-
             <!--layout for user icon, user name and platform specification-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_medium">
 
-                <!--user icon (temporary icon for now)-->
+                <!--fav button-->
+                <ToggleButton
+                    android:id="@+id/fav_button"
+                    android:layout_gravity="start"
+                    android:layout_width="@dimen/square_icon_small"
+                    android:layout_height="@dimen/square_icon_small"
+                    tools:background="@drawable/fav_button"
+                    android:checked="false"
+                    android:textOff=""
+                    android:textOn=""/>
+
+                <TextView
+                    android:id="@+id/edit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/edit"
+                    style="@style/EditButton"
+                    tools:ignore="RelativeOverlap" />
+
+                <!--user icon-->
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/user_icon"
@@ -121,9 +130,11 @@
             <!--Skills Headline-->
             <TextView
                 style="@style/Title"
+                android:id="@+id/skills_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/skills_headline" />
+                android:text="@string/skills_headline"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <!--Layout for progress in skills-->
             <androidx.constraintlayout.widget.ConstraintLayout
