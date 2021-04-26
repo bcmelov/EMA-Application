@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UserProfileFragment(): Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
 
     private lateinit var bundleId: String
     private lateinit var database: Database
