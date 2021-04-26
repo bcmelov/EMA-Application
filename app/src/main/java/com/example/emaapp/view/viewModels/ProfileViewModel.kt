@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class DetailViewModel
+class ProfileViewModel
 @Inject
 constructor(
     private val mainRepository: DetailRepository,

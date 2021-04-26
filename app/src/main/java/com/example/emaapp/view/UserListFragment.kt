@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.emaapp.R
-import com.example.emaapp.api.RetrofitBuilder
-import com.example.emaapp.api.Service
 import com.example.emaapp.data.FilterType
 import com.example.emaapp.data.User
 import com.example.emaapp.databinding.FragmentUserListBinding
@@ -20,7 +18,6 @@ import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Status.*
 import com.example.emaapp.view.viewModels.MainViewModel
-import com.example.emaapp.view.viewModels.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,10 +25,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserListFragment : Fragment(R.layout.fragment_user_list),
     ViewHolder.UserClickListener {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var adapter: ViewHolder.UserAdapter
     private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
     private lateinit var loginResult: ActivityResultLauncher<LoginResponse>
+
+    private val viewModel: MainViewModel by viewModels()
 
     //View Binding - nullable and non nullable
     private var _binding: FragmentUserListBinding? = null
@@ -41,7 +39,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
         super.onCreate(savedInstanceState)
         //registering activity as result activity for LoginContract()
         loginResult = registerForActivityResult(LoginContract()) {
-            setupViewModel()
             viewModel.getUsers()
         }
     }
@@ -57,7 +54,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewModel()
         setupObservers()
 
         viewModel.getUsers()
@@ -67,7 +63,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
 
         //Refresh feature
         binding.swipeLayoutItems.setOnRefreshListener {
-            setupViewModel()
             viewModel.getUsers()
         }
 
@@ -84,14 +79,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
             }
         }
     }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService), appPreferences)
-        ).get(MainViewModel::class.java)
-    }
-
 
     private fun setupObservers() {
         viewModel.usersData.observe(viewLifecycleOwner, {

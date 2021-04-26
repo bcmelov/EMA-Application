@@ -3,7 +3,6 @@ package com.example.emaapp.di
 import android.content.Context
 import com.example.emaapp.api.Service
 import com.example.emaapp.api.UserApi
-import com.example.emaapp.database.Database
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.DetailRepository
 import com.example.emaapp.repository.LoginRepository
@@ -60,10 +59,6 @@ object AppModule {
             .addInterceptor(interceptor)
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun provideUserDao(db: Database) = db.userDao()
 
     @Singleton
     @Provides

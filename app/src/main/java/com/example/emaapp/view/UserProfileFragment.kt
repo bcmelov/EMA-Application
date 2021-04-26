@@ -23,7 +23,7 @@ import com.example.emaapp.database.FavUserDao
 import com.example.emaapp.database.FavUserEntity
 import com.example.emaapp.databinding.FragmentUserProfileBinding
 import com.example.emaapp.utils.Status
-import com.example.emaapp.view.viewModels.DetailViewModel
+import com.example.emaapp.view.viewModels.ProfileViewModel
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +37,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private lateinit var favDao: FavUserDao
     private var favUser = false
 
-    private val viewModel: DetailViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     //View Binding - nullable and non nullable
     private var _binding: FragmentUserProfileBinding? = null
@@ -86,14 +86,14 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                         favUser = true
                         setButtonState()
                     }
-                    Log.d("TAG", "USER ADDED TO FAVOURITES")
+                    Log.d("TAG", "User added to favourites.")
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
                         favDao.delete(FavUserEntity(bundleId))
                         favUser = false
                         setButtonState()
                     }
-                    Log.d("TAG", "USER REMOVED FROM FAVOURITES")
+                    Log.d("TAG", "User removed from favourites.")
                 }
             }
     }

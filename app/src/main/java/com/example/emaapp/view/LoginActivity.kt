@@ -3,17 +3,14 @@ package com.example.emaapp.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.emaapp.R
-import com.example.emaapp.api.RetrofitBuilder
-import com.example.emaapp.api.Service
 import com.example.emaapp.databinding.LoginActivityBinding
-import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
-import com.example.emaapp.view.viewModels.LoginViewModelFactory
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,10 +18,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 
-    private lateinit var viewModel: LoginViewModel
     private lateinit var username: String
     private lateinit var password: String
-    private lateinit var appPreferences: AppPreferences
+
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +29,6 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
         //View Binding
         val binding = LoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setupViewModel()
 
         //temporary 'button' for login (test purposes -> on button click inserts the credentials)
         binding.etneteraIcon.setOnClickListener {
@@ -50,16 +45,6 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
                 setupObservers()
             }
     }
-
-    private fun setupViewModel() {
-        appPreferences = AppPreferences(this)
-        viewModel = ViewModelProvider(
-            this,
-            LoginViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService),
-                appPreferences)
-        ).get(LoginViewModel::class.java)
-    }
-
 
     private fun setupObservers() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)

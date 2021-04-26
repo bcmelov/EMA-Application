@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import com.example.emaapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
+
+//NOTE - CLASS IS NOT YET FINISHED (PART OF HW6 - TODO)
+
 @AndroidEntryPoint
 class EditFragment: Fragment(R.layout.edit_profile) {
 
