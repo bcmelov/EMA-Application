@@ -1,5 +1,6 @@
 package com.example.emaapp.api
 
+import com.example.emaapp.data.Skill
 import com.example.emaapp.data.User
 import com.example.emaapp.data.UserProfileData
 import com.example.emaapp.model.LoginRequest
@@ -25,8 +26,8 @@ constructor(private val userApi: UserApi) {
     }
 
     //edit skills - request
-    suspend fun editSkills(user_id: String): UserProfileData {
-        return userApi.suspendEditSkills(user_id)
+    suspend fun editSkills(user_id: String, skills:Skill): UserProfileData {
+        return userApi.suspendEditSkills(user_id, skills)
     }
 
 }

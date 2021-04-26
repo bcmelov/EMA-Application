@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_editFragment_to_errorPageFragment2"
             app:destination="@id/errorPageFragment2" />
+        <action
+            android:id="@+id/action_editFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
     </fragment>
 
     <!-- Error page fragment -->

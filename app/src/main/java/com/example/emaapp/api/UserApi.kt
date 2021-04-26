@@ -1,5 +1,6 @@
 package com.example.emaapp.api
 
+import com.example.emaapp.data.Skill
 import com.example.emaapp.data.User
 import com.example.emaapp.data.UserProfileData
 import com.example.emaapp.model.LoginRequest
@@ -27,6 +28,7 @@ interface UserApi {
     @POST("v2/participants/{id}/skills")
     suspend fun suspendEditSkills(
         @Path("id") id: String?,
+        @Body skills: Skill
     ): UserProfileData
 
 }

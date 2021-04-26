@@ -68,7 +68,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         bundleId = arguments?.getString(KEY_NAME) ?: throw IllegalStateException("No id in args.")
 
         //go to edit profile
-        binding.editButton.setOnClickListener { onEditClick() }
+        binding.editButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(KEY_NAME, "cmelova.b") //TODO - temporary user ID
+            onEditClick() }
 
         //check, whether the user is in fav database
         lifecycleScope.launch(Dispatchers.IO) {
@@ -385,7 +388,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     //on EditButton click (bundle with userID)
     private fun onEditClick() {
         val bundle = Bundle()
-        bundle.putString(EditFragment.KEY_NAME, arguments?.getString(KEY_NAME))
+        bundle.putString(KEY_NAME, arguments?.getString(KEY_NAME))
         findNavController().navigate(R.id.action_userProfileFragment_to_editFragment, bundle)
     }
 

@@ -5,6 +5,7 @@ import com.example.emaapp.api.Service
 import com.example.emaapp.api.UserApi
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.DetailRepository
+import com.example.emaapp.repository.EditRepository
 import com.example.emaapp.repository.LoginRepository
 import com.example.emaapp.repository.MainRepository
 import com.google.gson.Gson
@@ -72,4 +73,7 @@ object AppModule {
     @Provides
     fun provideDetailRepository(service: Service) = DetailRepository(service)
 
+    @Singleton
+    @Provides
+    fun provideEditRepository(service: Service) = EditRepository(service)
 }
