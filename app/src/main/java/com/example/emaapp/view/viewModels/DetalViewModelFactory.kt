@@ -4,8 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.emaapp.api.Service
 import com.example.emaapp.repository.DetailRepository
+import javax.inject.Inject
 
-class DetailViewModelFactory(private val service: Service) : ViewModelProvider.Factory {
+class DetailViewModelFactory
+@Inject
+constructor(
+    private val service: Service,
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {

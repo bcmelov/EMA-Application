@@ -8,8 +8,11 @@ import com.example.emaapp.repository.MainRepository
 import com.example.emaapp.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class MainViewModel(
+class MainViewModel
+@Inject
+constructor(
     private val mainRepository: MainRepository,
     private val appPreferences: AppPreferences,
 ) : ViewModel() {

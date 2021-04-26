@@ -25,7 +25,7 @@ interface UserApi {
 
     //update skills
     @POST("v2/participants/{id}/skills")
-    suspend fun suspendUpdateSkills(
+    suspend fun suspendEditSkills(
         @Path("id") id: String?,
     ): UserProfileData
 

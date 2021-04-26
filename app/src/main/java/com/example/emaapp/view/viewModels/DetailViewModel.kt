@@ -5,8 +5,13 @@ import androidx.lifecycle.liveData
 import com.example.emaapp.repository.DetailRepository
 import com.example.emaapp.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class DetailViewModel(private val mainRepository: DetailRepository) : ViewModel() {
+class DetailViewModel
+@Inject
+constructor(
+    private val mainRepository: DetailRepository,
+) : ViewModel() {
 
     fun getUser(id: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))

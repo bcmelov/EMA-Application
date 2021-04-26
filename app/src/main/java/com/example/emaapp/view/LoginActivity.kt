@@ -15,7 +15,10 @@ import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.example.emaapp.view.viewModels.LoginViewModelFactory
 import com.thekhaeng.pushdownanim.PushDownAnim
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity(R.layout.login_activity) {
 
     private lateinit var viewModel: LoginViewModel

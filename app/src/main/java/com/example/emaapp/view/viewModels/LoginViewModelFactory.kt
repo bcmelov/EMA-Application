@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.emaapp.api.Service
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.LoginRepository
+import javax.inject.Inject
 
-class LoginViewModelFactory(
+class LoginViewModelFactory
+@Inject
+constructor(
     private val service: Service,
     private val appPreferences: AppPreferences,
 ) : ViewModelProvider.Factory {

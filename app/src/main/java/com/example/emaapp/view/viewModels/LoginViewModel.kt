@@ -5,11 +5,13 @@ import androidx.lifecycle.liveData
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.LoginRepository
 import com.example.emaapp.utils.Resource
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class LoginViewModel(
+class LoginViewModel
+@Inject
+constructor(
     private val mainRepository: LoginRepository,
     private val appPreferences: AppPreferences,
 ) : ViewModel() {

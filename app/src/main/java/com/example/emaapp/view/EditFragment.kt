@@ -3,7 +3,9 @@ package com.example.emaapp.view
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.emaapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditFragment: Fragment(R.layout.edit_profile) {
 
     //KEYNAME to retrieve the user information from the bundle

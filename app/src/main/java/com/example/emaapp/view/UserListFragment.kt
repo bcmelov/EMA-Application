@@ -21,8 +21,9 @@ import com.example.emaapp.utils.LoginContract
 import com.example.emaapp.utils.Status.*
 import com.example.emaapp.view.viewModels.MainViewModel
 import com.example.emaapp.view.viewModels.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 //fragment with display of list of the attendees as RecyclerViewer
 class UserListFragment : Fragment(R.layout.fragment_user_list),
     ViewHolder.UserClickListener {

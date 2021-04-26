@@ -6,8 +6,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.emaapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ErrorPageFragment : Fragment(R.layout.error_page) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

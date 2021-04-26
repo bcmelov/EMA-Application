@@ -29,11 +29,13 @@ import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
 import com.example.emaapp.view.viewModels.DetailViewModelFactory
 import com.thekhaeng.pushdownanim.PushDownAnim
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
+@AndroidEntryPoint
+class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
 
     private lateinit var viewModel: DetailViewModel
     private lateinit var bundleId: String
