@@ -16,8 +16,8 @@ constructor(private val userApi: UserApi) {
     }
 
     //get user list
-    suspend fun getUsers(token: String): List<User> {
-        return userApi.suspendGetUsers(token)
+    suspend fun getUsers(): List<User> {
+        return userApi.suspendGetUsers()
     }
 
     //get user profile
@@ -26,7 +26,7 @@ constructor(private val userApi: UserApi) {
     }
 
     //edit skills - request
-    suspend fun editSkills(user_id: String, skills:Skill): UserProfileData {
+    suspend fun editSkills(user_id: String, skills: Skill): UserProfileData {
         return userApi.suspendEditSkills(user_id, skills)
     }
 

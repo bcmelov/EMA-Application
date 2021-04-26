@@ -39,7 +39,7 @@ constructor(
 
             try {
                 _usersData.value =
-                    Resource.success(mainRepository.getUsers(appPreferences.getToken()))
+                    Resource.success(mainRepository.getUsers())
             } catch (http: HttpException) {
                 when (http.code()) {
                     //clearing saved token from previous sessions

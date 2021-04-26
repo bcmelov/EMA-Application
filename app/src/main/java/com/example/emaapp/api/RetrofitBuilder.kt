@@ -40,9 +40,6 @@ class RetrofitBuilder
             .build()
     }
 
-    //API service
-    val apiService: UserApi = getRetrofit().create(UserApi::class.java)
-
     //Base API URL
     companion object {
         private const val BASE_URL = "http://emarest.cz.mass-php-1.mit.etn.cz/api/"

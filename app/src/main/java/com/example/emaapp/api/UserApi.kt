@@ -5,9 +5,10 @@ import com.example.emaapp.data.User
 import com.example.emaapp.data.UserProfileData
 import com.example.emaapp.model.LoginRequest
 import com.example.emaapp.model.LoginResponse
-import dagger.Module
-import dagger.Provides
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface UserApi {
     //login user
@@ -16,7 +17,7 @@ interface UserApi {
 
     //load user list
     @GET("v2/participants")
-    suspend fun suspendGetUsers(@Header("access_token") token: String): List<User>
+    suspend fun suspendGetUsers(): List<User>
 
     //load user profile
     @GET("v2/participants/{id}")
@@ -28,7 +29,7 @@ interface UserApi {
     @POST("v2/participants/{id}/skills")
     suspend fun suspendEditSkills(
         @Path("id") id: String?,
-        @Body skills: Skill
+        @Body skills: Skill,
     ): UserProfileData
 
 }
