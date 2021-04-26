@@ -7,12 +7,16 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.emaapp.R
 import com.example.emaapp.databinding.LoginActivityBinding
+import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.LoginViewModel
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -22,6 +26,8 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
     private lateinit var password: String
 
     private val viewModel: LoginViewModel by viewModels()
+    @Inject
+    lateinit var appPreferences:AppPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +52,7 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
             }
     }
 
+    //on success saving username to shared preferences for use in UserProfileFragment
     private fun setupObservers() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarUserProfile)
         viewModel.loginUser(username, password).observe(this, {
@@ -58,8 +65,10 @@ class LoginActivity : AppCompatActivity(R.layout.login_activity) {
                     Status.SUCCESS -> {
                         progressBar?.visibility = View.GONE
                         Log.d("TAG", "SUCCESS")
-//                        setupViewModel()
                         viewModel
+                        lifecycleScope.launch {
+                            appPreferences.setId(username)
+                        }
                         setResult(RESULT_OK, intent)
                         finish()
                         Toast.makeText(this,

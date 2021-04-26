@@ -78,5 +78,10 @@
     <string name="edit_skills">Upravit znalosti</string>
     <string name="edit">Upravit</string>
     <string name="submit">Uložit</string>
+    <string name="no_rights_edit">Na úpravu tohoto profilu nemáte práva.</string>
+    <string name="swift_skill">Swift zkušenosti</string>
+    <string name="ios_skill">iOS zkušenosti</string>
+    <string name="kotlin_skill">Kotlin zkušenosti</string>
+    <string name="android_skill">Android zkušenosti</string>
 
 </resources>

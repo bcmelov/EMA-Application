@@ -22,15 +22,17 @@ import com.example.emaapp.database.Database
 import com.example.emaapp.database.FavUserDao
 import com.example.emaapp.database.FavUserEntity
 import com.example.emaapp.databinding.FragmentUserProfileBinding
+import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.ProfileViewModel
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment(): Fragment(R.layout.fragment_user_profile) {
 
     private lateinit var bundleId: String
     private lateinit var database: Database
@@ -38,6 +40,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private var favUser = false
 
     private val viewModel: ProfileViewModel by viewModels()
+    @Inject
+    lateinit var appPreferences : AppPreferences
 
     //View Binding - nullable and non nullable
     private var _binding: FragmentUserProfileBinding? = null
@@ -69,9 +73,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
         //go to edit profile
         binding.editButton.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(KEY_NAME, "cmelova.b") //TODO - temporary user ID
-            onEditClick() }
+            if (appPreferences.getId() == bundleId) {
+                findNavController().navigate(R.id.action_userProfileFragment_to_editFragment)
+            } else {
+                Toast.makeText(context, getString(R.string.no_rights_edit), Toast.LENGTH_LONG).show()
+            }
+        }
 
         //check, whether the user is in fav database
         lifecycleScope.launch(Dispatchers.IO) {
@@ -81,6 +88,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
         setupObservers()
 
+        //Fav button - adding/removing users from favourites
         PushDownAnim.setPushDownAnimTo(binding.favButton)
             .setOnClickListener {
                 if (!favUser) {
@@ -383,13 +391,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             binding.favButton.setBackgroundResource(R.drawable.fav_button_empty)
             Log.d("Tag", "user not found in favourites")
         }
-    }
-
-    //on EditButton click (bundle with userID)
-    private fun onEditClick() {
-        val bundle = Bundle()
-        bundle.putString(KEY_NAME, arguments?.getString(KEY_NAME))
-        findNavController().navigate(R.id.action_userProfileFragment_to_editFragment, bundle)
     }
 
     //setting ViewBinding back to null

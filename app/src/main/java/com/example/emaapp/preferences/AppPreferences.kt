@@ -24,8 +24,21 @@ class AppPreferences(context: Context) {
         }
     }
 
+    //get user id from shared preferences
+    fun getId(): String {
+        return sharedPrefs.getString(ID, "").toString()
+    }
+
+    //insert user id to shared preferences
+    suspend fun setId(value: String) {
+        withContext(Dispatchers.IO) {
+            sharedPrefs.edit().putString(ID, value).commit()
+        }
+    }
+
     companion object {
         private const val TOKEN = "access_token"
+        private const val ID = "user_id"
         private const val NAME = "name"
     }
 }

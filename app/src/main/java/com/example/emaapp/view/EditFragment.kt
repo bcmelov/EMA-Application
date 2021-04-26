@@ -28,11 +28,6 @@ class EditFragment: Fragment(R.layout.edit_profile) {
 
     private val viewModel: EditViewModel by viewModels()
 
-    //KEYNAME to retrieve the user information from the bundle
-    companion object {
-        const val KEY_NAME = "id"
-    }
-
     //View Binding - nullable and non nullable
     private var _binding: EditProfileBinding? = null
     private val binding get() = _binding!!
@@ -63,8 +58,6 @@ class EditFragment: Fragment(R.layout.edit_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //receiving ID from the bundle
-        id = arguments?.getString(UserProfileFragment.KEY_NAME) ?: throw IllegalStateException("No id in args.")
 
         skills = Skill(0,0,3,3)
 

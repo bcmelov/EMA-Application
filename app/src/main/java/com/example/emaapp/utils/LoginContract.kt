@@ -15,12 +15,9 @@ class LoginContract : ActivityResultContract<LoginResponse, LoginResponse?>() {
     }
 
     //explicit intent
-    override fun createIntent(context: Context, input: LoginResponse?): Intent =
-        Intent(context, LoginActivity::class.java).apply {
-            input?.let {
-                putExtra(TOKEN, it.access_token)
-            }
-        }
+    override fun createIntent(context: Context, input: LoginResponse?): Intent {
+        return Intent(context, LoginActivity::class.java).apply {}
+    }
 
     override fun parseResult(resultCode: Int, intent: Intent?): LoginResponse? =
         if (resultCode == Activity.RESULT_OK && intent != null) {
