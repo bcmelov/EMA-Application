@@ -1,13 +1,9 @@
-package com.example.emaapp.utils
+package com.example.emaapp.di
 
 import android.content.Context
-import androidx.lifecycle.ProcessLifecycleOwner.get
-import com.example.emaapp.EmaApplication
 import com.example.emaapp.api.Service
 import com.example.emaapp.api.UserApi
-import com.example.emaapp.data.User
 import com.example.emaapp.database.Database
-import com.example.emaapp.database.FavUserDao
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.DetailRepository
 import com.example.emaapp.repository.LoginRepository
@@ -40,9 +36,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(gson:Gson, client: OkHttpClient) : Retrofit = Retrofit.Builder()
+    fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl("http://emarest.cz.mass-php-1.mit.etn.cz/api/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create(Gson()))
         .client(client)
         .build()
 
@@ -71,16 +67,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideMainRepository(service: Service) =  MainRepository(service)
+    fun provideMainRepository(service: Service) = MainRepository(service)
 
     @Singleton
     @Provides
-    fun provideLoginRepository(service: Service) =  LoginRepository(service)
+    fun provideLoginRepository(service: Service) = LoginRepository(service)
 
     @Singleton
     @Provides
-    fun provideDetailRepository(service: Service) =  DetailRepository(service)
-
-
+    fun provideDetailRepository(service: Service) = DetailRepository(service)
 
 }

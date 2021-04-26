@@ -6,10 +6,12 @@ import com.example.emaapp.data.User
 import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.repository.MainRepository
 import com.example.emaapp.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel
 @Inject
 constructor(

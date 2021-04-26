@@ -11,38 +11,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.emaapp.R
-import com.example.emaapp.api.RetrofitBuilder
-import com.example.emaapp.api.Service
 import com.example.emaapp.data.UserProfileData
 import com.example.emaapp.database.Database
 import com.example.emaapp.database.FavUserDao
 import com.example.emaapp.database.FavUserEntity
 import com.example.emaapp.databinding.FragmentUserProfileBinding
-import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.DetailViewModel
-import com.example.emaapp.view.viewModels.DetailViewModelFactory
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
-    private lateinit var viewModel: DetailViewModel
     private lateinit var bundleId: String
     private lateinit var database: Database
     private lateinit var favDao: FavUserDao
     private var favUser = false
-    private val appPreferences: AppPreferences by lazy { AppPreferences(requireContext()) }
+
+    private val viewModel: DetailViewModel by viewModels()
 
     //View Binding - nullable and non nullable
     private var _binding: FragmentUserProfileBinding? = null
@@ -81,7 +76,6 @@ class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
             setButtonState()
         }
 
-        setupViewModel()
         setupObservers()
 
         PushDownAnim.setPushDownAnimTo(binding.favButton)
@@ -102,13 +96,6 @@ class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
                     Log.d("TAG", "USER REMOVED FROM FAVOURITES")
                 }
             }
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            DetailViewModelFactory(Service(RetrofitBuilder(appPreferences).apiService))
-        ).get(DetailViewModel::class.java)
     }
 
     @SuppressLint("InflateParams")
