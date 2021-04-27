@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/etneteraIcon"
             android:layout_width="@dimen/xl_square_icon"
-            android:layout_height="@dimen/large_square_icon"
+            android:layout_height="@dimen/square_icon_medium"
             android:layout_marginTop="@dimen/spacing_large"
             android:contentDescription="@string/etnetera_logo"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -38,7 +38,7 @@
             android:layout_width="@dimen/credentialsInput"
             android:layout_height="@dimen/square_icon_small"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/spacing_XXL"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_small"
             android:autofillHints="@string/hint_username"
             android:background="@color/grey_light_x"

@@ -50,6 +50,7 @@
         <item name="android:height">@dimen/square_icon_Xsmall</item>
         <item name="backgroundTint">@color/white</item>
         <item name="android:textColor">@color/purple_500</item>
+        <item name= "textAllCaps">true</item>
     </style>
 
     <!--Button style -->

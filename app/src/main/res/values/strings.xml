@@ -93,4 +93,5 @@
     <string name="ios_skill">iOS skill</string>
     <string name="swift_skill">Swift skill</string>
     <string name="no_rights_edit">You have no rights to edit this profile.</string>
+    <string name="edit_skills_subtitle">You can edit your skills here.</string>
 </resources>

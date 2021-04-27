@@ -15,7 +15,6 @@ import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.EditViewModel
 import com.thekhaeng.pushdownanim.PushDownAnim
-import com.xw.repo.BubbleSeekBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -55,12 +54,10 @@ class EditFragment : Fragment(R.layout.edit_profile) {
         id = appPreferences.getId()
 
         //SeekBars for skills
-        //note: findViewById used because binding cannot find the element //TODO: change to binding
-        val androidSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_android)
-        val kotlinSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_kotlin)
-        val iosSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_ios)
-        val swiftSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_swift)
-
+        val androidSeekBar = binding.progressEditAndroid.bubbleProgressBar
+        val kotlinSeekBar = binding.progressEditKotlin.bubbleProgressBar
+        val iosSeekBar = binding.progressEditIos.bubbleProgressBar
+        val swiftSeekBar = binding.progressEditSwift.bubbleProgressBar
 
         //onClickListener for LoginButton
         PushDownAnim.setPushDownAnimTo(binding.submitEdit).setOnClickListener {

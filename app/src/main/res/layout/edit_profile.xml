@@ -11,7 +11,7 @@
         <!-- main layout for scroll view -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="@dimen/spacing_small">
 
@@ -29,7 +29,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/spacing_small"
                 android:paddingVertical="@dimen/spacing_small"
-                android:text="You can edit your skills here." />
+                android:text="@string/edit_skills_subtitle" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -48,12 +48,12 @@
                     app:drawableStartCompat="@drawable/ic_android" />
 
                 <include
-                    android:id="@+id/progress_bar_android"
+                    android:id="@+id/progress_edit_android"
                     layout="@layout/bubble_progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/android_title"
-                    android:layout_marginBottom="@dimen/spacing_small"/>
+                    android:layout_marginBottom="@dimen/spacing_small" />
 
                 <!--Kotlin -->
 
@@ -61,18 +61,18 @@
                     android:id="@+id/kotlin_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/progress_bar_android"
+                    android:layout_below="@id/progress_edit_android"
                     android:drawablePadding="@dimen/spacing_small"
                     android:text="@string/kotlin_skill"
                     app:drawableStartCompat="@drawable/ic_kotlin" />
 
                 <include
-                    android:id="@+id/progress_bar_kotlin"
+                    android:id="@+id/progress_edit_kotlin"
                     layout="@layout/bubble_progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/kotlin_title"
-                    android:layout_marginBottom="@dimen/spacing_small"/>
+                    android:layout_marginBottom="@dimen/spacing_small" />
 
                 <!-- IOS -->
 
@@ -80,18 +80,18 @@
                     android:id="@+id/ios_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/progress_bar_kotlin"
+                    android:layout_below="@id/progress_edit_kotlin"
                     android:drawablePadding="@dimen/spacing_small"
                     android:text="@string/ios_skill"
                     app:drawableStartCompat="@drawable/ic_apple" />
 
                 <include
-                    android:id="@+id/progress_bar_ios"
+                    android:id="@+id/progress_edit_ios"
                     layout="@layout/bubble_progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ios_title"
-                    android:layout_marginBottom="@dimen/spacing_small"/>
+                    android:layout_marginBottom="@dimen/spacing_small" />
 
                 <!-- Swift -->
 
@@ -99,18 +99,18 @@
                     android:id="@+id/swift_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/progress_bar_ios"
+                    android:layout_below="@id/progress_edit_ios"
                     android:drawablePadding="@dimen/spacing_small"
                     android:text="@string/swift_skill"
                     app:drawableStartCompat="@drawable/ic_swift" />
 
                 <include
-                    android:id="@+id/progress_bar_swift"
+                    android:id="@+id/progress_edit_swift"
                     layout="@layout/bubble_progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/swift_title"
-                    android:layout_marginBottom="@dimen/spacing_small"/>
+                    android:layout_marginBottom="@dimen/spacing_small" />
 
 
             </RelativeLayout>
