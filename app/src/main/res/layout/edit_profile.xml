@@ -12,105 +12,115 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!--Header-->
-            <LinearLayout
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/square_icon_medium"
-                android:background="@color/yellow"
-                android:orientation="vertical" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="@dimen/square_icon_medium"
-                android:layout_height="@dimen/square_icon_medium"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-20dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_edit"
-                app:shapeAppearanceOverlay="@style/CircleImageView" />
+            android:orientation="vertical"
+            android:paddingTop="@dimen/spacing_small">
 
             <TextView
-                style="@style/Title"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/skills_headline" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/spacing_small"
+                android:paddingVertical="@dimen/spacing_small"
+                android:text="You can edit your skills here." />
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:paddingHorizontal="@dimen/spacing_medium">
 
-                <EditText
-                    android:id="@+id/android_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/square_icon_small"
-                    android:layout_marginVertical="@dimen/spacing_small"
-                    android:autofillHints="0"
-                    android:background="@color/grey_light_x"
-                    android:drawableStart="@drawable/ic_android"
-                    android:drawablePadding="@dimen/spacing_small"
-                    android:gravity="end"
-                    android:inputType="number"
-                    android:textSize="@dimen/medium_text"
-                    android:hint="@string/android_skill"/>
+                <!-- Android -->
 
-                <EditText
-                    android:id="@+id/kotlin_edit"
+                <TextView
+                    android:id="@+id/android_title"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/square_icon_small"
-                    android:layout_below="@id/android_edit"
-                    android:layout_marginVertical="@dimen/spacing_small"
-                    android:autofillHints="0"
-                    android:background="@color/grey_light_x"
-                    android:drawableStart="@drawable/ic_kotlin"
+                    android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/spacing_small"
-                    android:gravity="end"
-                    android:inputType="number"
-                    android:textSize="@dimen/medium_text"
-                    android:hint="@string/kotlin_skill"/>
+                    android:text="@string/android_skill"
+                    app:drawableStartCompat="@drawable/ic_android" />
 
-                <EditText
-                    android:id="@+id/ios_edit"
+                <include
+                    android:id="@+id/progress_bar_android"
+                    layout="@layout/bubble_progress_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/square_icon_small"
-                    android:layout_below="@id/kotlin_edit"
-                    android:layout_marginVertical="@dimen/spacing_small"
-                    android:autofillHints="0"
-                    android:background="@color/grey_light_x"
-                    android:drawableStart="@drawable/ic_apple"
-                    android:drawablePadding="@dimen/spacing_small"
-                    android:gravity="end"
-                    android:inputType="number"
-                    android:textSize="@dimen/medium_text"
-                    android:hint="@string/ios_skill"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/android_title"
+                    android:layout_marginBottom="@dimen/spacing_small"/>
 
-                <EditText
-                    android:id="@+id/swift_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/square_icon_small"
-                    android:layout_below="@id/ios_edit"
-                    android:layout_marginVertical="@dimen/spacing_small"
-                    android:autofillHints="0"
-                    android:background="@color/grey_light_x"
-                    android:drawableStart="@drawable/ic_swift"
+                <!--Kotlin -->
+
+                <TextView
+                    android:id="@+id/kotlin_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progress_bar_android"
                     android:drawablePadding="@dimen/spacing_small"
-                    android:gravity="end"
-                    android:inputType="number"
-                    android:textSize="@dimen/medium_text"
-                    android:hint="@string/swift_skill"/>
+                    android:text="@string/kotlin_skill"
+                    app:drawableStartCompat="@drawable/ic_kotlin" />
+
+                <include
+                    android:id="@+id/progress_bar_kotlin"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/kotlin_title"
+                    android:layout_marginBottom="@dimen/spacing_small"/>
+
+                <!-- IOS -->
+
+                <TextView
+                    android:id="@+id/ios_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progress_bar_kotlin"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:text="@string/ios_skill"
+                    app:drawableStartCompat="@drawable/ic_apple" />
+
+                <include
+                    android:id="@+id/progress_bar_ios"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ios_title"
+                    android:layout_marginBottom="@dimen/spacing_small"/>
+
+                <!-- Swift -->
+
+                <TextView
+                    android:id="@+id/swift_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progress_bar_ios"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:text="@string/swift_skill"
+                    app:drawableStartCompat="@drawable/ic_swift" />
+
+                <include
+                    android:id="@+id/progress_bar_swift"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/swift_title"
+                    android:layout_marginBottom="@dimen/spacing_small"/>
+
 
             </RelativeLayout>
 
             <android.widget.Button
                 android:id="@+id/submitEdit"
-                style="@style/Username"
-                android:layout_width="@dimen/xl_square_icon"
-                android:layout_height="@dimen/square_icon_medium"
+                android:layout_width="@dimen/large_square_icon"
+                android:layout_height="@dimen/square_icon_small"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/spacing_XXL"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:background="@drawable/button"
                 android:elevation="@dimen/spacing_small"
                 android:text="@string/submit"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <com.xw.repo.BubbleSeekBar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bubble_progress_bar"
+        app:bsb_auto_adjust_section_mark="true"
+        app:bsb_second_track_color="@color/yellow"
+        app:bsb_section_count="10"
+        app:bsb_section_text_position="below_section_mark"
+        app:bsb_show_section_mark="true"
+        app:bsb_show_section_text="true"
+        app:bsb_show_thumb_text="true"
+        app:bsb_thumb_text_size="18sp"
+        app:bsb_touch_to_seek="true"
+        app:bsb_max="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small" />

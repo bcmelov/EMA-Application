@@ -15,6 +15,7 @@ import com.example.emaapp.preferences.AppPreferences
 import com.example.emaapp.utils.Status
 import com.example.emaapp.view.viewModels.EditViewModel
 import com.thekhaeng.pushdownanim.PushDownAnim
+import com.xw.repo.BubbleSeekBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,15 +30,10 @@ class EditFragment : Fragment(R.layout.edit_profile) {
     private lateinit var id: String
     private lateinit var skills: Skill
 
-    private lateinit var iosSkill: String
-    private lateinit var swiftSkill: String
-    private lateinit var androidSkill: String
-    private lateinit var kotlinSkill: String
-
-    private var iosSkillInt: Int = 0
-    private var swiftSkillInt: Int = 0
-    private var androidSkillInt: Int = 0
-    private var kotlinSkillInt: Int = 0
+    private var iosSkill: Int = 0
+    private var swiftSkill: Int = 0
+    private var androidSkill: Int = 0
+    private var kotlinSkill: Int = 0
 
 
     //View Binding - nullable and non nullable
@@ -58,32 +54,40 @@ class EditFragment : Fragment(R.layout.edit_profile) {
 
         id = appPreferences.getId()
 
+        //SeekBars for skills
+        //note: findViewById used because binding cannot find the element //TODO: change to binding
+        val androidSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_android)
+        val kotlinSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_kotlin)
+        val iosSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_ios)
+        val swiftSeekBar = view.findViewById<BubbleSeekBar>(R.id.progress_bar_swift)
 
-        //TODO - check for non int values -> else return toast with warning
+
         //onClickListener for LoginButton
-        PushDownAnim.setPushDownAnimTo(binding.submitEdit)
-            .setOnClickListener {
-                iosSkill = binding.iosEdit.text.toString()
-                swiftSkill = binding.swiftEdit.text.toString()
-                androidSkill = binding.androidEdit.text.toString()
-                kotlinSkill = binding.kotlinEdit.text.toString()
-
-                if (iosSkill != "") {
-                    iosSkillInt = iosSkill.toInt()
-                }
-                if (swiftSkill != "") {
-                    swiftSkillInt = swiftSkill.toInt()
-                }
-                if (androidSkill != "") {
-                    androidSkillInt = androidSkill.toInt()
-                }
-                if (kotlinSkill != "") {
-                    kotlinSkillInt = kotlinSkill.toInt()
-                }
-
-                skills = Skill(swiftSkillInt, iosSkillInt, kotlinSkillInt, androidSkillInt)
-                setupObservers()
+        PushDownAnim.setPushDownAnimTo(binding.submitEdit).setOnClickListener {
+            iosSkill = try {
+                iosSeekBar.progress
+            } catch (exception: NullPointerException) {
+                0
             }
+            swiftSkill = try {
+                swiftSeekBar.progress
+            } catch (exception: NullPointerException) {
+                0
+            }
+            androidSkill = try {
+                androidSeekBar.progress
+            } catch (exception: NullPointerException) {
+                0
+            }
+            kotlinSkill = try {
+                kotlinSeekBar.progress
+            } catch (exception: NullPointerException) {
+                0
+            }
+
+            skills = Skill(swiftSkill, iosSkill, kotlinSkill, androidSkill)
+            setupObservers()
+        }
     }
 
     private fun setupObservers() {
@@ -94,7 +98,7 @@ class EditFragment : Fragment(R.layout.edit_profile) {
                         Log.d("TAG", "LOADING")
                     }
                     Status.SUCCESS -> {
-                        resource.data?.let { user ->
+                        resource.data?.let { _ ->
                             findNavController().navigate(R.id.action_editFragment_to_userListFragment)
                         }
                         Log.d("TAG", "SUCCESS")
@@ -107,5 +111,4 @@ class EditFragment : Fragment(R.layout.edit_profile) {
             }
         })
     }
-
 }

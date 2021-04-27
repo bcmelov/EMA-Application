@@ -66,8 +66,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list),
             viewModel.getUsers()
         }
 
-
-        binding.includeLayout.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        binding.userFilter.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 val type = when (checkedId) {
                     R.id.button_android -> FilterType.ANDROID
