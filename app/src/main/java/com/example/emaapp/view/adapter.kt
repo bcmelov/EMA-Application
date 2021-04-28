@@ -84,7 +84,7 @@ class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
                 LayoutInflater.from(parent.context).inflate(R.layout.layout_row, parent, false)
             val viewHolder = ViewHolder(view)
             viewHolder.itemView.setOnClickListener {
-                listener.onUserClick(users[viewHolder.adapterPosition])
+                listener.onUserClick(users[viewHolder.bindingAdapterPosition])
             }
             return viewHolder
         }

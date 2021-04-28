@@ -16,7 +16,6 @@ interface FavUserDao {
     @Query("SELECT EXISTS (SELECT 1 FROM users WHERE id = :id)")
     suspend fun isFavourite(id: String): Boolean
 
-
     //delete a user from the database based on his ID
     @Delete
     suspend fun delete(user: FavUserEntity)

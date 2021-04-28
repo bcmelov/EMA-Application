@@ -13,7 +13,6 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.*
 import android.view.animation.LinearInterpolator
-import androidx.annotation.ColorInt
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import com.xw.repo.BubbleSeekBar.*
@@ -27,6 +26,7 @@ import java.math.BigDecimal
  *
  * Created by woxingxiao on 2016-10-27.
  */
+@Suppress("DEPRECATION")
 abstract class BubbleSeekBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -237,24 +237,24 @@ abstract class BubbleSeekBar @JvmOverloads constructor(
 
         // 计算滑到两端气泡里文字需要显示的宽度，比较取最大值为气泡的半径
         var text: String
-        if (isShowProgressInFloat) {
-            text = float2String(if (isRtl) max else min)
+        text = if (isShowProgressInFloat) {
+            float2String(if (isRtl) max else min)
         } else {
             if (isRtl) {
-                text = if (isFloatType) float2String(max) else max as String
+                if (isFloatType) float2String(max) else max as String
             } else {
-                text = if (isFloatType) float2String(min) else min as String
+                if (isFloatType) float2String(min) else min as String
             }
         }
         mPaint.getTextBounds(text, 0, text.length, mRectText)
         val w1 = mRectText.width() + mTextSpace * 2 shr 1
-        if (isShowProgressInFloat) {
-            text = float2String(if (isRtl) min else max)
+        text = if (isShowProgressInFloat) {
+            float2String(if (isRtl) min else max)
         } else {
             if (isRtl) {
-                text = if (isFloatType) float2String(min) else min as String
+                if (isFloatType) float2String(min) else min as String
             } else {
-                text = if (isFloatType) float2String(max) else max as String
+                if (isFloatType) float2String(max) else max as String
             }
         }
         mPaint.getTextBounds(text, 0, text.length, mRectText)
@@ -766,7 +766,7 @@ abstract class BubbleSeekBar @JvmOverloads constructor(
         val x_ = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).toFloat()
         val onSection = x_ == x // 就在section处，不作valueAnim，优化性能
         val animatorSet = AnimatorSet()
-        var valueAnim: ValueAnimator? = null
+        val valueAnim: ValueAnimator?
         if (!onSection) {
             valueAnim = if (mThumbCenterX - x <= mSectionOffset / 2f) {
                 ValueAnimator.ofFloat(mThumbCenterX, x)
@@ -880,22 +880,6 @@ abstract class BubbleSeekBar @JvmOverloads constructor(
         }
     }
     /////// Api begins /////////////////////////////////////////////////////////////////////////////
-    /**
-     * When BubbleSeekBar's parent view is scrollable, must listener to it's scrolling and call this
-     * method to correct the offsets.
-     */
-    fun correctOffsetWhenContainerOnScrolling() {
-        if (isHideBubble) return
-        locatePositionInWindow()
-        if (mBubbleView!!.parent != null) {
-            if (isAlwaysShowBubble) {
-                mLayoutParams.y = (mBubbleCenterRawSolidY + 0.5f).toInt()
-                mWindowManager.updateViewLayout(mBubbleView, mLayoutParams)
-            } else {
-                postInvalidate()
-            }
-        }
-    }
 
     fun setProgress(progress: Float) {
         mProgress = progress
@@ -965,46 +949,6 @@ abstract class BubbleSeekBar @JvmOverloads constructor(
             }
         }
         return progress
-    }
-
-    fun setTrackColor(@ColorInt trackColor: Int) {
-        if (mTrackColor != trackColor) {
-            mTrackColor = trackColor
-            invalidate()
-        }
-    }
-
-    fun setSecondTrackColor(@ColorInt secondTrackColor: Int) {
-        if (mSecondTrackColor != secondTrackColor) {
-            mSecondTrackColor = secondTrackColor
-            invalidate()
-        }
-    }
-
-    fun setThumbColor(@ColorInt thumbColor: Int) {
-        if (mThumbColor != thumbColor) {
-            mThumbColor = thumbColor
-            invalidate()
-        }
-    }
-
-    fun setBubbleColor(@ColorInt bubbleColor: Int) {
-        if (mBubbleColor != bubbleColor) {
-            mBubbleColor = bubbleColor
-            mBubbleView?.invalidate()
-        }
-    }
-
-    fun setCustomSectionTextArray(@NonNull customSectionTextArray: CustomSectionTextArray) {
-        mSectionTextArray = customSectionTextArray.onCustomize(mSectionCount, mSectionTextArray)
-        for (i in 0..mSectionCount) {
-            if (mSectionTextArray[i] == null) {
-                mSectionTextArray.put(i, "")
-            }
-        }
-        isShowThumbText = false
-        requestLayout()
-        invalidate()
     }
 
     /////// Api ends ///////////////////////////////////////////////////////////////////////////////

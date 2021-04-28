@@ -8,14 +8,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ProfileViewModel
 @Inject
 constructor(
     private val mainRepository: DetailRepository,
 ) : ViewModel() {
-
     fun getUser(id: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {

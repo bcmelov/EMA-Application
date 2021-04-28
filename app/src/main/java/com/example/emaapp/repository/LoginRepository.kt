@@ -5,6 +5,7 @@ import com.example.emaapp.model.LoginResponse
 
 class LoginRepository
 constructor(private val service: Service) {
+    //login to the application
     suspend fun loginUser(user_id: String, password: String): LoginResponse {
         return service.loginUser(user_id, password)
     }
