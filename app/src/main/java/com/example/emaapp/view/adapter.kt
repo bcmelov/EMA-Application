@@ -13,6 +13,7 @@ import com.example.emaapp.data.ParticipantType
 import com.example.emaapp.data.User
 
 class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
+
     val name: TextView = itemView.findViewById(R.id.list_user_name)
     private val userIcon: ImageView = itemView.findViewById(R.id.list_user_icon)
     private val platformIcon: ImageView = itemView.findViewById(R.id.list_platform_id)

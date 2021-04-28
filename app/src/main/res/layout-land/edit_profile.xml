@@ -36,7 +36,6 @@
                 android:paddingHorizontal="@dimen/spacing_medium">
 
                 <!-- Android -->
-
                 <ImageView
                     android:id="@+id/android_icon"
                     android:layout_width="@dimen/square_icon_small"
@@ -51,7 +50,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/android_icon"
-                    android:drawablePadding="@dimen/spacing_small"
                     android:text="@string/android_skill" />
 
                 <include
@@ -66,14 +64,12 @@
                     android:layout_marginEnd="@dimen/spacing_medium"/>
 
                 <!--Kotlin -->
-
                 <ImageView
                     android:id="@+id/kotlin_icon"
                     android:layout_width="@dimen/square_icon_small"
                     android:layout_height="@dimen/square_icon_medium"
                     android:layout_below="@id/android_icon"
                     android:src="@drawable/ic_kotlin"
-                    android:padding="@dimen/spacing_Xsmall"
                     android:layout_marginEnd="@dimen/spacing_medium"
                     android:contentDescription="@string/kotlin" />
 
@@ -84,7 +80,6 @@
                     android:layout_toEndOf="@id/kotlin_icon"
                     android:layout_below="@id/progress_edit_android"
                     android:layout_alignTop="@id/kotlin_icon"
-                    android:drawablePadding="@dimen/spacing_small"
                     android:text="@string/kotlin_skill" />
 
                 <include
@@ -99,7 +94,6 @@
                     android:layout_marginBottom="@dimen/spacing_small" />
 
                 <!-- IOS -->
-
                 <ImageView
                     android:id="@+id/ios_icon"
                     android:layout_width="@dimen/square_icon_small"
@@ -116,7 +110,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/progress_edit_kotlin"
                     android:layout_toEndOf="@id/ios_icon"
-                    android:drawablePadding="@dimen/spacing_small"
                     android:text="@string/ios_skill"/>
 
                 <include
@@ -131,7 +124,6 @@
                     android:layout_marginBottom="@dimen/spacing_small" />
 
                 <!-- Swift -->
-
                 <ImageView
                     android:id="@+id/swift_icon"
                     android:layout_width="@dimen/square_icon_small"
@@ -147,7 +139,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/swift_icon"
                     android:layout_below="@id/progress_edit_ios"
-                    android:drawablePadding="@dimen/spacing_small"
                     android:layout_toEndOf="@id/swift_icon"
                     android:text="@string/swift_skill" />
 
@@ -161,7 +152,6 @@
                     android:layout_alignBaseline="@id/swift_icon"
                     android:layout_marginEnd="@dimen/spacing_medium"
                     android:layout_marginBottom="@dimen/spacing_small" />
-
 
             </RelativeLayout>
 

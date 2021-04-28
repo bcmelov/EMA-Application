@@ -52,7 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/list_user_name"
-            android:text="Homework progress"
+            android:text="@string/homework_progress"
+            android:layout_centerHorizontal="true"
             style="@style/Title"
             android:textSize="@dimen/small_text"/>
 
@@ -61,7 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/hw_list_title"
             android:orientation="vertical"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border_homeworks"
+            android:padding="@dimen/spacing_small">
 
             <!-- homework 1 -->
             <ImageView
@@ -88,7 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/list_hw2"
-                android:layout_marginEnd="@dimen/spacing_Xsmall"
                 android:contentDescription="@string/home_works"
                 tools:src="@drawable/ic_three" />
 

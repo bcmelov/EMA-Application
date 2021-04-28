@@ -40,11 +40,12 @@
     <string name="nine">9/10</string>
     <string name="ten">10/10</string>
 
-
     <!-- toolbar titles -->
     <string name="user_filter_all">Vše</string>
     <string name="user_list_title">Seznam účastníků</string>
     <string name="user_profile_title">Profil účastníka</string>
+    <string name="edit_fragment_label">Upravit profil</string>
+    <string name="error_fragment_label">Chyba</string>
 
     <!-- navigation between fragments-->
     <string name="first_fragment_label">Seznam studentů</string>
@@ -86,5 +87,6 @@
     <string name="edit_skills_subtitle">Dejte nám vědět, co umíte!</string>
     <string name="skills_change_success">Změny byly úspěšně uloženy.</string>
     <string name="arrow">šipka</string>
+    <string name="homework_progress">Domácí úkoly</string>
 
 </resources>

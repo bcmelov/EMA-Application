@@ -4,7 +4,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/userListFragment">
 
-    <!--Start fragment (user list)-->
+    <!-- User list fragment -->
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.example.emaapp.view.UserListFragment"
@@ -17,7 +17,7 @@
             app:destination="@id/errorPageFragment2" />
     </fragment>
 
-   <!-- End fragment (user profile) -->
+    <!-- User profile fragment -->
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.emaapp.view.UserProfileFragment"
@@ -32,21 +32,22 @@
             android:id="@+id/action_userProfileFragment_to_editFragment"
             app:destination="@id/editFragment" />
     </fragment>
+
+    <!-- Error page fragment -->
     <fragment
         android:id="@+id/errorPageFragment2"
         android:name="com.example.emaapp.view.ErrorPageFragment"
-        android:label="ErrorPageFragment" >
+        android:label="@string/error_fragment_label">
         <action
             android:id="@+id/action_errorPageFragment2_to_userListFragment"
             app:destination="@id/userListFragment" />
     </fragment>
+
+    <!-- Skills-edit fragment -->
     <fragment
         android:id="@+id/editFragment"
         android:name="com.example.emaapp.view.EditFragment"
-        android:label="EditFragment" >
-        <action
-            android:id="@+id/action_editFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
+        android:label="@string/edit_fragment_label">
         <action
             android:id="@+id/action_editFragment_to_errorPageFragment2"
             app:destination="@id/errorPageFragment2" />
@@ -54,7 +55,5 @@
             android:id="@+id/action_editFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
     </fragment>
-
-    <!-- Error page fragment -->
 
 </navigation>

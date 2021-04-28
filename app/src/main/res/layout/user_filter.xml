@@ -14,7 +14,9 @@
         style="@style/ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/spacing_small"
         android:layout_weight="3"
+        android:shadowRadius="10"
         android:text="@string/user_filter_all" />
 
     <Button
@@ -22,6 +24,8 @@
         style="@style/ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/spacing_small"
+        android:shadowRadius="10"
         android:layout_weight="3"
         android:text="@string/user_filter_android" />
 
@@ -30,6 +34,8 @@
         style="@style/ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/spacing_small"
+        android:shadowRadius="10"
         android:layout_weight="3"
         android:text="@string/user_filter_iOS" />
 

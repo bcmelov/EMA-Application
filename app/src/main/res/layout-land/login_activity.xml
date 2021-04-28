@@ -84,5 +84,25 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
+        <ImageView
+            android:layout_width="@dimen/xxl_square_icon"
+            android:layout_height="@dimen/xl_square_icon"
+            android:contentDescription="@string/arrow"
+            android:rotation="@integer/config_navAnimTime"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintEnd_toStartOf="@id/loginButton"
+            app:layout_constraintTop_toBottomOf="@id/inputPassword"
+            app:tint="@color/grey" />
+
+        <ImageView
+            android:layout_width="@dimen/xxl_square_icon"
+            android:layout_height="@dimen/xl_square_icon"
+            android:contentDescription="@string/arrow"
+            android:rotation="30"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintStart_toEndOf="@id/loginButton"
+            app:layout_constraintTop_toBottomOf="@id/loginButton"
+            app:tint="@color/grey" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

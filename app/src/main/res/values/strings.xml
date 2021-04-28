@@ -51,6 +51,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Students List</string>
     <string name="second_fragment_label">User Profile</string>
+    <string name="edit_fragment_label"> Edit Profile</string>
+    <string name="error_fragment_label">Error</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -96,4 +98,5 @@
     <string name="edit_skills_subtitle">You can edit your skills here.</string>
     <string name="skills_change_success">Skills were successfully changed.</string>
     <string name="arrow">arrow</string>
+    <string name="homework_progress">Homework progress</string>
 </resources>
