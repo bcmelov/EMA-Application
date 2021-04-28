@@ -9,14 +9,15 @@
     <dimen name="spacing_Xlarge">50dp</dimen>
     <!--square icons-->
     <dimen name="square_icon_Xsmall">20dp</dimen>
-    <dimen name="square_icon_small">30dp</dimen>
+    <dimen name="square_icon_small">25dp</dimen>
     <dimen name="square_icon_medium">50dp</dimen>
-    <dimen name="large_square_icon">120dp</dimen>
-    <dimen name="xl_square_icon">180dp</dimen>
+    <dimen name="large_square_icon">100dp</dimen>
+    <dimen name="xl_square_icon">150dp</dimen>
+    <dimen name="xxl_square_icon">180dp</dimen>
     <!-- text sizes -->
     <dimen name="small_text">10sp</dimen>
     <dimen name="medium_text">15sp</dimen>
-    <dimen name="large_text">20sp</dimen>
+    <dimen name="large_text">18sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!-- error handling text overlap -->
     <dimen name="overlap_error">-150dp</dimen>

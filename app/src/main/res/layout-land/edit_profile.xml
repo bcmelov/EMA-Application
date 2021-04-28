@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- main layout for scroll view -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skills_headline"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_skills_subtitle"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:paddingHorizontal="@dimen/spacing_medium">
+
+                <!-- Android -->
+
+                <ImageView
+                    android:id="@+id/android_icon"
+                    android:layout_width="@dimen/square_icon_small"
+                    android:layout_height="@dimen/square_icon_medium"
+                    android:src="@drawable/ic_android"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:contentDescription="@string/android" />
+
+                <TextView
+                    android:id="@+id/android_title"
+                    android:layout_toEndOf="@id/android_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/android_icon"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:text="@string/android_skill" />
+
+                <include
+                    android:id="@+id/progress_edit_android"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/android_icon"
+                    android:layout_alignBaseline="@id/android_icon"
+                    android:layout_below="@id/android_title"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_medium"/>
+
+                <!--Kotlin -->
+
+                <ImageView
+                    android:id="@+id/kotlin_icon"
+                    android:layout_width="@dimen/square_icon_small"
+                    android:layout_height="@dimen/square_icon_medium"
+                    android:layout_below="@id/android_icon"
+                    android:src="@drawable/ic_kotlin"
+                    android:padding="@dimen/spacing_Xsmall"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:contentDescription="@string/kotlin" />
+
+                <TextView
+                    android:id="@+id/kotlin_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/kotlin_icon"
+                    android:layout_below="@id/progress_edit_android"
+                    android:layout_alignTop="@id/kotlin_icon"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:text="@string/kotlin_skill" />
+
+                <include
+                    android:id="@+id/progress_edit_kotlin"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/kotlin_icon"
+                    android:layout_toEndOf="@id/kotlin_icon"
+                    android:layout_below="@id/kotlin_title"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_small" />
+
+                <!-- IOS -->
+
+                <ImageView
+                    android:id="@+id/ios_icon"
+                    android:layout_width="@dimen/square_icon_small"
+                    android:layout_height="@dimen/square_icon_medium"
+                    android:layout_below="@id/kotlin_icon"
+                    android:src="@drawable/ic_apple"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:contentDescription="@string/ios" />
+
+                <TextView
+                    android:id="@+id/ios_title"
+                    android:layout_alignTop="@id/ios_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progress_edit_kotlin"
+                    android:layout_toEndOf="@id/ios_icon"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:text="@string/ios_skill"/>
+
+                <include
+                    android:layout_toEndOf="@id/ios_icon"
+                    android:id="@+id/progress_edit_ios"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ios_title"
+                    android:layout_alignBaseline="@id/ios_icon"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_small" />
+
+                <!-- Swift -->
+
+                <ImageView
+                    android:id="@+id/swift_icon"
+                    android:layout_width="@dimen/square_icon_small"
+                    android:layout_height="@dimen/square_icon_medium"
+                    android:layout_below="@id/ios_icon"
+                    android:src="@drawable/ic_swift"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:contentDescription="@string/swift" />
+
+                <TextView
+                    android:id="@+id/swift_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/swift_icon"
+                    android:layout_below="@id/progress_edit_ios"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:layout_toEndOf="@id/swift_icon"
+                    android:text="@string/swift_skill" />
+
+                <include
+                    android:id="@+id/progress_edit_swift"
+                    layout="@layout/bubble_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_toEndOf="@id/swift_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/swift_title"
+                    android:layout_alignBaseline="@id/swift_icon"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_small" />
+
+
+            </RelativeLayout>
+
+            <android.widget.Button
+                android:id="@+id/submitEdit"
+                android:layout_width="@dimen/large_square_icon"
+                android:layout_height="@dimen/square_icon_small"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@drawable/button"
+                android:elevation="@dimen/spacing_small"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

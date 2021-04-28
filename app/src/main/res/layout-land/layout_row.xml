@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/xl_square_icon"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/spacing_Xsmall">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/spacing_Xsmall">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/list_user_icon"
+            android:layout_width="@dimen/square_icon_medium"
+            android:layout_height="@dimen/square_icon_medium"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/user_icon"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            tools:srcCompat="@drawable/loading_icon" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/list_platform_id"
+            android:layout_width="@dimen/square_icon_Xsmall"
+            android:layout_height="@dimen/square_icon_Xsmall"
+            android:layout_below="@id/list_user_icon"
+            android:layout_marginTop="-10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:contentDescription="@string/platform_android"
+            android:tint="@color/teal_700"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            tools:srcCompat="@drawable/ic_android" />
+
+        <TextView
+            android:id="@+id/list_user_name"
+            android:layout_centerHorizontal="true"
+            style="@style/UserListName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_platform_id"
+            android:paddingTop="@dimen/spacing_small"
+            tools:text="@string/hint_username" />
+
+        <TextView
+            android:id="@+id/hw_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_user_name"
+            android:text="Homework progress"
+            style="@style/Title"
+            android:textSize="@dimen/small_text"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hw_list_title"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true">
+
+            <!-- homework 1 -->
+            <ImageView
+                android:id="@+id/list_hw1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_Xsmall"
+                android:contentDescription="@string/home_works"
+                tools:src="@drawable/ic_one" />
+
+            <!-- homework 2 -->
+            <ImageView
+                android:id="@+id/list_hw2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/list_hw1"
+                android:layout_marginEnd="@dimen/spacing_Xsmall"
+                android:contentDescription="@string/home_works"
+                tools:src="@drawable/ic_two" />
+
+            <!-- homework 3 -->
+            <ImageView
+                android:id="@+id/list_hw3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/list_hw2"
+                android:layout_marginEnd="@dimen/spacing_Xsmall"
+                android:contentDescription="@string/home_works"
+                tools:src="@drawable/ic_three" />
+
+            <!-- homework 4 -->
+            <ImageView
+                android:id="@+id/list_hw4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_hw2"
+                android:contentDescription="@string/home_works"
+                android:layout_marginEnd="@dimen/spacing_Xsmall"
+                tools:src="@drawable/ic_four" />
+
+            <!-- homework 5 -->
+            <ImageView
+                android:id="@+id/list_hw5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_hw2"
+                android:layout_toEndOf="@id/list_hw4"
+                android:layout_marginEnd="@dimen/spacing_Xsmall"
+                android:contentDescription="@string/home_works"
+                tools:src="@drawable/ic_five" />
+
+            <!-- homework 6 -->
+            <ImageView
+                android:id="@+id/list_hw6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_hw3"
+                android:layout_toEndOf="@id/list_hw5"
+                android:contentDescription="@string/home_works"
+                tools:src="@drawable/ic_six" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+

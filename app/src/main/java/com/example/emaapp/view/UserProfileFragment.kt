@@ -76,7 +76,7 @@ class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
             if (appPreferences.getId() == bundleId) {
                 findNavController().navigate(R.id.action_userProfileFragment_to_editFragment)
             } else {
-                Toast.makeText(context, getString(R.string.no_rights_edit), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.no_rights_edit), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -115,18 +115,18 @@ class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-                        binding.progressBarUserProfile.visibility = View.VISIBLE
+                        binding.progressBarUserProfile?.visibility = View.VISIBLE
                         Log.d("TAG", "LOADING")
                     }
                     Status.SUCCESS -> {
-                        binding.progressBarUserProfile.visibility = View.GONE
+                        binding.progressBarUserProfile?.visibility = View.GONE
                         resource.data?.let { user ->
                             retrieveProfile(user)
                         }
                         Log.d("TAG", "SUCCESS")
                     }
                     Status.ERROR -> {
-                        binding.progressBarUserProfile.visibility = View.GONE
+                        binding.progressBarUserProfile?.visibility = View.GONE
                         Log.d("TAG", "FAILURE")
                         findNavController().navigate(R.id.action_userProfileFragment_to_errorPageFragment2)
                     }
@@ -184,12 +184,12 @@ class UserProfileFragment: Fragment(R.layout.fragment_user_profile) {
                 val url = user.linkedIn?.let { Uri.parse(it) }
                     ?: return@setOnClickListener (Toast.makeText(context,
                         getString(R.string.error_linked_in),
-                        Toast.LENGTH_LONG)
+                        Toast.LENGTH_SHORT)
                         .show())
                 val intent = Intent(Intent.ACTION_VIEW, url)
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_LONG)
+                Toast.makeText(context, getString(R.string.activity_not_found), Toast.LENGTH_SHORT)
                     .show()
             }
         }

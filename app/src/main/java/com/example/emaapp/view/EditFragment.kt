@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -98,6 +99,9 @@ class EditFragment : Fragment(R.layout.edit_profile) {
                         resource.data?.let { _ ->
                             findNavController().navigate(R.id.action_editFragment_to_userListFragment)
                         }
+                        Toast.makeText(context,
+                            getString(R.string.skills_change_success),
+                            Toast.LENGTH_SHORT).show()
                         Log.d("TAG", "SUCCESS")
                     }
                     Status.ERROR -> {

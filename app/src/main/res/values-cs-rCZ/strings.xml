@@ -84,5 +84,7 @@
     <string name="kotlin_skill">Kotlin zkušenosti</string>
     <string name="android_skill">Android zkušenosti</string>
     <string name="edit_skills_subtitle">Dejte nám vědět, co umíte!</string>
+    <string name="skills_change_success">Změny byly úspěšně uloženy.</string>
+    <string name="arrow">šipka</string>
 
 </resources>

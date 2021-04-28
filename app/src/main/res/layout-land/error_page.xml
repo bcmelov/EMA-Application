@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/robotImage"
-            android:layout_width="@dimen/xl_square_icon"
-            android:layout_height="@dimen/xl_square_icon"
+            android:layout_width="@dimen/large_square_icon"
+            android:layout_height="@dimen/large_square_icon"
             android:layout_marginTop="@dimen/spacing_Xlarge"
             android:contentDescription="@string/error_image"
             app:layout_constraintBottom_toTopOf="@+id/errorTitle"
@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_Xsmall"
             android:gravity="center"
+            android:textSize="@dimen/medium_text"
             android:text="@string/error_connection"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -49,8 +50,8 @@
         <Button
             android:id="@+id/buttonError"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_height="@dimen/square_icon_medium"
+            android:layout_marginTop="@dimen/spacing_small"
             android:text="@string/error_button"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
